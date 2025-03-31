@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header"; 
+import Navbar from "./components/Navbar"; 
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Account from "./pages/Account";
@@ -16,8 +16,10 @@ import FAQ from "./pages/FAQ";
 
 export default function App () {
   return (
-    <main>
-    <Header> 
+    <main classname = "overflow-hidden bg-light">
+    <Navbar/> 
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      </div>
       <Routes>
         <Route path="/" element = {<Home />}/>
         <Route path="/about" element = {<About />}/>
