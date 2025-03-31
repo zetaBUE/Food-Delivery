@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import { RiShoppingBasketLine } from "react-icons/ri";
 
 export default function Navbar() {
   return (
@@ -11,11 +12,14 @@ export default function Navbar() {
       </div>
 
       {/* Navigation Links */}
-      <div className="flex justify-between w-auto text-white text-lg">
+      <div className="inline-flex justify-between w-auto text-white text-lg">
         <Link to="/" className="hover:underline"> Home </Link>
         <Link to="/account" className="hover:underline"> Account </Link>
         <Link to="/restaurants" className="hover:underline"> Restaurants </Link>
-        <Link to="/cart" className="hover:underline"> Cart </Link>
+        <Link to="/cart" className="text-white text-3xl hover:text-yellow-300">
+  <RiShoppingBasketLine />
+</Link>
+
       </div>
 
       {/* Order Now Button */}
