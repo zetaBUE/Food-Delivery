@@ -33,8 +33,8 @@ export default function App () {
         <Route path="/add-items" element = {<AddItems/>}/>
         <Route path="/faq" element = {<FAQ/>}/>
       </Routes>
-    </Header>
     </main>
+    
   )
 }
 
