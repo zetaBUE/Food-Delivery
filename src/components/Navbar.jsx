@@ -39,10 +39,11 @@ export default function Navbar() {
           <span className="text-lg">Cart</span>
         </Link>
       </div>
-
+      <Link to="/checkout">
       <button className="bg-[#404380] text-white px-6 py-2 rounded-full text-lg hover:opacity-80">
         Order Now
       </button>
+      </Link>
     </nav>
   );
 }
