@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import Grey from '../assets/Grey.jpeg';
 const restaurantData = [
-  { name: "Restaurant 1", image: Grey, path: "/" },
+  { name: "Restaurant 1", image: Grey, path: "/faq" },
   { name: "Restaurant 2", image: Grey, path:"/" },
   { name: "Restaurant 3", image: Grey, path:"/" },
   { name: "Restaurant 4", image: Grey, path:"/" },
@@ -20,7 +20,7 @@ const Restaurants = () => {
        <Link
           key={restaurant.name}
           to={restaurant.path}
-          className="max-w-[300px] group rounded-2xl bg-white hover:bg-gray-800
+          className="max-w-[300px] group rounded-2xl bg-white hover:bg-[#212121]
                      hover:text-white duration-300 shadow-xl" 
         >
 
