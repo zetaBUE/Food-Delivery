@@ -1,23 +1,29 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import Grey from '../assets/Grey.jpeg';
 const restaurantData = [
-  { name: "Restaurant 1", image: Grey },
-  { name: "Restaurant 2", image: Grey },
-  { name: "Restaurant 3", image: Grey },
-  { name: "Restaurant 4", image: Grey },
-  { name: "Restaurant 5", image: Grey },
-  { name: "Restaurant 6", image: Grey }
+  { name: "Restaurant 1", image: Grey, path: "/" },
+  { name: "Restaurant 2", image: Grey, path:"/" },
+  { name: "Restaurant 3", image: Grey, path:"/" },
+  { name: "Restaurant 4", image: Grey, path:"/" },
+  { name: "Restaurant 5", image: Grey, path:"/" },
+  { name: "Restaurant 6", image: Grey, path:"/" }
 ];
 
 const Restaurants = () => {
   return (
+    <div className="text-center">
+      
+      <h1 className="text-3xl font-bold mb-24">Pick a Restaurant</h1>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-0.01 gap-y-18 place-items-center">
       {restaurantData.map((restaurant, index) => (
-        <div
-          key={index}
+       <Link
+          key={restaurant.name}
+          to={restaurant.path}
           className="max-w-[300px] group rounded-2xl bg-white hover:bg-gray-800
-                     hover:text-white duration-300 shadow-xl"
+                     hover:text-white duration-300 shadow-xl" 
         >
+
           <div className="h-[100px]">
             <img
               src={restaurant.image}
@@ -33,8 +39,9 @@ const Restaurants = () => {
               --------------------------
             </p>
           </div>
-        </div>
+        </Link>
       ))}
+    </div>
     </div>
   );
 };
@@ -80,6 +87,7 @@ const Restaurants = () => {
           </div>
         </div>
       ))}
+    </div>
     </div>
   );
 };
