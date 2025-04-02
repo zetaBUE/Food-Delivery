@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import './index.css';
-import Navbar from "./components/Navbar"; 
+import "./index.css";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Account from "./pages/Account";
@@ -15,33 +15,28 @@ import ListItems from "./pages/ListItems";
 import AddItems from "./pages/AddItems";
 import FAQ from "./pages/FAQ";
 
-export default function App () {
+export default function App() {
   return (
-    <main classname = "overflow-hidden bg-light">
-    <Navbar/> 
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      </div>
+    <main classname="overflow-hidden">
+      <Navbar />
       <Routes>
-        <Route path="/" element = {<Home />}/>
-        <Route path="/about" element = {<About />}/>
-        <Route path="/account" element = {<Account />}/>
-        <Route path="/cart" element = {<Cart />}/>
-        <Route path="/checkout" element = {<Checkout />}/>
-        <Route path="/login" element = {<Login />}/>
-        <Route path="/menus" element = {<Menus />}/>
-        <Route path="/orders" element = {<Orders />}/>
-        <Route path="/restaurants" element = {<Restaurants />}/>
-        <Route path="/user-orders" element = {<UserOrders />}/>
-        <Route path="/list-items" element = {<ListItems/>}/>
-        <Route path="/add-items" element = {<AddItems/>}/>
-        <Route path="/faq" element = {<FAQ/>}/>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/menus" element={<Menus />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/restaurants" element={<Restaurants />} />
+        <Route path="/user-orders" element={<UserOrders />} />
+        <Route path="/list-items" element={<ListItems />} />
+        <Route path="/add-items" element={<AddItems />} />
+        <Route path="/faq" element={<FAQ />} />
       </Routes>
     </main>
-    
-  )
+  );
 }
-
-
 
 /* import FoodLogo from './assets/FoodDeliveryLogo.svg'
 import './App.css'
@@ -60,4 +55,4 @@ function App() {
   )
 }
 
-export default App */ 
+export default App */
