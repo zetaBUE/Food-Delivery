@@ -15,7 +15,7 @@ const Restaurants = () => {
     <div className="text-center">
       
       <h1 className="text-3xl font-bold mb-24">Pick a Restaurant</h1>
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-0.01 gap-y-18 place-items-center">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-1 gap-y-18 place-items-center mb-10">
       {restaurantData.map((restaurant, index) => (
        <Link
           key={restaurant.name}

@@ -3,14 +3,14 @@
 const Checkout = () => {
   return (
     <div>Checkout</div>
-  
+    first name-last name-address-apartment-city,governorate-postalcode,phone
   )
 }
 
 export default Checkout*/
 
 
-import React from 'react';
+/*import React from 'react';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 
@@ -81,4 +81,328 @@ const CheckoutPage = () => {
 };
 
 export default CheckoutPage;
+*/
+/*import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+export default function Checkout() {
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      address: "",
+      apartment: "",
+      city: "",
+      governorate: "",
+      zipCode: "",
+      email: "",
+      phone: "",
+      paymentMethod: "cash"
+    },
+    validationSchema: Yup.object({
+      firstName: Yup.string().required("Required"),
+      lastName: Yup.string().required("Required"),
+      address: Yup.string().required("Required"),
+      city: Yup.string().required("Required"),
+      governorate: Yup.string().required("Required"),
+      email: Yup.string().email("Invalid email").required("Required"),
+      phone: Yup.string().required("Required")
+    }),
+    onSubmit: values => {
+      console.log("Order placed:", values);
+    }
+  });
+
+  const cart = [
+    { id: 1, name: "Product 1", price: 20 },
+    { id: 2, name: "Product 2", price: 35 }
+  ];
+
+  const subtotal = cart.reduce((acc, item) => acc + item.price, 0);
+  const shipping = 5;
+  const total = subtotal + shipping;
+
+  return (
+    <div className="min-h-screen bg-white p-4 flex flex-col lg:flex-row">
+      <div className="w-full lg:w-2/3">
+        <h2 className="text-2xl font-semibold mb-4">Checkout</h2>
+        <form onSubmit={formik.handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input
+            name="firstName"
+            placeholder="First Name"
+            className="border p-2"
+            onChange={formik.handleChange}
+            value={formik.values.firstName}
+          />
+          <input
+            name="lastName"
+            placeholder="Last Name"
+            className="border p-2"
+            onChange={formik.handleChange}
+            value={formik.values.lastName}
+          />
+          <input
+            name="address"
+            placeholder="Street address"
+            className="border p-2 col-span-2"
+            onChange={formik.handleChange}
+            value={formik.values.address}
+          />
+          <input
+            name="apartment"
+            placeholder="Apartment (optional)"
+            className="border p-2 col-span-2"
+            onChange={formik.handleChange}
+            value={formik.values.apartment}
+          />
+          <input
+            name="city"
+            placeholder="City"
+            className="border p-2"
+            onChange={formik.handleChange}
+            value={formik.values.city}
+          />
+          <input
+            name="governorate"
+            placeholder="Region"
+            className="border p-2"
+            onChange={formik.handleChange}
+            value={formik.values.governorate}
+          />
+          <input
+            name="zipCode"
+            placeholder="Zip code (optional)"
+            className="border p-2"
+            onChange={formik.handleChange}
+            value={formik.values.zipCode}
+          />
+          <input
+            name="email"
+            placeholder="Email"
+            className="border p-2 col-span-2"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+          />
+          <input
+            name="phone"
+            placeholder="Phone"
+            className="border p-2 col-span-2"
+            onChange={formik.handleChange}
+            value={formik.values.phone}
+          />
+
+          <div className="col-span-2 flex gap-4">
+            <label className="flex items-center gap-2">
+              <input
+                type="radio"
+                name="paymentMethod"
+                value="cash"
+                checked={formik.values.paymentMethod === "cash"}
+                onChange={formik.handleChange}
+              />
+              <span className="text-[800020]">Cash on delivery</span>
+            </label>
+            <label className="flex items-center gap-2">
+              <input
+                type="radio"
+                name="paymentMethod"
+                value="visa"
+                checked={formik.values.paymentMethod === "visa"}
+                onChange={formik.handleChange}
+              />
+              <span className="text-[800020]">Visa</span>
+            </label>
+          </div>
+
+          <button type="submit" className="bg-[#FFE662] text-black py-2 px-6 rounded-full mt-4">
+            Place Order
+          </button>
+        </form>
+      </div>
+
+      <div className="w-full lg:w-1/3 bg-gray-100 p-4 mt-8 lg:mt-0 lg:ml-4 border border-[#FFE662]">
+        <h3 className="text-lg font-semibold mb-4">Order Summary</h3>
+        <ul>
+          {cart.map(item => (
+            <li key={item.id} className="flex justify-between py-1">
+              <span>{item.name}</span>
+              <span>${item.price}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-4 border-t pt-2 text-sm">
+          <div className="flex justify-between">
+            <span>Subtotal:</span>
+            <span>${subtotal}</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Shipping:</span>
+            <span>${shipping}</span>
+          </div>
+          <div className="flex justify-between font-bold">
+            <span>Total:</span>
+            <span>${total}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}*/
+
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+export default function Checkout() {
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      address: "",
+      apartment: "",
+      city: "",
+      governorate: "",
+      zipCode: "",
+      email: "",
+      phone: "",
+      paymentMethod: "cash"
+    },
+    validationSchema: Yup.object({
+      firstName: Yup.string().required("Required"),
+      lastName: Yup.string().required("Required"),
+      address: Yup.string().required("Required"),
+      city: Yup.string().required("Required"),
+      governorate: Yup.string().required("Required"),
+      email: Yup.string().email("Invalid email").required("Required"),
+      phone: Yup.string().required("Required")
+    }),
+    onSubmit: values => {
+      console.log("Order placed:", values);
+    }
+  });
+
+  const cart = [
+    { id: 1, name: "Product 1", price: 20 },
+    { id: 2, name: "Product 2", price: 35 }
+  ];
+
+  const subtotal = cart.reduce((acc, item) => acc + item.price, 0);
+  const shipping = 5;
+  const total = subtotal + shipping;
+
+  const renderInput = (name, placeholder, extraClasses = "") => (
+    <div className={`w-full ${extraClasses}`}>
+      <input
+        name={name}
+        placeholder={placeholder}
+        className={`border p-2 w-full ${
+          formik.touched[name] && formik.errors[name] ? "border-red-500" : ""
+        } focus:outline-none focus:border-[#D3D3D3]`}  // Changed to light gray
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values[name]}
+      />
+      {formik.touched[name] && formik.errors[name] && (
+        <div className="text-red-500 text-sm mt-1">{formik.errors[name]}</div>
+      )}
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-white p-4 flex flex-col lg:flex-row">
+      <div className="w-full lg:w-2/3">
+        <h2 className="text-2xl font-semibold mb-4">Checkout</h2>
+        <form onSubmit={formik.handleSubmit} className="space-y-6">
+          {/* Delivery Details Section */}
+          <div className="border p-4 rounded-lg shadow-sm">
+            <h3 className="text-xl font-semibold mb-4 text-[#800020]">Delivery Details</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {renderInput("firstName", "First Name")}
+              {renderInput("lastName", "Last Name")}
+              {renderInput("address", "Street address", "md:col-span-2")}
+              {renderInput("apartment", "Apartment (optional)", "md:col-span-2")}
+              {renderInput("city", "City")}
+              {renderInput("governorate", "Region")}
+              {renderInput("zipCode", "Zip code (optional)")}
+              {renderInput("email", "Email", "md:col-span-2")}
+              {renderInput("phone", "Phone", "md:col-span-2")}
+            </div>
+          </div>
+
+          {/* Payment Method Section */}
+          <div className="border p-4 rounded-lg shadow-sm">
+            <h3 className="text-xl font-semibold mb-4 text-[#800020]">Payment Method</h3>
+            <div className="flex gap-4">
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="cash"
+                  checked={formik.values.paymentMethod === "cash"}
+                  onChange={formik.handleChange}
+                />
+                <span className="text-[#800020]">Cash on delivery</span>
+              </label>
+              <label className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="visa"
+                  checked={formik.values.paymentMethod === "visa"}
+                  onChange={formik.handleChange}
+                />
+                <span className="text-[#800020]">Visa</span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" className="bg-[#FFE662] text-black py-2 px-6 rounded-full">
+            Place Order
+          </button>
+        </form>
+      </div>
+
+      {/* Order Summary Section inside the box with curved borders */}
+      <div className="w-full lg:w-1/3 mt-8 lg:mt-0 lg:ml-4">
+        <div className="bg-[#212121] p-4 rounded-lg shadow-sm"> {/* Added rounded-lg for curved borders */}
+          <h3 className="text-lg font-semibold text-white mb-4">Order Summary</h3>
+          <ul>
+            {cart.map(item => (
+              <li key={item.id} className="flex justify-between py-1 text-white">
+                <span>{item.name}</span>
+                <span>${item.price}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-4 border-t pt-2 text-sm text-white">
+            <div className="flex justify-between">
+              <span>Subtotal:</span>
+              <span>${subtotal}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Shipping:</span>
+              <span>${shipping}</span>
+            </div>
+            <div className="flex justify-between font-bold">
+              <span>Total:</span>
+              <span>${total}</span>
+            </div>
+          </div>
+        </div>
+        <div className="mt-4 text-sm text-gray-400">
+          By placing your order, you agree to our{' '}
+          <a href="#" className="text-blue-600 underline hover:text-blue-800">
+            Terms and Conditions
+          </a>{' '}
+          and{' '}
+          <a href="#" className="text-blue-600 underline hover:text-blue-800">
+            Privacy Policy
+          </a>
+          .
+        </div>
+      </div>
+    </div>
+  );
+}
 
