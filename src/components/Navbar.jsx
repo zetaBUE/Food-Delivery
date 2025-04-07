@@ -4,13 +4,13 @@ import { RiShoppingBasketLine } from "react-icons/ri";
 import { AiFillHome } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import { MdRestaurantMenu } from "react-icons/md";
-import FoodDeliveryLogo from "../assets/FoodDeliveryLogo.svg";
+import CraveCartLogo from "../assets/CraveCartLogo.png";
 
 export default function Navbar() {
   return (
     <nav className="w-[80%] min-w-2 max-w-4xl mx-auto my-10 bg-[#7A1523] h-15 py-6 rounded-full flex items-center justify-end gap-x-5 shadow-lg text-white/40">
       <Link to="/" className="flex items-center justify-start mr-auto ml-5">
-        <img src={FoodDeliveryLogo} alt="Food Delivery Logo" className="w-25" />
+        <img src={CraveCartLogo} alt="Crave Cart Logo" className="w-20" />
       </Link>
 
       <Link
