@@ -137,17 +137,26 @@ const FAQ = () => {
 
 export default FAQ;*/
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const faqs = [
     { question: "What is Crave Cart?", answer: "Crave Cart is an online food ordering platform where you can browse various restaurants, choose your favorite dishes, and have them delivered to your door." },
-    { question: "How do I place an order?", answer: "Simply browse through our menu, select your items, add them to the cart, and proceed to checkout. You can pay securely through our platform, and your food will be delivered to you." },
-    { question: "Do you offer contactless delivery?", answer: "Yes, we offer contactless delivery for your safety and convenience. You can choose the contactless option during checkout." },
-    { question: "Can I track my order?", answer: "Absolutely! Once your order is placed, you will receive real-time updates on its status, including when it is being prepared, when it's out for delivery, and when it arrives at your doorstep." },
-    { question: "Do you offer discounts or promotions?", answer: "Yes, we regularly offer discounts, special promotions, and deals. Be sure to check our homepage for the latest offers or subscribe to our newsletter to stay updated." },
-    { question: "Can I cancel or modify my order?", answer: "You can cancel or modify your order within a certain timeframe after placing it. Please contact customer support for assistance with cancellations or modifications." },
+    { question: "How do I place an order?", answer: "Login to your account. Choose the restaurant ,pick the items you want to order and add it to the cart. Finally place the order." },
+    { question: "How mush does it cost to use Crave cart service?", answer: "Nothing, you will only pay for your order and the shipping is free." },
+    { question: "Can I pay using the credit card?", answer: "Yes! we offer a secure payment using the cedit card." },
+    { question: "Do you offer discounts or promotions?", answer: "Yes, we regularly offer discounts, special promotions, and deals. " },
+    {
+      question: "If I have a complaint regarding the order what should I do?",
+      answer: (
+        <>
+          You can call the customer service or send us an email. You will find all our contact information on the{' '}
+          <Link to="/contact-us" className="text-yellow-300 underline">Contact Us</Link> page.
+        </>
+      )
+    },
     { question: "Is Crave Cart available in my area?", answer: "Crave Cart operates in various cities. Please enter your zip code on our website or app to check if we deliver to your location." }
   ];
 
