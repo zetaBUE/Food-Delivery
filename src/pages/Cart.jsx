@@ -150,6 +150,12 @@ function Cart() {
 
           {/* Add Item Button */}
           <button
+            onClick={() => navigate('/orders')}
+            className="mt-4 w-full bg-[#800020] text-white px-4 py-2 rounded-xl shadow-md hover:shadow-lg"
+          >
+            Orders
+          </button>
+          <button
             onClick={() => navigate('/menu')}
             className="mt-4 w-full bg-[#800020] text-white px-4 py-2 rounded-xl shadow-md hover:shadow-lg"
           >
