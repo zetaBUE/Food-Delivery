@@ -39,22 +39,3 @@ export default function App() {
     </main>
   );
 }
-
-/* import FoodLogo from './assets/FoodDeliveryLogo.svg'
-import './App.css'
-function App() {
-  return (
-    <>
-      <div class="logo-container">
-        <a target='_blank'>
-          <img src={FoodLogo} class="food" alt="Food logo" />
-        </a>
-      </div>
-      <h1 class="text-3xl font-bold hover:text-sky-700 ">Crave Cart</h1>
-      <div className="card">
-      </div>
-    </>
-  )
-}
-
-export default App */
