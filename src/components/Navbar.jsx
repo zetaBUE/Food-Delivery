@@ -17,6 +17,7 @@ export default function Navbar() {
         to="/"
         className="flex items-center hover:text-white transition-all duration-200 space-x-1"
       >
+        <AiFillHome />
         <span>Home</span>
       </Link>
 
@@ -24,6 +25,7 @@ export default function Navbar() {
         to="/account"
         className="flex items-center hover:text-white transition-all duration-200 space-x-1"
       >
+        <FaUserCircle />
         <span>My Account</span>
       </Link>
 
@@ -31,6 +33,7 @@ export default function Navbar() {
         to="/restaurants"
         className="flex items-center hover:text-white transition-all duration-200 space-x-1"
       >
+        <MdRestaurantMenu />
         <span>Restaurants</span>
       </Link>
 
@@ -38,8 +41,10 @@ export default function Navbar() {
         to="/cart"
         className="flex items-center hover:text-white transition-all duration-200 space-x-1"
       >
+        <RiShoppingBasketLine />
         <span>Cart</span>
       </Link>
+      
       <Link to="/checkout">
         <button className="bg-[#101035] text-nowrap text-white ease-out px-5 py-2 mr-3 rounded-full hover:scale-110 transition-all duration-200">
           Order Now

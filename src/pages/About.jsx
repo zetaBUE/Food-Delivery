@@ -8,7 +8,7 @@ const About = () => {
       {/* About Section */}
       <section className="text-center py-8">
         <h1 className="text-3xl font-bold text-[#000]">About Us</h1>
-        <p className="text-[#444] mt-2">Lorem ipsum dolor sit amet consectetur. Felis platea fusce.</p>
+        <p className="text-[#444] mt-2">Lorem ipsum dolor sit amet consectetur. Felis platea fusce. CHANGE TO ENGLISH </p>
       </section>
 
       {/* Info & Image Section */}
@@ -20,7 +20,7 @@ const About = () => {
             Lobortis sed ut tellus varius lectus amet at. Faucibus dolor risus nisl ipsum. Potenti amet sed luctus
             massa. Odio ac etiam lectus auctor. Interdum pellentesque vel pellentesque vitae et. Eget congue in mauris
             luctus nulla lacus nulla. Pharetra urna nec amet feugiat ipsum. Id pharetra fusce morbi eget sed pretium
-            sit diam facilisis.
+            sit diam facilisis. CHANGE THIS TO ENGLISH 
           </p>
         </div>
 
