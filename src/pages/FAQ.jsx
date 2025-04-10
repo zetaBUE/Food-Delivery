@@ -163,13 +163,13 @@ const FAQ = () => {
   const handleToggle = (index) => setOpenIndex(openIndex === index ? null : index);
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white text-[#212121] min-h-screen">
+    <div className="max-w-4xl mx-auto p-6 text-[#212121] ">
       <h1 className="text-4xl font-bold text-center mb-10 text-[#7A1523]">Frequently Asked Questions</h1>
       <div className="space-y-4">
         {faqs.map((faq, index) => (
-          <div key={index} className="bg-[#212121] shadow-lg rounded-lg p-4 transition-all duration-300 hover:scale-105">
+          <div key={index} className="bg-[#212121] shadow-lg rounded-lg p-4 duration-300 hover:scale-105">
             <button
-              className="w-full text-left p-5 text-lg font-medium text-orange-400 flex justify-between items-center"
+              className=" w-full p-5 text-lg font-medium text-orange-400  flex justify-between "
               onClick={() => handleToggle(index)}
             >
               {faq.question}

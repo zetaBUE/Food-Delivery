@@ -13,17 +13,18 @@ import Orders from "./pages/Orders";
 import Restaurants from "./pages/Restaurants";
 import UserOrders from "./pages/UserOrders";
 import ListItems from "./pages/ListItems";
-import AddItems from "./pages/AddItems";
+import AddRestaurant from "./pages/AddRestaurant";
 import FAQ from "./pages/FAQ";
 import RestaurantView from "./pages/RestaurantView";
 import RestaurantsOriginal from "./pages/Restaurants";
 import { CartProvider } from "./context/CartContext";
 import { OrderProvider } from "./context/OrderContext";
-
+import { RestaurantProvider } from "./context/RestaurantContext";
 export default function App() {
   return (
     <CartProvider>
       <OrderProvider>
+        <RestaurantProvider>
         <main classname="overflow-hidden">
           <Navbar />
           <Routes>
@@ -39,11 +40,12 @@ export default function App() {
             <Route path="/restaurant/:id" element={<RestaurantView />} />
             <Route path="/user-orders" element={<UserOrders />} />
             <Route path="/list-items" element={<ListItems />} />
-            <Route path="/add-items" element={<AddItems />} />
+            <Route path="/add-Restaurant" element={<AddRestaurant />} />
             <Route path="/faq" element={<FAQ />} />
           </Routes>
           <Footer />
         </main>
+        </RestaurantProvider>
       </OrderProvider>
     </CartProvider>
   );

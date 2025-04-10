@@ -20,9 +20,8 @@ const Checkout = () => {
   const { cartItems, getCartTotal, clearCart } = useCart();
   const { addOrder } = useOrder();
 
-  const subtotal = getCartTotal();
-  const shipping = 5;
-  const total = subtotal + shipping;
+  const total = getCartTotal();  
+  const shipping = "Free";  
 
   const handleSubmit = (values) => {
     const orderData = {
@@ -232,16 +231,12 @@ const Checkout = () => {
           </ul>
           <div className="mt-4 border-t pt-2 text-sm">
             <div className="flex justify-between">
-              <span>Subtotal:</span>
-              <span>${subtotal.toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between">
               <span>Shipping:</span>
-              <span>${shipping.toFixed(2)}</span>
+              <span>{shipping}</span> {/* Shipping is displayed as "Free" */}
             </div>
             <div className="flex justify-between font-bold">
               <span>Total:</span>
-              <span>${total.toFixed(2)}</span>
+              <span>${total.toFixed(2)}</span> 
             </div>
           </div>
         </div>
