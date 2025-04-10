@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Wave from "../assets/Wave.svg";
 import Grey from "../assets/Grey.jpeg"; // Import your image
 import { FaArrowRight } from "react-icons/fa";
+import FeaturesBox from "../components/FeaturesBox";
 
 function Home() {
   return (
@@ -13,7 +14,7 @@ function Home() {
         className="w-full absolute top-0 rotate-180 z-[-10]"
       />
 
-      <div className="h-screen flex items-center pl-20">
+      <div className="h-fit mt-70 mb-40 flex items-center pl-20">
         {/* Text and Button */}
         <div className="flex-1">
           <span className="text-5xl font-bold text-[#212121] text-shadow-lg shadow-gray-800">
@@ -21,8 +22,8 @@ function Home() {
             your favorite food <br />
             items
           </span>
-          <Link to="/checkout" className="flex mt-4">
-            <button className="bg-[#101035] text-white text-lg ease-out px-5 py-2 rounded-full hover:scale-110 transition-all duration-200 flex items-center gap-2">
+          <Link to="/checkout" className="flex ml-45 justify-start">
+            <button className="bg-[#f1a129] text-[#212121] text-lg ease-out px-5 py-2 rounded-full hover:scale-110 transition-all duration-200 flex items-center gap-2">
               Order Now
               <FaArrowRight />
             </button>
@@ -37,6 +38,7 @@ function Home() {
           />
         </div>
       </div>
+      <FeaturesBox />
     </>
   );
 }
