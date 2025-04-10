@@ -15,19 +15,6 @@ export const restaurants = [
         { name: "Pepperoni Pizza", price: "$12" },
         { name: "Pasta Alfredo", price: "$15" },
       ],
-      specialOffer: "20% off on your first order",
-      reviews: [
-        {
-          username: "John Doe",
-          rating: 5,
-          comment: "Amazing pizza! Highly recommend.",
-        },
-        {
-          username: "Jane Smith",
-          rating: 4,
-          comment: "Great taste, but a bit too cheesy for my liking.",
-        },
-      ],
     },
     {
       id: 2,
@@ -45,19 +32,6 @@ export const restaurants = [
         { name: "Sashimi Plate", price: "$20" },
         { name: "Miso Soup", price: "$5" },
       ],
-      specialOffer: "Free Miso Soup with every Sashimi Plate!",
-      reviews: [
-        {
-          username: "Emily Johnson",
-          rating: 5,
-          comment: "Best sushi I've ever had!",
-        },
-        {
-          username: "Tom White",
-          rating: 4.5,
-          comment: "Fresh ingredients and great flavor.",
-        },
-      ],
     },
     {
       id: 3,
@@ -73,19 +47,6 @@ export const restaurants = [
         { name: "Cheeseburger", price: "$8" },
         { name: "Whopper", price: "$10" },
         { name: "French Fries", price: "$3" },
-      ],
-      specialOffer: "Get a free drink with any meal combo.",
-      reviews: [
-        {
-          username: "Chris Brown",
-          rating: 4,
-          comment: "Burgers are good, but a bit greasy.",
-        },
-        {
-          username: "Maya Lee",
-          rating: 4.5,
-          comment: "Great burger, but could use more toppings.",
-        },
       ],
     },
     {
@@ -104,19 +65,6 @@ export const restaurants = [
         { name: "Chicken Burrito", price: "$9" },
         { name: "Cheese Quesadilla", price: "$7" },
       ],
-      specialOffer: "Buy one burrito, get one taco free!",
-      reviews: [
-        {
-          username: "Carlos Mendoza",
-          rating: 5,
-          comment: "Tacos are amazing, so fresh!",
-        },
-        {
-          username: "Sophia Martinez",
-          rating: 4.5,
-          comment: "Love the burritos, but could use more spice.",
-        },
-      ],
     },
     {
       id: 5,
@@ -134,19 +82,6 @@ export const restaurants = [
         { name: "Lasagna", price: "$14" },
         { name: "Fettuccine Alfredo", price: "$13" },
       ],
-      specialOffer: "10% off all pasta dishes on weekends.",
-      reviews: [
-        {
-          username: "Olivia Green",
-          rating: 5,
-          comment: "The best pasta I’ve ever had!",
-        },
-        {
-          username: "Lucas Scott",
-          rating: 4.5,
-          comment: "Great sauce, but the pasta could be a little softer.",
-        },
-      ],
     },
     {
       id: 6,
@@ -162,19 +97,6 @@ export const restaurants = [
         { name: "Chicken Biryani", price: "$15" },
         { name: "Paneer Tikka", price: "$10" },
         { name: "Mutton Curry", price: "$18" },
-      ],
-      specialOffer: "Free naan with every biryani order!",
-      reviews: [
-        {
-          username: "Ravi Kumar",
-          rating: 5,
-          comment: "The best biryani in town, hands down!",
-        },
-        {
-          username: "Anjali Patel",
-          rating: 4,
-          comment: "A bit too spicy for my taste, but really flavorful.",
-        },
       ],
     },
     {
@@ -194,18 +116,6 @@ export const restaurants = [
         { name: "Vegan Pizza", price: "$13" },
       ],
       specialOffer: "Get 15% off your first vegan meal!",
-      reviews: [
-        {
-          username: "Charlotte Gray",
-          rating: 4.5,
-          comment: "Tasty and healthy, highly recommend the burger!",
-        },
-        {
-          username: "Daniel White",
-          rating: 4,
-          comment: "Good vegan food, but a bit on the pricey side.",
-        },
-      ],
     },
     {
       id: 8,
@@ -221,20 +131,6 @@ export const restaurants = [
         { name: "Pork Dumplings", price: "$8" },
         { name: "Shrimp Spring Rolls", price: "$7" },
         { name: "Dim Sum Assortment", price: "$15" },
-      ],
-      specialOffer: "Free dipping sauce with every order of dim sum.",
-      reviews: [
-        {
-          username: "Ming Chen",
-          rating: 5,
-          comment: "Best dim sum in the city!",
-        },
-        {
-          username: "Li Wei",
-          rating: 4.5,
-          comment:
-            "Love the pork dumplings, but the shrimp rolls were too crispy.",
-        },
       ],
     },
     {
@@ -252,19 +148,6 @@ export const restaurants = [
         { name: "Ribeye Steak", price: "$25" },
         { name: "Filet Mignon", price: "$30" },
         { name: "Garlic Mashed Potatoes", price: "$8" },
-      ],
-      specialOffer: "Free dessert with every main course ordered!",
-      reviews: [
-        {
-          username: "Jack Thomas",
-          rating: 5,
-          comment: "Perfectly cooked steaks every time!",
-        },
-        {
-          username: "Emily White",
-          rating: 4.5,
-          comment: "Great steak, but the sides could use improvement.",
-        },
       ],
     },
   ];
