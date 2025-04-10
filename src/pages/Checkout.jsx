@@ -354,7 +354,7 @@ const Checkout = () => {
                 </label>
                 <label className="flex items-center gap-2">
                   <Field type="radio" name="paymentMethod" value="visa" />
-                  <span className="text-black">Visa</span>
+                  <span className="text-black">Credit Card</span>
                 </label>
               </div>
             </div>
