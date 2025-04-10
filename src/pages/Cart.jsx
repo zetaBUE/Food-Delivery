@@ -43,11 +43,11 @@ function Cart() {
     <div className="min-h-screen bg-white text-black p-8 space-y-8">
       <main className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Shopping Cart Section */}
-        <div className="md:col-span-2 bg-[#101035] text-white rounded-2xl p-6 shadow-lg">
+        <div className="md:col-span-2 bg-[#424242] text-white rounded-2xl p-6 shadow-lg">
           <h2 className="text-2xl font-semibold mb-6">Shopping Cart</h2>
 
           {/* Table Header */}
-          <div className="grid grid-cols-5 text-yellow-300 font-semibold border-b border-gray-700 pb-2 mb-4">
+          <div className="grid grid-cols-5 text-white font-semibold border-b border-gray-700 pb-2 mb-4">
             <span>Product</span>
             <span className="text-center">Price</span>
             <span className="text-center">Quantity</span>
@@ -109,7 +109,7 @@ function Cart() {
 
           {/* Coupon Code Form */}
           <div className="mt-8 border-t border-gray-700 pt-6">
-            <h3 className="text-xl font-semibold mb-4 text-yellow-300">
+            <h3 className="text-xl font-semibold mb-4 text-white">
               Apply Coupon Code
             </h3>
             <form
@@ -128,7 +128,7 @@ function Cart() {
               />
               <button
                 type="submit"
-                className="bg-[#FFE662] text-[#800020] px-4 py-2 rounded-lg shadow-md"
+                className="bg-[#800020] text-white px-4 py-2 rounded-lg shadow-md"
               >
                 Apply
               </button>
@@ -142,7 +142,7 @@ function Cart() {
         </div>
 
         {/* Order Summary Section */}
-        <div className="bg-[#101035] text-white rounded-2xl p-6 shadow-lg">
+        <div className="bg-[#424242] text-white rounded-2xl p-6 shadow-lg">
           <h2 className="text-2xl font-semibold mb-6">Order Summary</h2>
           <div className="space-y-2">
             <div className="flex justify-between">
