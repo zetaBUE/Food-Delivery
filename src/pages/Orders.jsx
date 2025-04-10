@@ -1,108 +1,28 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useOrder } from "../hooks/useOrder";
 
 const Orders = () => {
-  // Example orders data (with some older orders added)
-  const orders = [
-    {
-      id: 1,
-      orderNumber: "#1234",
-      date: "2025-04-05",
-      totalAmount: 30.99,
-      status: "Delivered",
-      items: [
-        { name: "Burger", quantity: 2, price: 10 },
-        { name: "Fries", quantity: 1, price: 5.99 },
-      ],
-    },
-    {
-      id: 2,
-      orderNumber: "#1235",
-      date: "2025-04-06",
-      totalAmount: 45.50,
-      status: "Pending",
-      items: [
-        { name: "Pizza", quantity: 1, price: 20.50 },
-        { name: "Soda", quantity: 2, price: 5.00 },
-      ],
-    },
-    {
-      id: 3,
-      orderNumber: "#1236",
-      date: "2025-04-07",
-      totalAmount: 22.75,
-      status: "Shipped",
-      items: [
-        { name: "Sandwich", quantity: 1, price: 12.75 },
-        { name: "Salad", quantity: 1, price: 10.00 },
-      ],
-    },
-    {
-      id: 4,
-      orderNumber: "#1237",
-      date: "2025-03-20",
-      totalAmount: 55.00,
-      status: "Delivered",
-      items: [
-        { name: "Pasta", quantity: 2, price: 12.50 },
-        { name: "Garlic Bread", quantity: 1, price: 5.00 },
-      ],
-    },
-    {
-      id: 5,
-      orderNumber: "#1238",
-      date: "2025-02-25",
-      totalAmount: 15.25,
-      status: "Pending",
-      items: [
-        { name: "Salad", quantity: 1, price: 10.00 },
-        { name: "Juice", quantity: 1, price: 5.25 },
-      ],
-    },
-    {
-      id: 6,
-      orderNumber: "#1239",
-      date: "2025-01-30",
-      totalAmount: 30.0,
-      status: "Failed",
-      items: [
-        { name: "Brownies", quantity: 2, price: 15.00 },
-      ],
-    },
-    {
-      id: 7, 
-      orderNumber: "#1240", 
-      date: "2024-12-20", 
-      totalAmount: 100, 
-      status: "Delivered", 
-      items: [
-        { name: "Sushi", quantity: 20, price: 5 }, 
-      ]
-    },
-  ];
+  const { orders, searchOrders } = useOrder();
+  const [filteredOrders, setFilteredOrders] = useState(orders);
+  const [expandedOrder, setExpandedOrder] = useState(null);
 
-  const [filteredOrders, setFilteredOrders] = useState(orders); // State for filtered orders
-  const [expandedOrder, setExpandedOrder] = useState(null); // State for expanded order details
-
-  // Formik setup
   const formik = useFormik({
     initialValues: {
       searchOrder: "",
     },
     validationSchema: Yup.object({
-      searchOrder: Yup.string().min(3, "Order number must be at least 3 characters").required("Required"),
+      searchOrder: Yup.string()
+        .min(3, "Order number must be at least 3 characters")
+        .required("Required"),
     }),
     onSubmit: (values) => {
-      // Filter orders based on search input
-      const filtered = orders.filter((order) =>
-        order.orderNumber.includes(values.searchOrder)
-      );
+      const filtered = searchOrders(values.searchOrder);
       setFilteredOrders(filtered);
     },
   });
 
-  // Handle toggling order details
   const toggleOrderDetails = (orderId) => {
     setExpandedOrder((prev) => (prev === orderId ? null : orderId));
   };
@@ -116,7 +36,10 @@ const Orders = () => {
 
       {/* Search Filter */}
       <div className="container mx-auto p-4">
-        <form onSubmit={formik.handleSubmit} className="flex items-center gap-4">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="flex items-center gap-4"
+        >
           <input
             type="text"
             id="searchOrder"
@@ -129,7 +52,10 @@ const Orders = () => {
           {formik.errors.searchOrder && formik.touched.searchOrder && (
             <div className="text-red-500">{formik.errors.searchOrder}</div>
           )}
-          <button type="submit" className="bg-[#FFE662] px-4 py-2 rounded-md text-[#800020]">
+          <button
+            type="submit"
+            className="bg-[#FFE662] px-4 py-2 rounded-md text-[#800020]"
+          >
             Search
           </button>
         </form>
@@ -154,7 +80,9 @@ const Orders = () => {
                   <tr className="border-b">
                     <td className="px-4 py-2">{order.orderNumber}</td>
                     <td className="px-4 py-2">{order.date}</td>
-                    <td className="px-4 py-2">${order.totalAmount}</td>
+                    <td className="px-4 py-2">
+                      ${order.totalAmount.toFixed(2)}
+                    </td>
                     <td className="px-4 py-2 text-gray-800">{order.status}</td>
                     <td className="px-4 py-2">
                       <button
@@ -162,13 +90,9 @@ const Orders = () => {
                         onClick={() => toggleOrderDetails(order.id)}
                       >
                         {expandedOrder === order.id ? (
-                          <>
-                            - Hide Details
-                          </>
+                          <>- Hide Details</>
                         ) : (
-                          <>
-                            + View Details
-                          </>
+                          <>+ View Details</>
                         )}
                       </button>
                     </td>
@@ -184,6 +108,18 @@ const Orders = () => {
                             </li>
                           ))}
                         </ul>
+                        <div className="mt-4">
+                          <p>
+                            <strong>Delivery Address:</strong>{" "}
+                            {order.deliveryAddress}
+                          </p>
+                          <p>
+                            <strong>Customer:</strong> {order.customerName}
+                          </p>
+                          <p>
+                            <strong>Contact:</strong> {order.phone}
+                          </p>
+                        </div>
                       </td>
                     </tr>
                   )}
@@ -191,7 +127,9 @@ const Orders = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="5" className="px-4 py-2 text-center">No orders found.</td>
+                <td colSpan="5" className="px-4 py-2 text-center">
+                  No orders found.
+                </td>
               </tr>
             )}
           </tbody>

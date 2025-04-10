@@ -15,27 +15,37 @@ import UserOrders from "./pages/UserOrders";
 import ListItems from "./pages/ListItems";
 import AddItems from "./pages/AddItems";
 import FAQ from "./pages/FAQ";
+import RestaurantView from "./pages/RestaurantView";
+import RestaurantsOriginal from "./pages/RestaurantsOriginal";
+import { CartProvider } from "./context/CartContext";
+import { OrderProvider } from "./context/OrderContext";
 
 export default function App() {
   return (
-    <main classname="overflow-hidden">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/menus" element={<Menus />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/restaurants" element={<Restaurants />} />
-        <Route path="/user-orders" element={<UserOrders />} />
-        <Route path="/list-items" element={<ListItems />} />
-        <Route path="/add-items" element={<AddItems />} />
-        <Route path="/faq" element={<FAQ />} />
-      </Routes>
-      <Footer/>
-    </main>
+    <CartProvider>
+      <OrderProvider>
+        <main classname="overflow-hidden">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/menus" element={<Menus />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/restaurants" element={<Restaurants />} />
+            <Route path="/restaurants1" element={<RestaurantsOriginal />} />
+            <Route path="/restaurant/:id" element={<RestaurantView />} />
+            <Route path="/user-orders" element={<UserOrders />} />
+            <Route path="/list-items" element={<ListItems />} />
+            <Route path="/add-items" element={<AddItems />} />
+            <Route path="/faq" element={<FAQ />} />
+          </Routes>
+          <Footer />
+        </main>
+      </OrderProvider>
+    </CartProvider>
   );
 }

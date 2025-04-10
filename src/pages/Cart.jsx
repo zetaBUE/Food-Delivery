@@ -1,60 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
-import { FaTrashAlt } from 'react-icons/fa';
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+import { FaTrashAlt } from "react-icons/fa";
+import { useCart } from "../hooks/useCart";
 
 function Cart() {
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState([]);
-
-  // Fetch cart items from localStorage when the component mounts
-  useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    setCartItems(savedCart);
-  }, []);
+  const { cartItems, removeFromCart, updateQuantity, getCartTotal } = useCart();
 
   const formik = useFormik({
-    initialValues: { coupon: '' },
+    initialValues: { coupon: "" },
     validationSchema: Yup.object({
       coupon: Yup.string()
-        .min(3, 'Must be at least 3 characters')
-        .required('Required'),
+        .min(3, "Must be at least 3 characters")
+        .required("Required"),
     }),
-    onSubmit: values => {
+    onSubmit: (values) => {
       alert(`Coupon Applied: ${values.coupon}`);
     },
   });
 
-  const subtotal = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  const subtotal = getCartTotal();
   const shipping = 5;
   const total = subtotal + shipping;
 
   const handleIncreaseQuantity = (id) => {
-    const updatedCart = cartItems.map(item =>
-      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-    );
-    setCartItems(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    const item = cartItems.find((item) => item.id === id);
+    if (item) {
+      updateQuantity(id, item.quantity + 1);
+    }
   };
 
   const handleDecreaseQuantity = (id) => {
-    const updatedCart = cartItems.map(item =>
-      item.id === id && item.quantity > 1
-        ? { ...item, quantity: item.quantity - 1 }
-        : item
-    );
-    setCartItems(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-  };
-
-  const handleDeleteItem = (id) => {
-    const updatedCart = cartItems.filter(item => item.id !== id);
-    setCartItems(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    const item = cartItems.find((item) => item.id === id);
+    if (item && item.quantity > 1) {
+      updateQuantity(id, item.quantity - 1);
+    }
   };
 
   return (
@@ -75,11 +57,15 @@ function Cart() {
 
           {/* Table Rows */}
           <div className="space-y-4">
-            {cartItems.map(item => (
+            {cartItems.map((item) => (
               <div key={item.id} className="grid grid-cols-5 items-center">
                 {/* Product */}
                 <div className="flex items-center space-x-4">
-                  <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded-xl" />
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-16 h-16 object-cover rounded-xl"
+                  />
                   <span>{item.name}</span>
                 </div>
 
@@ -88,17 +74,32 @@ function Cart() {
 
                 {/* Quantity */}
                 <div className="text-center">
-                  <button onClick={() => handleDecreaseQuantity(item.id)} className="px-2 py-1 bg-gray-700 text-white rounded-full">-</button>
+                  <button
+                    onClick={() => handleDecreaseQuantity(item.id)}
+                    className="px-2 py-1 bg-gray-700 text-white rounded-full"
+                  >
+                    -
+                  </button>
                   <span className="mx-2">{item.quantity}</span>
-                  <button onClick={() => handleIncreaseQuantity(item.id)} className="px-2 py-1 bg-gray-700 text-white rounded-full">+</button>
+                  <button
+                    onClick={() => handleIncreaseQuantity(item.id)}
+                    className="px-2 py-1 bg-gray-700 text-white rounded-full"
+                  >
+                    +
+                  </button>
                 </div>
 
                 {/* Subtotal */}
-                <div className="text-right">${(item.price * item.quantity).toFixed(2)}</div>
+                <div className="text-right">
+                  ${(item.price * item.quantity).toFixed(2)}
+                </div>
 
                 {/* Delete Item with Trash Icon */}
                 <div className="text-right">
-                  <button onClick={() => handleDeleteItem(item.id)} className="text-red-500 hover:text-red-700">
+                  <button
+                    onClick={() => removeFromCart(item.id)}
+                    className="text-red-500 hover:text-red-700"
+                  >
                     <FaTrashAlt className="inline-block" size={20} />
                   </button>
                 </div>
@@ -108,8 +109,13 @@ function Cart() {
 
           {/* Coupon Code Form */}
           <div className="mt-8 border-t border-gray-700 pt-6">
-            <h3 className="text-xl font-semibold mb-4 text-yellow-300">Apply Coupon Code</h3>
-            <form onSubmit={formik.handleSubmit} className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+            <h3 className="text-xl font-semibold mb-4 text-yellow-300">
+              Apply Coupon Code
+            </h3>
+            <form
+              onSubmit={formik.handleSubmit}
+              className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4"
+            >
               <input
                 id="coupon"
                 name="coupon"
@@ -118,13 +124,19 @@ function Cart() {
                 onBlur={formik.handleBlur}
                 value={formik.values.coupon}
                 placeholder="Enter coupon code"
-                className="flex-1 p-2 rounded-lg bg-white text-black placeholder-gray-500 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300" />
-              <button type="submit" className="bg-[#FFE662] text-[#800020] px-4 py-2 rounded-lg shadow-md">
+                className="flex-1 p-2 rounded-lg bg-white text-black placeholder-gray-500 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+              />
+              <button
+                type="submit"
+                className="bg-[#FFE662] text-[#800020] px-4 py-2 rounded-lg shadow-md"
+              >
                 Apply
               </button>
             </form>
             {formik.touched.coupon && formik.errors.coupon && (
-              <div className="text-red-500 text-sm mt-2">{formik.errors.coupon}</div>
+              <div className="text-red-500 text-sm mt-2">
+                {formik.errors.coupon}
+              </div>
             )}
           </div>
         </div>
@@ -148,23 +160,17 @@ function Cart() {
             </div>
           </div>
 
-          {/* Add Item Button */}
+          {/* Navigation Buttons */}
           <button
-            onClick={() => navigate('/orders')}
+            onClick={() => navigate("/restaurants")}
             className="mt-4 w-full bg-[#800020] text-white px-4 py-2 rounded-xl shadow-md hover:shadow-lg"
           >
-            Orders
-          </button>
-          <button
-            onClick={() => navigate('/menu')}
-            className="mt-4 w-full bg-[#800020] text-white px-4 py-2 rounded-xl shadow-md hover:shadow-lg"
-          >
-            Add Item
+            Add More Items
           </button>
 
           {/* Place Order Button */}
           <button
-            onClick={() => navigate('/checkout')}
+            onClick={() => navigate("/checkout")}
             className="mt-6 w-full bg-[#FFE662] text-[#800020] px-4 py-2 rounded-xl shadow-md hover:shadow-lg"
           >
             Checkout

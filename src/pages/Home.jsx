@@ -23,7 +23,7 @@ function Home() {
             items
           </span>
           <Link to="/checkout" className="flex ml-45 justify-start">
-            <button className="bg-[#f1a129] text-[#212121] text-lg ease-out px-5 py-2 rounded-full hover:scale-110 transition-all duration-200 flex items-center gap-2">
+            <button className="bg-[#FEE662] text-[#212121] text-lg ease-out px-5 py-2 rounded-full hover:scale-110 transition-all duration-200 flex items-center gap-2">
               Order Now
               <FaArrowRight />
             </button>
