@@ -6,7 +6,6 @@ export const restaurants = [
       rating: 4.5,
       description:
         "The best pizza in town, freshly made with high-quality ingredients.",
-      cuisine: "Italian",
       deliveryTime: "30-40 min",
       location: "123 Pizza St, Pizzaville",
       contact: "+1 555-123-4567",
@@ -23,7 +22,6 @@ export const restaurants = [
       rating: 4.8,
       description:
         "Authentic Japanese sushi with the finest selection of seafood.",
-      cuisine: "Japanese",
       deliveryTime: "20-30 min",
       location: "456 Sushi Rd, Sushi City",
       contact: "+1 555-987-6543",
@@ -39,7 +37,6 @@ export const restaurants = [
       image: "/images/burger-king.jpg",
       rating: 4.2,
       description: "Juicy burgers and crispy fries – the ultimate comfort food.",
-      cuisine: "American",
       deliveryTime: "30-45 min",
       location: "789 Burger Blvd, Burger Town",
       contact: "+1 555-666-7777",
@@ -56,7 +53,6 @@ export const restaurants = [
       rating: 4.7,
       description:
         "Tacos, burritos, and quesadillas with all the flavors of Mexico.",
-      cuisine: "Mexican",
       deliveryTime: "25-35 min",
       location: "321 Taco Lane, Fiesta City",
       contact: "+1 555-765-4321",
@@ -73,7 +69,6 @@ export const restaurants = [
       rating: 4.9,
       description:
         "Delicious homemade pasta dishes crafted with love and passion.",
-      cuisine: "Italian",
       deliveryTime: "35-45 min",
       location: "123 Pasta Ave, Noodle Town",
       contact: "+1 555-234-5678",
@@ -89,7 +84,6 @@ export const restaurants = [
       image: "/images/biryani-palace.jpg",
       rating: 4.6,
       description: "Spicy, aromatic biryanis and flavorful Indian cuisine.",
-      cuisine: "Indian",
       deliveryTime: "40-50 min",
       location: "222 Spice St, Curry City",
       contact: "+1 555-876-5432",
@@ -106,7 +100,6 @@ export const restaurants = [
       rating: 4.4,
       description:
         "A plant-based dining experience with fresh ingredients and great flavors.",
-      cuisine: "Vegan",
       deliveryTime: "30-40 min",
       location: "678 Green Rd, Plant City",
       contact: "+1 555-444-3333",
@@ -115,7 +108,6 @@ export const restaurants = [
         { name: "Quinoa Salad", price: "$9" },
         { name: "Vegan Pizza", price: "$13" },
       ],
-      specialOffer: "Get 15% off your first vegan meal!",
     },
     {
       id: 8,
@@ -123,7 +115,6 @@ export const restaurants = [
       image: "/images/dim-sum-delight.jpg",
       rating: 4.8,
       description: "Authentic Chinese dim sum and delicious small plates.",
-      cuisine: "Chinese",
       deliveryTime: "25-35 min",
       location: "345 Dumpling St, Chinatown",
       contact: "+1 555-123-9876",
@@ -140,7 +131,6 @@ export const restaurants = [
       rating: 4.9,
       description:
         "Premium steaks and exceptional cuts of meat grilled to perfection.",
-      cuisine: "Steakhouse",
       deliveryTime: "40-50 min",
       location: "456 Grill St, Steak Town",
       contact: "+1 555-987-3210",

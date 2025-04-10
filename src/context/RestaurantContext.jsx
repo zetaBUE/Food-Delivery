@@ -1,19 +1,34 @@
-import React, { createContext, useState } from "react";
-import Grey from "../assets/Grey.jpeg";
-import Garnell from "../assets/Garnell.png";
+import React, { createContext, useState, useEffect } from "react";
 import { restaurants as initialRestaurants } from "../dataSet/RestaurantData";
 
-// Create the context
 export const RestaurantContext = createContext();
 
-// Create the provider component
 export const RestaurantProvider = ({ children }) => {
-  // Initialize the restaurant data (preliminary data)
-  const [restaurants, setRestaurants] = useState(initialRestaurants);
+  // Initialize from localStorage or use initial data
+  const [restaurants, setRestaurants] = useState(() => {
+    const savedRestaurants = localStorage.getItem('restaurants');
+    return savedRestaurants ? JSON.parse(savedRestaurants) : initialRestaurants;
+  });
 
-  // Function to add a new restaurant
+  // Save to localStorage whenever restaurants change
+  useEffect(() => {
+    localStorage.setItem('restaurants', JSON.stringify(restaurants));
+  }, [restaurants]);
+
   const addRestaurant = (restaurant) => {
-    setRestaurants((prevRestaurants) => [...prevRestaurants, restaurant]);
+    const highestId = restaurants.reduce((max, restaurant) => 
+      Math.max(max, restaurant.id), 0);
+      
+    const newId = (highestId + 1) > 999 ? 1 : highestId + 1;
+
+    const newRestaurant = {
+      ...restaurant,
+      id: newId,
+      rating: 0,
+      menu: restaurant.menu || []
+    };
+
+    setRestaurants(prevRestaurants => [...prevRestaurants, newRestaurant]);
   };
 
   return (
@@ -22,39 +37,3 @@ export const RestaurantProvider = ({ children }) => {
     </RestaurantContext.Provider>
   );
 };
-
-/*import React, { createContext, useState } from "react";
-
-export const RestaurantContext = createContext();
-
-export const RestaurantProvider = ({ children }) => {
-  const [restaurants, setRestaurants] = useState([]);
-
-  const addRestaurant = (restaurant) => {
-    setRestaurants((prevRestaurants) => [...prevRestaurants, restaurant]);
-  };
-
-  return (
-    <RestaurantContext.Provider value={{ restaurants, addRestaurant }}>
-      {children}
-    </RestaurantContext.Provider>
-  );
-};
-*/
-/*import React, { createContext, useState } from "react";
-
-export const RestaurantContext = createContext();
-
-export const RestaurantProvider = ({ children }) => {
-  const [restaurants, setRestaurants] = useState([]);
-
-  const addRestaurant = (restaurant) => {
-    setRestaurants([...restaurants, restaurant]);
-  };
-
-  return (
-    <RestaurantContext.Provider value={{ restaurants, addRestaurant }}>
-      {children}
-    </RestaurantContext.Provider>
-  );
-};*/

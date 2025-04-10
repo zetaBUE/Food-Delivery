@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { restaurants } from "../dataSet/RestaurantData";
+import { RestaurantContext } from "../context/RestaurantContext"; 
 
 const Restaurants = () => {
+  const { restaurants } = useContext(RestaurantContext); 
   return (
     <>
       <div className="flex justify-center items-center">
