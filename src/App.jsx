@@ -16,7 +16,7 @@ import ListItems from "./pages/ListItems";
 import AddItems from "./pages/AddItems";
 import FAQ from "./pages/FAQ";
 import RestaurantView from "./pages/RestaurantView";
-import RestaurantsOriginal from "./pages/RestaurantsOriginal";
+import RestaurantsOriginal from "./pages/Restaurants";
 import { CartProvider } from "./context/CartContext";
 import { OrderProvider } from "./context/OrderContext";
 
@@ -36,7 +36,6 @@ export default function App() {
             <Route path="/menus" element={<Menus />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/restaurants" element={<Restaurants />} />
-            <Route path="/restaurants1" element={<RestaurantsOriginal />} />
             <Route path="/restaurant/:id" element={<RestaurantView />} />
             <Route path="/user-orders" element={<UserOrders />} />
             <Route path="/list-items" element={<ListItems />} />
