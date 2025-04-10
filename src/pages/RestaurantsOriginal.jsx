@@ -4,7 +4,6 @@ import { RestaurantContext } from "../context/RestaurantContext"; // Import cont
 
 const Restaurants = () => {
   const { restaurants } = useContext(RestaurantContext); // Get restaurants from context
-
   return (
     <>
       <div className="flex justify-center items-center">
@@ -17,17 +16,20 @@ const Restaurants = () => {
               <Link
                 key={index}
                 to={restaurant.path}
-                className="w-80 h-100 group rounded-2xl text-black hover:bg-[#212121] hover:text-[#E0E0E0] duration-300 shadow-xl"
+                className="w-80 h-100 group rounded-2xl text-black hover:bg-[#212121]
+                          hover:text-[#E0E0E0] duration-300 shadow-xl"
               >
                 <img
-                  src={restaurant.photo}
+                  src={restaurant.image}
                   alt={restaurant.name}
-                  className="mx-auto block transform group-hover:scale-105 group-hover:rotate-6 duration-300 rounded-t-lg"
+                  className="mx-auto block transform
+                            group-hover:scale-105 group-hover:rotate-6 duration-300 rounded-t-lg"
                 />
+
                 <div className="p-4 text-center">
                   <h1 className="text-xl font-bold">{restaurant.name}</h1>
                   <p className="text-gray-500 group-hover:text-[#E0E0E0] duration-300 text-sm">
-                    {restaurant.description}
+                  {restaurant.description}
                   </p>
                 </div>
               </Link>
