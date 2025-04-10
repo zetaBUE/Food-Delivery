@@ -1,96 +1,100 @@
-import React, { useState, useContext } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useContext } from "react";
 import { RestaurantContext } from "../context/RestaurantContext";
 
 const AddRestaurant = () => {
+  const navigate = useNavigate();
   const { addRestaurant } = useContext(RestaurantContext);
-  const [formData, setFormData] = useState({
+
+  const initialValues = {
     name: "",
-    photo: null, // Changed to store File object
     description: "",
+    image: null,
+  };
+
+  const validationSchema = Yup.object({
+    name: Yup.string().required("Restaurant name is required"),
+    description: Yup.string().required("Description is required"),
+    image: Yup.mixed().required("Image is required"),
   });
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const handleSubmit = (values, { resetForm }) => {
+    // Convert the image to a usable URL
+    const imageUrl = URL.createObjectURL(values.image);
 
-  const handleFileChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      photo: e.target.files[0], // Handle file selection
-    }));
-  };
+    // Call the context to add the restaurant
+    addRestaurant({
+      name: values.name,
+      description: values.description,
+      image: imageUrl,
+    });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Create an object URL for the image file if available
-    const photoUrl = formData.photo ? URL.createObjectURL(formData.photo) : null;
-
-    const newRestaurant = {
-      name: formData.name,
-      photo: photoUrl,
-      description: formData.description,
-      path: "/faq", // Replace with actual path
-    };
-
-    addRestaurant(newRestaurant); // Add restaurant to context
-    alert("Restaurant added!");
-    setFormData({ name: "", photo: null, description: "" }); // Reset form data
+    alert("Restaurant added successfully!");
+    resetForm();
+    navigate("/restaurants");
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg">
-      <h2 className="text-2xl font-bold mb-4 text-center">Add New Restaurant</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block font-medium mb-1">Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2"
-            required
-          />
-        </div>
+    <div className="max-w-xl mx-auto p-6">
+      <h2 className="text-2xl font-bold mb-6">Add a New Restaurant</h2>
 
-        <div>
-          <label className="block font-medium mb-1">Photo</label>
-          <input
-            type="file"
-            name="photo"
-            onChange={handleFileChange}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2"
-            required
-          />
-        </div>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ setFieldValue }) => (
+          <Form className="space-y-4">
+            <div>
+              <Field
+                name="name"
+                placeholder="Restaurant Name"
+                className="w-full p-2 border rounded"
+              />
+              <ErrorMessage name="name" component="div" className="text-red-500 text-sm" />
+            </div>
 
-        <div>
-          <label className="block font-medium mb-1">Description</label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            rows="4"
-            className="w-full border border-gray-300 rounded-lg px-3 py-2"
-            required
-          />
-        </div>
+            <div>
+              <Field
+                name="description"
+                placeholder="Description"
+                className="w-full p-2 border rounded"
+              />
+              <ErrorMessage name="description" component="div" className="text-red-500 text-sm" />
+            </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
-        >
-          Add Restaurant
-        </button>
-      </form>
+            <div>
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={(event) => {
+                  setFieldValue("image", event.currentTarget.files[0]);
+                }}
+                className="w-full p-2 border rounded"
+              />
+              <ErrorMessage name="image" component="div" className="text-red-500 text-sm" />
+            </div>
+
+            <button
+              type="submit"
+              className="bg-[#FFE662] text-black py-2 px-6 rounded-full"
+            >
+              Add Restaurant
+            </button>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
 
 export default AddRestaurant;
+
+
 
 /*import React, { useContext } from "react";
 import { useFormik } from "formik";
