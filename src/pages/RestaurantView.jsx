@@ -3,7 +3,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import RestaurantHeader from "../components/RestaurantHeader.jsx";
 import MenuComponent from "../components/MenuComponent.jsx";
-import RestaurantContactInfo from "../components/RestaurantContactInfo.jsx";
+
 
 const RestaurantView = () => {
   const location = useLocation();
@@ -20,11 +20,6 @@ const RestaurantView = () => {
         <MenuComponent
           menu={restaurant.menu}
           restaurantName={restaurant.name}
-        />
-        <RestaurantContactInfo
-          location={restaurant.location}
-          contact={restaurant.contact}
-          deliveryTime={restaurant.deliveryTime}
         />
       </div>
     </div>

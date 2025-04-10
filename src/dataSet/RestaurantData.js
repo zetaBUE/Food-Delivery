@@ -6,9 +6,6 @@ export const restaurants = [
       rating: 4.5,
       description:
         "The best pizza in town, freshly made with high-quality ingredients.",
-      deliveryTime: "30-40 min",
-      location: "123 Pizza St, Pizzaville",
-      contact: "+1 555-123-4567",
       menu: [
         { name: "Margherita Pizza", price: "$10" },
         { name: "Pepperoni Pizza", price: "$12" },
@@ -22,9 +19,6 @@ export const restaurants = [
       rating: 4.8,
       description:
         "Authentic Japanese sushi with the finest selection of seafood.",
-      deliveryTime: "20-30 min",
-      location: "456 Sushi Rd, Sushi City",
-      contact: "+1 555-987-6543",
       menu: [
         { name: "Sushi Roll", price: "$18" },
         { name: "Sashimi Plate", price: "$20" },
@@ -37,9 +31,6 @@ export const restaurants = [
       image: "/images/burger-king.jpg",
       rating: 4.2,
       description: "Juicy burgers and crispy fries – the ultimate comfort food.",
-      deliveryTime: "30-45 min",
-      location: "789 Burger Blvd, Burger Town",
-      contact: "+1 555-666-7777",
       menu: [
         { name: "Cheeseburger", price: "$8" },
         { name: "Whopper", price: "$10" },
@@ -53,9 +44,6 @@ export const restaurants = [
       rating: 4.7,
       description:
         "Tacos, burritos, and quesadillas with all the flavors of Mexico.",
-      deliveryTime: "25-35 min",
-      location: "321 Taco Lane, Fiesta City",
-      contact: "+1 555-765-4321",
       menu: [
         { name: "Beef Taco", price: "$6" },
         { name: "Chicken Burrito", price: "$9" },
@@ -69,9 +57,6 @@ export const restaurants = [
       rating: 4.9,
       description:
         "Delicious homemade pasta dishes crafted with love and passion.",
-      deliveryTime: "35-45 min",
-      location: "123 Pasta Ave, Noodle Town",
-      contact: "+1 555-234-5678",
       menu: [
         { name: "Spaghetti Carbonara", price: "$12" },
         { name: "Lasagna", price: "$14" },
@@ -84,9 +69,6 @@ export const restaurants = [
       image: "/images/biryani-palace.jpg",
       rating: 4.6,
       description: "Spicy, aromatic biryanis and flavorful Indian cuisine.",
-      deliveryTime: "40-50 min",
-      location: "222 Spice St, Curry City",
-      contact: "+1 555-876-5432",
       menu: [
         { name: "Chicken Biryani", price: "$15" },
         { name: "Paneer Tikka", price: "$10" },
@@ -100,9 +82,6 @@ export const restaurants = [
       rating: 4.4,
       description:
         "A plant-based dining experience with fresh ingredients and great flavors.",
-      deliveryTime: "30-40 min",
-      location: "678 Green Rd, Plant City",
-      contact: "+1 555-444-3333",
       menu: [
         { name: "Vegan Burger", price: "$11" },
         { name: "Quinoa Salad", price: "$9" },
@@ -115,9 +94,6 @@ export const restaurants = [
       image: "/images/dim-sum-delight.jpg",
       rating: 4.8,
       description: "Authentic Chinese dim sum and delicious small plates.",
-      deliveryTime: "25-35 min",
-      location: "345 Dumpling St, Chinatown",
-      contact: "+1 555-123-9876",
       menu: [
         { name: "Pork Dumplings", price: "$8" },
         { name: "Shrimp Spring Rolls", price: "$7" },
@@ -131,9 +107,6 @@ export const restaurants = [
       rating: 4.9,
       description:
         "Premium steaks and exceptional cuts of meat grilled to perfection.",
-      deliveryTime: "40-50 min",
-      location: "456 Grill St, Steak Town",
-      contact: "+1 555-987-3210",
       menu: [
         { name: "Ribeye Steak", price: "$25" },
         { name: "Filet Mignon", price: "$30" },

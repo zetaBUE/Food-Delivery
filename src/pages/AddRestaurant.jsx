@@ -22,19 +22,30 @@ const AddRestaurant = () => {
   });
 
   const handleSubmit = (values, { resetForm }) => {
-    // Convert the image to a usable URL
-    const imageUrl = URL.createObjectURL(values.image);
-
-    // Call the context to add the restaurant
+    const reader = new FileReader();
+    
+    reader.onload = (e) => {
+      const base64Image = e.target.result;
+      
     addRestaurant({
       name: values.name,
       description: values.description,
-      image: imageUrl,
+      image: base64Image,
+        cuisine: "Various",
+        deliveryTime: "30-45 min",
+        location: "Address pending",
+        contact: "Contact pending",
+        menu: []
     });
 
     alert("Restaurant added successfully!");
     resetForm();
     navigate("/restaurants");
+  };
+
+    if (values.image) {
+      reader.readAsDataURL(values.image);
+    }
   };
 
   return (
@@ -93,6 +104,7 @@ const AddRestaurant = () => {
 };
 
 export default AddRestaurant;
+
 
 
 
