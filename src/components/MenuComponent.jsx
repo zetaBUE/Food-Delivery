@@ -1,6 +1,6 @@
 // MenuComponent.js
 import React from "react";
-import { useCart } from "../hooks/useCart.js";
+import { useCart } from "../context/CartContext";
 
 const MenuComponent = ({ menu, restaurantName }) => {
   const { addToCart } = useCart();

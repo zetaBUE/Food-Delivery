@@ -2,8 +2,8 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../hooks/useCart";
-import { useOrder } from "../hooks/useOrder";
+import { useCart } from "../context/CartContext";
+import { useOrder } from "../context/OrderContext";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("Required"),
