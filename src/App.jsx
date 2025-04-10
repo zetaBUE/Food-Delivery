@@ -8,15 +8,11 @@ import Account from "./pages/Account";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
-import Menus from "./pages/Menus";
 import Orders from "./pages/Orders";
 import Restaurants from "./pages/Restaurants";
-import UserOrders from "./pages/UserOrders";
-import ListItems from "./pages/ListItems";
 import AddRestaurant from "./pages/AddRestaurant";
 import FAQ from "./pages/FAQ";
-import RestaurantView from "./pages/RestaurantView";
-import RestaurantsOriginal from "./pages/Restaurants";
+import RestaurantMenu from "./pages/RestaurantMenu";
 import { CartProvider } from "./context/CartContext";
 import { OrderProvider } from "./context/OrderContext";
 import { RestaurantProvider } from "./context/RestaurantContext";
@@ -34,12 +30,9 @@ export default function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/menus" element={<Menus />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/restaurants" element={<Restaurants />} />
-            <Route path="/restaurant/:id" element={<RestaurantView />} />
-            <Route path="/user-orders" element={<UserOrders />} />
-            <Route path="/list-items" element={<ListItems />} />
+            <Route path="/restaurant/:id" element={<RestaurantMenu />} />
             <Route path="/add-Restaurant" element={<AddRestaurant />} />
             <Route path="/faq" element={<FAQ />} />
           </Routes>
