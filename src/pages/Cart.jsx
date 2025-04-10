@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
-import { useCart } from "../hooks/useCart";
+import { useCart } from "../context/CartContext";
 
 function Cart() {
   const navigate = useNavigate();

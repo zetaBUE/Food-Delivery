@@ -4,7 +4,7 @@ import { RiShoppingBasketLine } from "react-icons/ri";
 import { AiFillHome } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import { MdRestaurantMenu } from "react-icons/md";
-import { useCart } from "../hooks/useCart";
+import { useCart } from "../context/CartContext";
 import CraveCartLogo from "../assets/CraveCartLogo.png";
 
 export default function Navbar() {

@@ -1,6 +1,14 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 
 const OrderContext = createContext(null);
+
+export function useOrder() {
+  const context = useContext(OrderContext);
+  if (!context) {
+    throw new Error("useOrder must be used within an OrderProvider");
+  }
+  return context;
+}
 
 export function OrderProvider({ children }) {
   const [orders, setOrders] = useState(() => {
