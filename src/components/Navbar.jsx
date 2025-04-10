@@ -50,7 +50,7 @@ export default function Navbar() {
       </Link>
 
       <Link to="/checkout">
-        <button className="bg-[#101035] text-nowrap text-white ease-out px-5 py-2 mr-3 rounded-full hover:scale-110 transition-all duration-200">
+        <button className="bg-[#FFE662] text-nowrap text-black ease-out px-5 py-2 mr-3 rounded-full hover:scale-110 transition-all duration-200">
           Order Now
         </button>
       </Link>
