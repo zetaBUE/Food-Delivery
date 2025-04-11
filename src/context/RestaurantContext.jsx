@@ -4,13 +4,11 @@ import { restaurants as initialRestaurants } from "../dataSet/RestaurantData";
 export const RestaurantContext = createContext();
 
 export const RestaurantProvider = ({ children }) => {
-  // Initialize from localStorage or use initial data
   const [restaurants, setRestaurants] = useState(() => {
     const savedRestaurants = localStorage.getItem("restaurants");
     return savedRestaurants ? JSON.parse(savedRestaurants) : initialRestaurants;
   });
 
-  // Save to localStorage whenever restaurants change
   useEffect(() => {
     localStorage.setItem("restaurants", JSON.stringify(restaurants));
   }, [restaurants]);

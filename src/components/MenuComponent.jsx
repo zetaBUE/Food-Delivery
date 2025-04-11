@@ -12,7 +12,7 @@ const MenuComponent = ({ menu, restaurantName }) => {
         .replace(/\s+/g, "-"),
       name: menuItem.name,
       price: parseFloat(menuItem.price.replace("$", "")),
-      image: "/images/food-placeholder.jpg", // You can replace this with actual food images
+      image: "/images/food-placeholder.jpg",
       restaurant: restaurantName,
     };
     addToCart(itemToAdd);

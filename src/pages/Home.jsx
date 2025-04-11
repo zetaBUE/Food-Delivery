@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Wave from "../assets/Wave.svg";
-import Grey from "../assets/Grey.jpeg"; // Import your image
+import Grey from "../assets/Grey.jpeg";
 import { FaArrowRight } from "react-icons/fa";
 import FeaturesBox from "../components/FeaturesBox";
 
@@ -15,7 +15,6 @@ function Home() {
       />
 
       <div className="h-fit mt-70 mb-40 flex items-center pl-20">
-        {/* Text and Button */}
         <div className="flex-1">
           <span className="text-5xl font-bold text-[#212121] text-shadow-lg shadow-gray-800">
             We are ready to deliver <br />

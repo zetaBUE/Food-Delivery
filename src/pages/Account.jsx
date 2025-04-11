@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 export function Account() {
   const navigate = useNavigate();
 
-  // Formik for Account Info
   const accountForm = useFormik({
     initialValues: { name: "", email: "", phone: "" },
     validationSchema: Yup.object({
@@ -22,7 +21,6 @@ export function Account() {
     },
   });
 
-  // Formik for Password Change
   const passwordForm = useFormik({
     initialValues: {
       currentPassword: "",
@@ -44,7 +42,6 @@ export function Account() {
     },
   });
 
-  // Formik for Add Address
   const addressForm = useFormik({
     initialValues: { address: "", city: "", postalCode: "" },
     validationSchema: Yup.object({
@@ -60,7 +57,6 @@ export function Account() {
 
   return (
     <div className="flex max-w-6xl mx-auto p-6 space-x-8">
-      {/* Sidebar Navigation */}
       <aside className="w-1/4 bg-[#424242] shadow-lg rounded-2xl p-4 h-fit">
         <nav className="space-y-4">
           <button
@@ -78,11 +74,9 @@ export function Account() {
         </nav>
       </aside>
 
-      {/* Main Content */}
       <div className="flex-1 space-y-8">
         <h1 className="text-3xl font-bold text-[#800020] mb-4">My Account</h1>
 
-        {/* Account Information */}
         <div className="bg-[white] p-6 rounded-2xl shadow-md border-t-4 border-[#FFE662]">
           <h2 className="text-xl font-semibold text-[#800020] mb-4">
             Account Information
@@ -116,7 +110,6 @@ export function Account() {
           </form>
         </div>
 
-        {/* Add Address */}
         <div className="bg-white p-6 rounded-2xl shadow-md border-t-4 border-[#FFE662]">
           <h2 className="text-xl font-semibold text-[#800020] mb-4">
             Add Address
@@ -150,7 +143,6 @@ export function Account() {
           </form>
         </div>
 
-        {/* Change Password */}
         <div className="bg-white p-6 rounded-2xl shadow-md border-t-4 border-[#FFE662]">
           <h2 className="text-xl font-semibold text-[#800020] mb-4">
             Change Password

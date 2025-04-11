@@ -16,12 +16,10 @@ export default function SearchRestaurant() {
       return;
     }
 
-    // Filter restaurants based on query
     const found = restaurants.filter((restaurant) =>
       restaurant.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    // Set result to display the matching restaurant(s)
     setResult(found.length > 0 ? found : "No matching restaurant found");
   };
 

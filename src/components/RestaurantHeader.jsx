@@ -1,4 +1,3 @@
-// RestaurantHeader.js
 import React from "react";
 
 const RestaurantHeader = ({ restaurant }) => {

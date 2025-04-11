@@ -6,7 +6,8 @@ import { RestaurantContext } from "../context/RestaurantContext";
 
 const ManageRestaurant = () => {
   const navigate = useNavigate();
-  const { addRestaurant, removeRestaurant, restaurants } = useContext(RestaurantContext);
+  const { addRestaurant, removeRestaurant, restaurants } =
+    useContext(RestaurantContext);
 
   const initialValues = {
     name: "",
@@ -50,8 +51,6 @@ const ManageRestaurant = () => {
   return (
     <div className=" py-10 px-6 text-white">
       <div className="max-w-3xl mx-auto space-y-12">
-
-        {/* Form Section */}
         <div className="bg-[#2e2e2e] shadow-lg rounded-2xl p-8 border border-[#FFE662]">
           <h2 className="text-3xl font-bold text-[#FFE662] mb-6 text-center">
             Add a New Restaurant
@@ -65,17 +64,25 @@ const ManageRestaurant = () => {
             {({ setFieldValue }) => (
               <Form className="space-y-5">
                 <div>
-                  <label className="block font-medium mb-1 text-[#FFE662]">Restaurant Name</label>
+                  <label className="block font-medium mb-1 text-[#FFE662]">
+                    Restaurant Name
+                  </label>
                   <Field
                     name="name"
                     placeholder="e.g., Spicy Kitchen"
                     className="w-full p-3 border border-gray-400 rounded-lg bg-[#1d1d1d] text-white focus:outline-none focus:ring-2 focus:ring-[#FFE662]"
                   />
-                  <ErrorMessage name="name" component="div" className="text-red-400 text-sm mt-1" />
+                  <ErrorMessage
+                    name="name"
+                    component="div"
+                    className="text-red-400 text-sm mt-1"
+                  />
                 </div>
 
                 <div>
-                  <label className="block font-medium mb-1 text-[#FFE662]">Description</label>
+                  <label className="block font-medium mb-1 text-[#FFE662]">
+                    Description
+                  </label>
                   <Field
                     name="description"
                     placeholder="Short description"
@@ -89,15 +96,23 @@ const ManageRestaurant = () => {
                 </div>
 
                 <div>
-                  <label className="block font-medium mb-1 text-[#FFE662]">Image</label>
+                  <label className="block font-medium mb-1 text-[#FFE662]">
+                    Image
+                  </label>
                   <input
                     type="file"
                     name="image"
                     accept="image/*"
-                    onChange={(event) => setFieldValue("image", event.currentTarget.files[0])}
+                    onChange={(event) =>
+                      setFieldValue("image", event.currentTarget.files[0])
+                    }
                     className="w-full p-2 border border-gray-400 rounded-lg bg-[#1d1d1d] text-white"
                   />
-                  <ErrorMessage name="image" component="div" className="text-red-400 text-sm mt-1" />
+                  <ErrorMessage
+                    name="image"
+                    component="div"
+                    className="text-red-400 text-sm mt-1"
+                  />
                 </div>
 
                 <div className="text-center">
@@ -113,7 +128,6 @@ const ManageRestaurant = () => {
           </Formik>
         </div>
 
-        {/* Existing Restaurants Section */}
         <div>
           <h3 className="text-2xl font-semibold text-[#800020] mb-6 text-center">
             Existing Restaurants
@@ -125,8 +139,12 @@ const ManageRestaurant = () => {
                 className="flex justify-between items-center bg-[#2e2e2e] border border-[#FFE662] rounded-xl p-5 shadow hover:shadow-md transition"
               >
                 <div>
-                  <h4 className="text-lg font-semibold text-[#FFE662]">{restaurant.name}</h4>
-                  <p className="text-sm text-gray-300">{restaurant.description}</p>
+                  <h4 className="text-lg font-semibold text-[#FFE662]">
+                    {restaurant.name}
+                  </h4>
+                  <p className="text-sm text-gray-300">
+                    {restaurant.description}
+                  </p>
                 </div>
                 <button
                   onClick={() => {

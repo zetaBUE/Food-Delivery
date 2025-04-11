@@ -1,16 +1,14 @@
 import React from "react";
-import Grey from "../assets/FoodDeliveryLogo.svg"; 
+import Grey from "../assets/FoodDeliveryLogo.svg";
 import FeaturesBox from "../components/FeaturesBox";
 
 const About = () => {
   return (
-    <div className=" font-sans">
-      {/* About Section */}
-    
-      <h1 className="text-center py-8 text-4xl font-bold text-[#000]">About Us</h1>
-     
+    <div className="font-sans">
+      <h1 className="text-center py-8 text-4xl font-bold text-[#000]">
+        About Us
+      </h1>
 
-      {/* Info & Image Section */}
       <div className="flex flex-col md:flex-row justify-center  px-8 md:px-24 py-8">
         <div className="bg-[#212121] p-6 rounded-lg text-white min-w-[250px] max-w-[400px]  shadow-md mb-6 ">
           <h2 className="font-bold text-2xl mb-4 ">Crave Cart.</h2>
@@ -33,7 +31,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* Features in a Smaller Purple Box */}
       <FeaturesBox />
     </div>
   );

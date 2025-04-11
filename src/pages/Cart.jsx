@@ -42,11 +42,9 @@ function Cart() {
   return (
     <div className="min-h-screen bg-white text-black p-8 space-y-8">
       <main className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Shopping Cart Section */}
         <div className="md:col-span-2 bg-[#424242] text-white rounded-2xl p-6 shadow-lg">
           <h2 className="text-2xl font-semibold mb-6">Shopping Cart</h2>
 
-          {/* Table Header */}
           <div className="grid grid-cols-5 text-white font-semibold border-b border-gray-700 pb-2 mb-4">
             <span>Product</span>
             <span className="text-center">Price</span>
@@ -55,11 +53,9 @@ function Cart() {
             <span className="text-right">Actions</span>
           </div>
 
-          {/* Table Rows */}
           <div className="space-y-4">
             {cartItems.map((item) => (
               <div key={item.id} className="grid grid-cols-5 items-center">
-                {/* Product */}
                 <div className="flex items-center space-x-4">
                   <img
                     src={item.image}
@@ -69,10 +65,8 @@ function Cart() {
                   <span>{item.name}</span>
                 </div>
 
-                {/* Price */}
                 <div className="text-center">${item.price.toFixed(2)}</div>
 
-                {/* Quantity */}
                 <div className="text-center">
                   <button
                     onClick={() => handleDecreaseQuantity(item.id)}
@@ -89,12 +83,10 @@ function Cart() {
                   </button>
                 </div>
 
-                {/* Subtotal */}
                 <div className="text-right">
                   ${(item.price * item.quantity).toFixed(2)}
                 </div>
 
-                {/* Delete Item with Trash Icon */}
                 <div className="text-right">
                   <button
                     onClick={() => removeFromCart(item.id)}
@@ -107,7 +99,6 @@ function Cart() {
             ))}
           </div>
 
-          {/* Coupon Code Form */}
           <div className="mt-8 border-t border-gray-700 pt-6">
             <h3 className="text-xl font-semibold mb-4 text-white">
               Apply Coupon Code
@@ -141,7 +132,6 @@ function Cart() {
           </div>
         </div>
 
-        {/* Order Summary Section */}
         <div className="bg-[#424242] text-white rounded-2xl p-6 shadow-lg">
           <h2 className="text-2xl font-semibold mb-6">Order Summary</h2>
           <div className="space-y-2">
@@ -160,7 +150,6 @@ function Cart() {
             </div>
           </div>
 
-          {/* Navigation Buttons */}
           <button
             onClick={() => navigate("/restaurants")}
             className="mt-4 w-full bg-[#800020] text-white px-4 py-2 rounded-xl shadow-md hover:shadow-lg"
@@ -168,7 +157,6 @@ function Cart() {
             Add More Items
           </button>
 
-          {/* Place Order Button */}
           <button
             onClick={() => navigate("/checkout")}
             className="mt-6 w-full bg-[#FFE662] text-[#800020] px-4 py-2 rounded-xl shadow-md hover:shadow-lg"

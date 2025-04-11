@@ -29,12 +29,10 @@ const Orders = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Orders Page Header */}
       <div className="bg-[#101035] text-white py-4">
         <h1 className="text-3xl font-bold text-center">Order History</h1>
       </div>
 
-      {/* Search Filter */}
       <div className="container mx-auto p-4">
         <form
           onSubmit={formik.handleSubmit}
@@ -61,7 +59,6 @@ const Orders = () => {
         </form>
       </div>
 
-      {/* Orders Table */}
       <div className="container mx-auto p-4">
         <table className="min-w-full table-auto border-collapse">
           <thead>
