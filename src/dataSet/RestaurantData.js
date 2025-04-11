@@ -6,6 +6,7 @@ import pizza from "../assets/restaurantLogos/pizza.png";
 import steakhouse from "../assets/restaurantLogos/steakhouse.png";
 import sushi from "../assets/restaurantLogos/sushi.png";
 import tacos from "../assets/restaurantLogos/tacos.png";
+import vegan from "../assets/restaurantLogos/vegan.png";
 
 export const restaurants = [
   {
@@ -87,7 +88,7 @@ export const restaurants = [
   {
     id: 7,
     name: "Vegan Vibes",
-    image: pizza, // TODO: Add vegan restaurant logo
+    image: vegan,
     rating: 4.4,
     description:
       "A plant-based dining experience with fresh ingredients and great flavors.",

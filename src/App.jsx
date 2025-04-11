@@ -14,6 +14,8 @@ import ManageRestaurant from "./pages/ManageRestaurant";
 import FAQ from "./pages/FAQ";
 import RestaurantMenu from "./pages/RestaurantMenu";
 import ContactUs from "./pages/ContactUs";
+import AdminLogin from "./pages/AdminLogin";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { CartProvider } from "./context/CartContext";
 import { OrderProvider } from "./context/OrderContext";
 import { RestaurantProvider } from "./context/RestaurantContext";
@@ -38,9 +40,14 @@ export default function App() {
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/restaurants" element={<Restaurants />} />
                 <Route path="/restaurant/:id" element={<RestaurantMenu />} />
+                <Route path="/admin" element={<AdminLogin />} />
                 <Route
                   path="/admin/manageRestaurant"
-                  element={<ManageRestaurant />}
+                  element={
+                    <ProtectedRoute>
+                      <ManageRestaurant />
+                    </ProtectedRoute>
+                  }
                 />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/contact-us" element={<ContactUs />} />

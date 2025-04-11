@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Wave from "../assets/Wave.svg";
-import Grey from "../assets/Grey.jpeg";
+import CraveCartLogo from "../assets/CraveCartLogo.svg";
 import { FaArrowRight } from "react-icons/fa";
 import FeaturesBox from "../components/FeaturesBox";
 import OrderButton from "../components/OrderButton";
@@ -15,7 +15,7 @@ function Home() {
         className="w-full absolute top-0 rotate-180 z-[-10]"
       />
 
-      <div className="h-fit mt-70 mb-40 flex items-center pl-20">
+      <div className="h-fit mt-70 mb-30 flex items-center pl-20">
         <div className="flex-1">
           <span className="text-5xl font-bold text-[#212121] text-shadow-lg shadow-gray-800">
             We are ready to deliver <br />
@@ -29,10 +29,13 @@ function Home() {
 
         <div className="flex-1">
           <img
-            src={Grey}
-            alt="Grey"
-            className="w-full ml-25 max-w-sm rounded-lg shadow-lg"
+            src={CraveCartLogo}
+            alt="CraveCartLogo"
+            className="w-full ml-25 max-w-sm rounded-lg"
           />
+          <p className="font-bold text-[#7A1523] ml-40 mt-10 text-6xl italic">
+            CraveCart
+          </p>
         </div>
       </div>
       <FeaturesBox />
