@@ -8,7 +8,7 @@ const Restaurants = () => {
   return (
     <>
       <div className="flex justify-center items-center">
-        <h1 className="text-3xl font-bold mb-5">Pick a Restaurant</h1>
+        <h1 className="text-5xl italic font-bold mb-5">Pick a Restaurant</h1>
       </div>
       <div className="mb-20">
         <SearchRestaurant />
