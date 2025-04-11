@@ -1,5 +1,5 @@
 import React from "react";
-import Grey from "../assets/FoodDeliveryLogo.svg";
+import CraveCartLogo from "../assets/CraveCartLogo.svg";
 import FeaturesBox from "../components/FeaturesBox";
 
 const About = () => {
@@ -24,9 +24,9 @@ const About = () => {
 
         <div className="w-full md:w-[400px] h-[300px]">
           <img
-            src={Grey}
-            alt="Grey Image"
-            className="w-full h-full object-cover"
+            src={CraveCartLogo}
+            alt="CraveCartLogo Image"
+            className="w-fit h-fit mt-10 ml-10"
           />
         </div>
       </div>
