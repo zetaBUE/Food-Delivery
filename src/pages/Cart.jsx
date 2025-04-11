@@ -42,7 +42,7 @@ function Cart() {
   return (
     <div className="min-h-screen bg-white text-black p-8 space-y-8">
       <main className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="md:col-span-2 bg-[#424242] text-white rounded-2xl p-6 shadow-lg">
+        <div className="md:col-span-2 bg-[#212121] text-white rounded-2xl p-6 shadow-lg">
           <h2 className="text-2xl font-semibold mb-6">Shopping Cart</h2>
 
           <div className="grid grid-cols-5 text-white font-semibold border-b border-gray-700 pb-2 mb-4">
@@ -132,7 +132,7 @@ function Cart() {
           </div>
         </div>
 
-        <div className="bg-[#424242] text-white rounded-2xl p-6 shadow-lg">
+        <div className="bg-[#212121] text-white rounded-2xl p-6 shadow-lg">
           <h2 className="text-2xl font-semibold mb-6">Order Summary</h2>
           <div className="space-y-2">
             <div className="flex justify-between">

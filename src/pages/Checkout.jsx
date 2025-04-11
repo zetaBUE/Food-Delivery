@@ -1,9 +1,13 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useOrder } from "../context/OrderContext";
+import EmptyCart from "../components/checkout/EmptyCart";
+import DeliveryForm from "../components/checkout/DeliveryForm";
+import PaymentMethodForm from "../components/checkout/PaymentMethodForm";
+import OrderSummary from "../components/checkout/OrderSummary";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("Required"),
@@ -50,21 +54,11 @@ const Checkout = () => {
   };
 
   if (cartItems.length === 0) {
-    return (
-      <div className=" p-8 text-center">
-        <h2 className="text-2xl font-semibold mb-4">Your cart is empty</h2>
-        <button
-          onClick={() => navigate("/restaurants")}
-          className="bg-[#FFE662] text-[#800020] px-6 py-2 rounded-full hover:bg-[#FFD700]"
-        >
-          Browse Restaurants
-        </button>
-      </div>
-    );
+    return <EmptyCart />;
   }
 
   return (
-    <div className=" flex flex-col lg:flex-row">
+    <div className="flex flex-col lg:flex-row">
       <div className="w-full lg:w-2/3">
         <h2 className="text-2xl font-semibold mb-4">Checkout</h2>
         <Formik
@@ -84,133 +78,8 @@ const Checkout = () => {
           onSubmit={handleSubmit}
         >
           <Form className="space-y-6">
-            <div className="border p-4 rounded-lg shadow-sm">
-              <h3 className="text-xl font-semibold mb-4 text-[#800020]">
-                Delivery Details
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Field
-                    name="firstName"
-                    placeholder="First Name"
-                    className="border p-2 w-full"
-                  />
-                  <ErrorMessage
-                    name="firstName"
-                    component="div"
-                    className="text-red-500 text-sm mt-1"
-                  />
-                </div>
-                <div>
-                  <Field
-                    name="lastName"
-                    placeholder="Last Name"
-                    className="border p-2 w-full"
-                  />
-                  <ErrorMessage
-                    name="lastName"
-                    component="div"
-                    className="text-red-500 text-sm mt-1"
-                  />
-                </div>
-                <div className="md:col-span-2">
-                  <Field
-                    name="address"
-                    placeholder="Street address"
-                    className="border p-2 w-full"
-                  />
-                  <ErrorMessage
-                    name="address"
-                    component="div"
-                    className="text-red-500 text-sm mt-1"
-                  />
-                </div>
-                <div className="md:col-span-2">
-                  <Field
-                    name="apartment"
-                    placeholder="Apartment (optional)"
-                    className="border p-2 w-full"
-                  />
-                </div>
-                <div>
-                  <Field
-                    name="city"
-                    placeholder="City"
-                    className="border p-2 w-full"
-                  />
-                  <ErrorMessage
-                    name="city"
-                    component="div"
-                    className="text-red-500 text-sm mt-1"
-                  />
-                </div>
-                <div>
-                  <Field
-                    name="governorate"
-                    placeholder="Region"
-                    className="border p-2 w-full"
-                  />
-                  <ErrorMessage
-                    name="governorate"
-                    component="div"
-                    className="text-red-500 text-sm mt-1"
-                  />
-                </div>
-                <div>
-                  <Field
-                    name="zipCode"
-                    placeholder="Zip code (optional)"
-                    className="border p-2 w-full"
-                  />
-                  <ErrorMessage
-                    name="zipCode"
-                    component="div"
-                    className="text-red-500 text-sm mt-1"
-                  />
-                </div>
-                <div className="md:col-span-2">
-                  <Field
-                    name="email"
-                    placeholder="Email"
-                    className="border p-2 w-full"
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className="text-red-500 text-sm mt-1"
-                  />
-                </div>
-                <div className="md:col-span-2">
-                  <Field
-                    name="phone"
-                    placeholder="Phone"
-                    className="border p-2 w-full"
-                  />
-                  <ErrorMessage
-                    name="phone"
-                    component="div"
-                    className="text-red-500 text-sm mt-1"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="border p-4 rounded-lg shadow-sm">
-              <h3 className="text-xl font-semibold mb-4 text-[#800020]">
-                Payment Method
-              </h3>
-              <div className="flex gap-4">
-                <label className="flex items-center gap-2">
-                  <Field type="radio" name="paymentMethod" value="cash" />
-                  <span className="text-black">Cash on delivery</span>
-                </label>
-                <label className="flex items-center gap-2">
-                  <Field type="radio" name="paymentMethod" value="visa" />
-                  <span className="text-black">Credit Card</span>
-                </label>
-              </div>
-            </div>
-
+            <DeliveryForm />
+            <PaymentMethodForm />
             <button
               type="submit"
               className="bg-[#FFE662] text-black py-4 px-6 rounded-full mb-4"
@@ -222,36 +91,7 @@ const Checkout = () => {
       </div>
 
       <div className="w-full lg:w-1/3 mt-12 lg:ml-4">
-        <div className="bg-[#212121] p-4 rounded-lg shadow-sm text-white">
-          <h3 className="text-lg font-semibold mb-4">Order Summary</h3>
-          <ul>
-            {cartItems.map((item) => (
-              <li key={item.id} className="flex justify-between py-1">
-                <div className="flex items-center">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-12 h-12 object-cover mr-4"
-                  />
-                  <span>
-                    {item.name} x {item.quantity}
-                  </span>
-                </div>
-                <span>${(item.price * item.quantity).toFixed(2)}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-4 border-t pt-2 text-sm">
-            <div className="flex justify-between">
-              <span>Shipping:</span>
-              <span>{shipping}</span>
-            </div>
-            <div className="flex justify-between font-bold">
-              <span>Total:</span>
-              <span>${total.toFixed(2)}</span>
-            </div>
-          </div>
-        </div>
+        <OrderSummary cartItems={cartItems} total={total} shipping={shipping} />
       </div>
     </div>
   );
