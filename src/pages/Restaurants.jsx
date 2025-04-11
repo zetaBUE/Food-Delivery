@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { RestaurantContext } from "../context/RestaurantContext"; 
+import SearchRestaurant from "../components/SearchRestaurant";
 
 const Restaurants = () => {
   const { restaurants } = useContext(RestaurantContext); 
@@ -9,6 +10,7 @@ const Restaurants = () => {
       <div className="flex justify-center items-center">
         <h1 className="text-3xl font-bold mb-18">Pick a Restaurant</h1>
       </div>
+     <SearchRestaurant/> 
       <div className="flex justify-center">
         <div className="flex justify-center mb-30 w-250">
           <div className="grid max-w-fit grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-30 gap-y-30 place-items-center">
