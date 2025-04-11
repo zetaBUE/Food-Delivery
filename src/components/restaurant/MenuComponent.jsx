@@ -25,7 +25,7 @@ const MenuComponent = ({ menu, restaurantName }) => {
         {menu.map((item, index) => (
           <div
             key={index}
-            className="flex justify-between items-center text-lg text-[#800020] bg-white p-4 rounded-lg shadow-sm"
+            className="flex justify-between items-center text-lg text-[#800020] bg-white p-4 rounded-lg shadow-lg"
           >
             <div className="flex-1">
               <span className="font-medium">{item.name}</span>
