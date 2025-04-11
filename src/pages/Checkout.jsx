@@ -12,7 +12,8 @@ const validationSchema = Yup.object().shape({
   city: Yup.string().required("Required"),
   governorate: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
-  phone: Yup.string().required("Required"),
+  phone: Yup.string().matches(/^\d{11}$/, "Phone number must be exactly 11 digits and numbers").required("Required"),
+  zipCode: Yup.string().matches(/^\d+$/, "Zip code must be a number"),
 });
 
 const Checkout = () => {
@@ -48,7 +49,7 @@ const Checkout = () => {
 
   if (cartItems.length === 0) {
     return (
-      <div className="min-h-screen bg-white p-8 text-center">
+      <div className=" p-8 text-center">
         <h2 className="text-2xl font-semibold mb-4">Your cart is empty</h2>
         <button
           onClick={() => navigate("/restaurants")}
@@ -61,7 +62,7 @@ const Checkout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white p-4 flex flex-col lg:flex-row">
+    <div className=" flex flex-col lg:flex-row">
       <div className="w-full lg:w-2/3">
         <h2 className="text-2xl font-semibold mb-4">Checkout</h2>
         <Formik
@@ -81,7 +82,6 @@ const Checkout = () => {
           onSubmit={handleSubmit}
         >
           <Form className="space-y-6">
-            {/* Delivery Details Section */}
             <div className="border p-4 rounded-lg shadow-sm">
               <h3 className="text-xl font-semibold mb-4 text-[#800020]">
                 Delivery Details
@@ -160,6 +160,11 @@ const Checkout = () => {
                     placeholder="Zip code (optional)"
                     className="border p-2 w-full"
                   />
+                  <ErrorMessage
+                    name="zipCode"
+                    component="div"
+                    className="text-red-500 text-sm mt-1"
+                 />
                 </div>
                 <div className="md:col-span-2">
                   <Field
@@ -188,7 +193,6 @@ const Checkout = () => {
               </div>
             </div>
 
-            {/* Payment Method Section */}
             <div className="border p-4 rounded-lg shadow-sm">
               <h3 className="text-xl font-semibold mb-4 text-[#800020]">
                 Payment Method
@@ -207,7 +211,7 @@ const Checkout = () => {
 
             <button
               type="submit"
-              className="bg-[#FFE662] text-black py-2 px-6 rounded-full"
+              className="bg-[#FFE662] text-black py-4 px-6 rounded-full mb-4"
             >
               Place Order
             </button>
@@ -215,24 +219,31 @@ const Checkout = () => {
         </Formik>
       </div>
 
-      {/* Order Summary Section */}
-      <div className="w-full lg:w-1/3 mt-8 lg:mt-0 lg:ml-4">
+   
+      <div className="w-full lg:w-1/3 mt-12 lg:ml-4">
         <div className="bg-[#212121] p-4 rounded-lg shadow-sm text-white">
           <h3 className="text-lg font-semibold mb-4">Order Summary</h3>
           <ul>
             {cartItems.map((item) => (
               <li key={item.id} className="flex justify-between py-1">
+              <div className="flex items-center">
+                <img
+                  src={item.image} 
+                  alt={item.name}
+                  className="w-12 h-12 object-cover mr-4"
+                />
                 <span>
                   {item.name} x {item.quantity}
                 </span>
-                <span>${(item.price * item.quantity).toFixed(2)}</span>
-              </li>
+              </div>
+              <span>${(item.price * item.quantity).toFixed(2)}</span>
+            </li>
             ))}
           </ul>
           <div className="mt-4 border-t pt-2 text-sm">
             <div className="flex justify-between">
               <span>Shipping:</span>
-              <span>{shipping}</span> {/* Shipping is displayed as "Free" */}
+              <span>{shipping}</span> 
             </div>
             <div className="flex justify-between font-bold">
               <span>Total:</span>
