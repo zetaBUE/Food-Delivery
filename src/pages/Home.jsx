@@ -4,6 +4,7 @@ import Wave from "../assets/Wave.svg";
 import Grey from "../assets/Grey.jpeg";
 import { FaArrowRight } from "react-icons/fa";
 import FeaturesBox from "../components/FeaturesBox";
+import OrderButton from "../components/OrderButton";
 
 function Home() {
   return (
@@ -21,12 +22,9 @@ function Home() {
             your favorite food <br />
             items
           </span>
-          <Link to="/checkout" className="flex ml-45 justify-start">
-            <button className="bg-[#FEE662] text-[#212121] text-lg ease-out px-5 py-2 rounded-full hover:scale-110 transition-all duration-200 flex items-center gap-2">
-              Order Now
-              <FaArrowRight />
-            </button>
-          </Link>
+          <div className="flex ml-45 justify-start">
+            <OrderButton />
+          </div>
         </div>
 
         <div className="flex-1">

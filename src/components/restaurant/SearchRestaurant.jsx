@@ -24,14 +24,14 @@ export default function SearchRestaurant() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-0 p-4 bg-white rounded-2xl shadow-md">
+    <div className="max-w-md mx-auto mt-0 p-4 bg-[#212121] rounded-2xl shadow-md">
       <div className="flex items-center gap-2">
         <input
           type="text"
           placeholder="Search for a restaurant"
           value={query}
           onChange={handleSearch}
-          className="flex-grow border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FFE662]"
+          className="flex-grow border border-gray-300 bg-white rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FFE662]"
         />
       </div>
 
