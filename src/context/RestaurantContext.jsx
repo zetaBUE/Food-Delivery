@@ -30,9 +30,12 @@ export const RestaurantProvider = ({ children }) => {
 
     setRestaurants(prevRestaurants => [...prevRestaurants, newRestaurant]);
   };
+  const removeRestaurant = (id) => {
+    setRestaurants(prev => prev.filter(restaurant => restaurant.id !== id));
+  };
 
   return (
-    <RestaurantContext.Provider value={{ restaurants, addRestaurant }}>
+    <RestaurantContext.Provider value={{ restaurants, addRestaurant,removeRestaurant }}>
       {children}
     </RestaurantContext.Provider>
   );

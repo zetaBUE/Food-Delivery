@@ -8,7 +8,7 @@ export default function Footer() {
         <Link to="/about" className="text-[#800020] font-semibold ml=0">
           About Us
         </Link>
-        <Link to="/contact" className="text-[#800020] font-semibold">
+        <Link to="/contact-us" className="text-[#800020] font-semibold">
           Contact Us
         </Link>
         <Link to="/faq" className="text-[#800020] font-semibold mr=0">

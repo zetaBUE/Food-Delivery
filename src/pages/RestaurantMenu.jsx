@@ -1,4 +1,3 @@
-// RestaurantView.js
 import React from "react";
 import { useLocation } from "react-router-dom";
 import RestaurantHeader from "../components/RestaurantHeader.jsx";
@@ -7,7 +6,7 @@ import MenuComponent from "../components/MenuComponent.jsx";
 
 const RestaurantView = () => {
   const location = useLocation();
-  const { restaurant } = location.state || {}; // safely access restaurant object
+  const { restaurant } = location.state || {};
 
   if (!restaurant) {
     return <p>Loading...</p>;

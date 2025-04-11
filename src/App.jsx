@@ -5,14 +5,15 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Account from "./pages/Account";
-import Cart from "./pages/Cart";
+import Cart from "./pages/Cart";  
 import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import Orders from "./pages/Orders";
 import Restaurants from "./pages/Restaurants";
-import AddRestaurant from "./pages/AddRestaurant";
+import ManageRestaurant from "./pages/ManageRestaurant";
 import FAQ from "./pages/FAQ";
 import RestaurantMenu from "./pages/RestaurantMenu";
+import ContactUs from "./pages/ContactUs"
 import { CartProvider } from "./context/CartContext";
 import { OrderProvider } from "./context/OrderContext";
 import { RestaurantProvider } from "./context/RestaurantContext";
@@ -33,8 +34,9 @@ export default function App() {
             <Route path="/orders" element={<Orders />} />
             <Route path="/restaurants" element={<Restaurants />} />
             <Route path="/restaurant/:id" element={<RestaurantMenu />} />
-            <Route path="/add-Restaurant" element={<AddRestaurant />} />
+            <Route path="/Admin/ManageRestaurant" element={<ManageRestaurant />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/contact-us" element={<ContactUs />} />
           </Routes>
           <Footer />
         </main>
