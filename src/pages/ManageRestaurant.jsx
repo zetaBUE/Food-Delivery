@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { RestaurantContext } from "../context/RestaurantContext";
-import AddRestaurantForm from "../components/restaurant/AddRestaurantForm";
-import RestaurantList from "../components/restaurant/RestaurantList";
+import AddRestaurantForm from "../components/admin/AddRestaurantForm";
+import RestaurantList from "../components/admin/RestaurantList";
 
 const ManageRestaurant = () => {
   const navigate = useNavigate();
