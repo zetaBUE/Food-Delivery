@@ -24,7 +24,7 @@ export default function SearchRestaurant() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-0 p-4 bg-[#212121] rounded-2xl shadow-md">
+    <div className="max-w-md mx-auto mt-0 p-4 bg-[#7A1523] rounded-2xl shadow-md">
       <div className="flex items-center gap-2">
         <input
           type="text"
