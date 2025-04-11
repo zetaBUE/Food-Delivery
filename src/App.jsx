@@ -38,7 +38,7 @@ export default function App() {
                 <Route path="/restaurants" element={<Restaurants />} />
                 <Route path="/restaurant/:id" element={<RestaurantMenu />} />
                 <Route
-                  path="/Admin/ManageRestaurant"
+                  path="/admin/manageRestaurant"
                   element={<ManageRestaurant />}
                 />
                 <Route path="/faq" element={<FAQ />} />
