@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import RestaurantHeader from "../components/RestaurantHeader.jsx";
 import MenuComponent from "../components/MenuComponent.jsx";
 
-
 const RestaurantView = () => {
   const location = useLocation();
   const { restaurant } = location.state || {};

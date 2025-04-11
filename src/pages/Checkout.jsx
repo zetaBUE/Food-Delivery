@@ -12,7 +12,9 @@ const validationSchema = Yup.object().shape({
   city: Yup.string().required("Required"),
   governorate: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
-  phone: Yup.string().matches(/^\d{11}$/, "Phone number must be exactly 11 digits and numbers").required("Required"),
+  phone: Yup.string()
+    .matches(/^\d{11}$/, "Phone number must be exactly 11 digits and numbers")
+    .required("Required"),
   zipCode: Yup.string().matches(/^\d+$/, "Zip code must be a number"),
 });
 
@@ -21,8 +23,8 @@ const Checkout = () => {
   const { cartItems, getCartTotal, clearCart } = useCart();
   const { addOrder } = useOrder();
 
-  const total = getCartTotal();  
-  const shipping = "Free";  
+  const total = getCartTotal();
+  const shipping = "Free";
 
   const handleSubmit = (values) => {
     const orderData = {
@@ -164,7 +166,7 @@ const Checkout = () => {
                     name="zipCode"
                     component="div"
                     className="text-red-500 text-sm mt-1"
-                 />
+                  />
                 </div>
                 <div className="md:col-span-2">
                   <Field
@@ -219,35 +221,34 @@ const Checkout = () => {
         </Formik>
       </div>
 
-   
       <div className="w-full lg:w-1/3 mt-12 lg:ml-4">
         <div className="bg-[#212121] p-4 rounded-lg shadow-sm text-white">
           <h3 className="text-lg font-semibold mb-4">Order Summary</h3>
           <ul>
             {cartItems.map((item) => (
               <li key={item.id} className="flex justify-between py-1">
-              <div className="flex items-center">
-                <img
-                  src={item.image} 
-                  alt={item.name}
-                  className="w-12 h-12 object-cover mr-4"
-                />
-                <span>
-                  {item.name} x {item.quantity}
-                </span>
-              </div>
-              <span>${(item.price * item.quantity).toFixed(2)}</span>
-            </li>
+                <div className="flex items-center">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-12 h-12 object-cover mr-4"
+                  />
+                  <span>
+                    {item.name} x {item.quantity}
+                  </span>
+                </div>
+                <span>${(item.price * item.quantity).toFixed(2)}</span>
+              </li>
             ))}
           </ul>
           <div className="mt-4 border-t pt-2 text-sm">
             <div className="flex justify-between">
               <span>Shipping:</span>
-              <span>{shipping}</span> 
+              <span>{shipping}</span>
             </div>
             <div className="flex justify-between font-bold">
               <span>Total:</span>
-              <span>${total.toFixed(2)}</span> 
+              <span>${total.toFixed(2)}</span>
             </div>
           </div>
         </div>
