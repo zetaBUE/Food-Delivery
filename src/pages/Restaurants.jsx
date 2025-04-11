@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { RestaurantContext } from "../context/RestaurantContext";
-import SearchRestaurant from "../components/SearchRestaurant";
-import RestaurantCard from "../components/RestaurantCard";
+import SearchRestaurant from "../components/restaurant/SearchRestaurant";
+import RestaurantCard from "../components/restaurant/RestaurantCard";
 
 const Restaurants = () => {
   const { restaurants } = useContext(RestaurantContext);

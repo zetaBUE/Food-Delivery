@@ -1,7 +1,10 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useAuth } from "../../context/AuthContext";
 
 const PasswordForm = () => {
+  const { user, login } = useAuth();
+
   const formik = useFormik({
     initialValues: {
       currentPassword: "",
@@ -18,8 +21,14 @@ const PasswordForm = () => {
         .required("Confirm your new password"),
     }),
     onSubmit: (values) => {
-      console.log("Password Change:", values);
+      // In a real app, we would verify the current password first
+      // For demo purposes, we'll just update the password
+      login({
+        ...user,
+        password: values.newPassword,
+      });
       alert("Password updated successfully!");
+      formik.resetForm();
     },
   });
 

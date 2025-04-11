@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import RestaurantHeader from "../components/RestaurantHeader.jsx";
-import MenuComponent from "../components/MenuComponent.jsx";
+import RestaurantHeader from "../components/restaurant/RestaurantHeader.jsx";
+import MenuComponent from "../components/restaurant/MenuComponent.jsx";
 
 const RestaurantView = () => {
   const location = useLocation();

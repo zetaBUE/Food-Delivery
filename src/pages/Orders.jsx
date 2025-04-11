@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useOrder } from "../context/OrderContext";
@@ -13,15 +13,35 @@ const Orders = () => {
       searchOrder: "",
     },
     validationSchema: Yup.object({
-      searchOrder: Yup.string()
-        .min(3, "Order number must be at least 3 characters")
-        .required("Required"),
+      searchOrder: Yup.string().matches(
+        /^\d*$/,
+        "Order number must contain only digits"
+      ),
     }),
+    validateOnChange: true,
     onSubmit: (values) => {
-      const filtered = searchOrders(values.searchOrder);
-      setFilteredOrders(filtered);
+      if (!values.searchOrder.trim()) {
+        setFilteredOrders(orders);
+      } else {
+        const filtered = searchOrders(values.searchOrder);
+        setFilteredOrders(filtered.length > 0 ? filtered : orders);
+      }
     },
   });
+
+  useEffect(() => {
+    setFilteredOrders(orders);
+  }, [orders]);
+
+  useEffect(() => {
+    const searchValue = formik.values.searchOrder.trim();
+    if (!searchValue) {
+      setFilteredOrders(orders);
+    } else {
+      const filtered = searchOrders(searchValue);
+      setFilteredOrders(filtered.length > 0 ? filtered : []);
+    }
+  }, [formik.values.searchOrder, orders, searchOrders]);
 
   const toggleOrderDetails = (orderId) => {
     setExpandedOrder((prev) => (prev === orderId ? null : orderId));
@@ -47,15 +67,9 @@ const Orders = () => {
             onChange={formik.handleChange}
             value={formik.values.searchOrder}
           />
-          {formik.errors.searchOrder && formik.touched.searchOrder && (
+          {formik.errors.searchOrder && (
             <div className="text-red-500">{formik.errors.searchOrder}</div>
           )}
-          <button
-            type="submit"
-            className="bg-[#FFE662] px-4 py-2 rounded-md text-[#800020]"
-          >
-            Search
-          </button>
         </form>
       </div>
 

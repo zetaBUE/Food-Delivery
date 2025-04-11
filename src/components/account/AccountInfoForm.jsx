@@ -1,9 +1,16 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useAuth } from "../../context/AuthContext";
 
 const AccountInfoForm = () => {
+  const { user, login } = useAuth();
+
   const formik = useFormik({
-    initialValues: { name: "", email: "", phone: "" },
+    initialValues: {
+      name: user?.name || "",
+      email: user?.email || "",
+      phone: user?.phone || "",
+    },
     validationSchema: Yup.object({
       name: Yup.string().required("Name is required"),
       email: Yup.string().email("Invalid email").required("Email is required"),
@@ -13,7 +20,10 @@ const AccountInfoForm = () => {
       ),
     }),
     onSubmit: (values) => {
-      console.log("Account Info:", values);
+      login({
+        ...user,
+        ...values,
+      });
       alert("Account information updated!");
     },
   });

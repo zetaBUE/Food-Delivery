@@ -1,17 +1,28 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useAuth } from "../../context/AuthContext";
 
 const AddressForm = () => {
+  const { user, login } = useAuth();
+
   const formik = useFormik({
-    initialValues: { address: "", city: "", postalCode: "" },
+    initialValues: {
+      address: user?.address || "",
+      city: user?.city || "",
+      postalCode: user?.postalCode || "",
+    },
     validationSchema: Yup.object({
       address: Yup.string().required("Address is required"),
       city: Yup.string().required("City is required"),
       postalCode: Yup.string().required("Postal code is required"),
     }),
     onSubmit: (values) => {
-      console.log("Address Info:", values);
-      alert("Address added successfully!");
+      // Update user info in auth context
+      login({
+        ...user,
+        ...values,
+      });
+      alert("Address updated successfully!");
     },
   });
 
@@ -42,7 +53,7 @@ const AddressForm = () => {
           type="submit"
           className="bg-[#800020] text-white px-6 py-2 rounded-xl hover:bg-[#a32638] transition"
         >
-          Add Address
+          Save Address
         </button>
       </form>
     </div>

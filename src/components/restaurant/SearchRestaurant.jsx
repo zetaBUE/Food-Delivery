@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { RestaurantContext } from "../context/RestaurantContext";
+import { RestaurantContext } from "../../context/RestaurantContext";
 
 export default function SearchRestaurant() {
   const { restaurants } = useContext(RestaurantContext);
