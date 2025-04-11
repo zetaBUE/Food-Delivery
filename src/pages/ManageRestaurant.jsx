@@ -19,10 +19,6 @@ const ManageRestaurant = () => {
         name: values.name,
         description: values.description,
         image: base64Image,
-        cuisine: "Various",
-        deliveryTime: "30-45 min",
-        location: "Address pending",
-        contact: "Contact pending",
         menu: [],
       });
 
