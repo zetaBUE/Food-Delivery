@@ -8,11 +8,6 @@ const OrderSummary = ({ cartItems, total, shipping }) => {
         {cartItems.map((item) => (
           <li key={item.id} className="flex justify-between py-1">
             <div className="flex items-center">
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-12 h-12 object-cover mr-4"
-              />
               <span>
                 {item.name} x {item.quantity}
               </span>

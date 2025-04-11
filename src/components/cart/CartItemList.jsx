@@ -16,11 +16,6 @@ const CartItemList = ({ items, onIncrease, onDecrease, onRemove }) => {
         {items.map((item) => (
           <div key={item.id} className="grid grid-cols-5 items-center">
             <div className="flex items-center space-x-4">
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-16 h-16 object-cover rounded-xl"
-              />
               <span>{item.name}</span>
             </div>
 
