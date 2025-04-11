@@ -21,6 +21,7 @@ import { OrderProvider } from "./context/OrderContext";
 import { RestaurantProvider } from "./context/RestaurantContext";
 import { AuthProvider } from "./context/AuthContext";
 
+
 export default function App() {
   return (
     <AuthProvider>
