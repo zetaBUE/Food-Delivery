@@ -12,7 +12,7 @@ const RestaurantView = () => {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-white min-h-screen">
       <div className="max-w-4xl mx-auto px-5 py-10">
         <RestaurantHeader restaurant={restaurant} />
         <MenuComponent
