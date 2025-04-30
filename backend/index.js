@@ -20,6 +20,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/restaurants", require("./routes/restaurant"));
 app.use("/api/orders", require("./routes/order"));
+app.use("/api/menu", require("./routes/menu"));
+app.use("/api/reviews", require("./routes/review"));
+app.use("/api/categories", require("./routes/category"));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
