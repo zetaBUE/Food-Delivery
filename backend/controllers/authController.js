@@ -1,7 +1,8 @@
-const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 
+// Register new user
 exports.register = async (req, res) => {
   try {
     const errors = validationResult(req);
@@ -11,20 +12,27 @@ exports.register = async (req, res) => {
 
     const { name, email, password } = req.body;
 
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ error: "Email already registered" });
+    // Check if user already exists
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ error: "User already exists" });
     }
 
-    const user = new User({ name, email, password });
+    // Create new user
+    user = new User({
+      name,
+      email,
+      password,
+    });
+
     await user.save();
 
+    // Create JWT token
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: "24h",
     });
 
     res.status(201).json({
-      message: "User registered successfully",
       token,
       user: {
         id: user._id,
@@ -34,24 +42,33 @@ exports.register = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: error.message });
   }
 };
 
+// Login user
 exports.login = async (req, res) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const { email, password } = req.body;
 
+    // Find user
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ error: "Invalid credentials" });
+      return res.status(400).json({ error: "Invalid credentials" });
     }
 
+    // Check password
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
-      return res.status(401).json({ error: "Invalid credentials" });
+      return res.status(400).json({ error: "Invalid credentials" });
     }
 
+    // Create JWT token
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: "24h",
     });
@@ -66,16 +83,51 @@ exports.login = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: error.message });
   }
 };
 
+// Get current user
+exports.getCurrentUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select("-password");
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Logout user
 exports.logout = async (req, res) => {
   try {
-    // In a real-world application, you might want to invalidate the token
-    // For now, we'll just send a success response as the client will remove the token
+    // In a token-based system, the client-side should handle token removal
     res.json({ message: "Logged out successfully" });
   } catch (error) {
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Update user profile
+exports.updateProfile = async (req, res) => {
+  try {
+    const { name, email } = req.body;
+
+    // Check if email is being changed and if it's already in use
+    if (email && email !== req.user.email) {
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res.status(400).json({ error: "Email already in use" });
+      }
+    }
+
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      { name, email },
+      { new: true, runValidators: true }
+    ).select("-password");
+
+    res.json(user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };

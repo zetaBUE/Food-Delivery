@@ -28,7 +28,23 @@ router.post(
   authController.login
 );
 
-// Logout route
+// Get current user - Private
+router.get("/me", auth, authController.getCurrentUser);
+
+// Update profile - Private
+router.put(
+  "/profile",
+  [
+    auth,
+    [
+      check("name", "Name is required").not().isEmpty(),
+      check("email", "Please include a valid email").isEmail(),
+    ],
+  ],
+  authController.updateProfile
+);
+
+// Logout route - Private
 router.post("/logout", auth, authController.logout);
 
 module.exports = router;
