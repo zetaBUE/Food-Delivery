@@ -11,7 +11,7 @@ const RestaurantCard = ({ restaurant }) => {
     >
       <div className="h-48 overflow-hidden rounded-t-2xl">
         <img
-          src={restaurant.image}
+          src={restaurant.imageUrl}
           alt={restaurant.name}
           className="w-full h-full object-cover transform
                               group-hover:scale-105 group-hover:rotate-6 duration-300"

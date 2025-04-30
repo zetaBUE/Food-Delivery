@@ -23,6 +23,17 @@ api.interceptors.request.use(
   }
 );
 
+// Add a response interceptor to handle errors
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("token");
+    }
+    return Promise.reject(error);
+  }
+);
+
 export const authAPI = {
   login: (credentials) => api.post("/auth/login", credentials),
   register: (userData) => api.post("/auth/register", userData),
@@ -34,17 +45,43 @@ export const authAPI = {
 export const restaurantAPI = {
   getAll: () => api.get("/restaurants"),
   getById: (id) => api.get(`/restaurants/${id}`),
-  create: (restaurantData) => api.post("/restaurants", restaurantData),
-  update: (id, restaurantData) => api.put(`/restaurants/${id}`, restaurantData),
+  create: (restaurantData) => {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    return api.post("/restaurants", restaurantData, config);
+  },
+  update: (id, restaurantData) => {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    return api.put(`/restaurants/${id}`, restaurantData, config);
+  },
   delete: (id) => api.delete(`/restaurants/${id}`),
 };
 
 export const menuAPI = {
   getMenuItems: (restaurantId) => api.get(`/menu/restaurant/${restaurantId}`),
-  addMenuItem: (restaurantId, menuItem) =>
-    api.post(`/menu/${restaurantId}`, menuItem),
-  updateMenuItem: (restaurantId, itemId, updates) =>
-    api.put(`/menu/${restaurantId}/${itemId}`, updates),
+  addMenuItem: (restaurantId, menuItem) => {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    return api.post(`/menu/${restaurantId}`, menuItem, config);
+  },
+  updateMenuItem: (restaurantId, itemId, updates) => {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    return api.put(`/menu/${restaurantId}/${itemId}`, updates, config);
+  },
   deleteMenuItem: (restaurantId, itemId) =>
     api.delete(`/menu/${restaurantId}/${itemId}`),
 };

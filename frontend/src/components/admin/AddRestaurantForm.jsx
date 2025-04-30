@@ -15,6 +15,15 @@ const initialValues = {
 };
 
 const AddRestaurantForm = ({ onSubmit }) => {
+  const handleSubmit = (values, { setSubmitting, resetForm }) => {
+    const formData = new FormData();
+    formData.append("name", values.name);
+    formData.append("description", values.description);
+    formData.append("image", values.image);
+
+    onSubmit(formData, { setSubmitting, resetForm });
+  };
+
   return (
     <div className="bg-[#2e2e2e] shadow-lg rounded-2xl p-8 border border-[#FFE662]">
       <h2 className="text-3xl font-bold text-[#FFE662] mb-6 text-center">
@@ -24,7 +33,7 @@ const AddRestaurantForm = ({ onSubmit }) => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
       >
         {({ setFieldValue }) => (
           <Form className="space-y-5">

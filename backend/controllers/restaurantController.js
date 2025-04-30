@@ -9,11 +9,17 @@ exports.createRestaurant = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const restaurant = new Restaurant({
+    const restaurantData = {
       ...req.body,
       owner: req.user._id,
-    });
+    };
 
+    // If an image was uploaded, add its URL to the restaurant data
+    if (req.file) {
+      restaurantData.imageUrl = `/uploads/${req.file.filename}`;
+    }
+
+    const restaurant = new Restaurant(restaurantData);
     await restaurant.save();
     res.status(201).json(restaurant);
   } catch (error) {
@@ -62,9 +68,16 @@ exports.updateRestaurant = async (req, res) => {
       return res.status(403).json({ error: "Not authorized" });
     }
 
+    const updateData = { ...req.body };
+
+    // If an image was uploaded, update the imageUrl
+    if (req.file) {
+      updateData.imageUrl = `/uploads/${req.file.filename}`;
+    }
+
     const updatedRestaurant = await Restaurant.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      updateData,
       { new: true, runValidators: true }
     );
 
@@ -87,7 +100,7 @@ exports.deleteRestaurant = async (req, res) => {
       return res.status(403).json({ error: "Not authorized" });
     }
 
-    await restaurant.remove();
+    await Restaurant.findByIdAndDelete(req.params.id);
     res.json({ message: "Restaurant removed" });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -107,7 +120,12 @@ exports.addMenuItem = async (req, res) => {
       return res.status(403).json({ error: "Not authorized" });
     }
 
-    restaurant.menu.push(req.body);
+    const menuItem = {
+      ...req.body,
+      imageUrl: req.file ? `/uploads/${req.file.filename}` : undefined,
+    };
+
+    restaurant.menu.push(menuItem);
     await restaurant.save();
     res.json(restaurant);
   } catch (error) {

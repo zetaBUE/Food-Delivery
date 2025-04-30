@@ -3,12 +3,14 @@ const { check } = require("express-validator");
 const router = express.Router();
 const restaurantController = require("../controllers/restaurantController");
 const auth = require("../middleware/auth");
+const upload = require("../middleware/upload");
 
 // Create restaurant - Private/Admin
 router.post(
   "/",
   [
     auth,
+    upload.single("image"),
     [
       check("name", "Name is required").not().isEmpty(),
       check("description", "Description is required").not().isEmpty(),
@@ -24,7 +26,11 @@ router.get("/", restaurantController.getAllRestaurants);
 router.get("/:id", restaurantController.getRestaurantById);
 
 // Update restaurant - Private/Owner
-router.put("/:id", auth, restaurantController.updateRestaurant);
+router.put(
+  "/:id",
+  [auth, upload.single("image")],
+  restaurantController.updateRestaurant
+);
 
 // Delete restaurant - Private/Owner
 router.delete("/:id", auth, restaurantController.deleteRestaurant);
@@ -34,6 +40,7 @@ router.post(
   "/:id/menu",
   [
     auth,
+    upload.single("image"),
     [
       check("name", "Item name is required").not().isEmpty(),
       check("description", "Description is required").not().isEmpty(),

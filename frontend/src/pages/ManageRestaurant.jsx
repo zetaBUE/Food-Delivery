@@ -5,7 +5,7 @@ import RestaurantList from "../components/admin/RestaurantList";
 import MenuManagement from "../components/admin/MenuManagement";
 
 const ManageRestaurant = () => {
-  const { addRestaurant, removeRestaurant, restaurants, loading, error } =
+  const { addRestaurant, removeRestaurant, restaurants, loading } =
     useContext(RestaurantContext);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [showMenuManagement, setShowMenuManagement] = useState(false);
@@ -46,14 +46,6 @@ const ManageRestaurant = () => {
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#FFE662]"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="text-red-500 text-xl">{error}</div>
       </div>
     );
   }
