@@ -18,7 +18,7 @@ const Restaurants = () => {
         <div className="flex justify-center mb-30 w-250">
           <div className="grid max-w-fit grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-30 gap-y-30 place-items-center">
             {restaurants.map((restaurant) => (
-              <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+              <RestaurantCard key={restaurant._id} restaurant={restaurant} />
             ))}
           </div>
         </div>

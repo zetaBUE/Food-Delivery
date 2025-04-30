@@ -12,10 +12,6 @@ router.post(
     [
       check("name", "Name is required").not().isEmpty(),
       check("description", "Description is required").not().isEmpty(),
-      check("cuisine", "Cuisine type is required").not().isEmpty(),
-      check("phone", "Phone number is required").not().isEmpty(),
-      check("email", "Please include a valid email").isEmail(),
-      check("address", "Address is required").not().isEmpty(),
     ],
   ],
   restaurantController.createRestaurant

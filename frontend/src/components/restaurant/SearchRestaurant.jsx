@@ -39,8 +39,8 @@ export default function SearchRestaurant() {
         {Array.isArray(result) ? (
           result.map((restaurant) => (
             <Link
-              key={restaurant.id}
-              to={`/restaurant/${restaurant.id}`}
+              key={restaurant._id}
+              to={`/restaurant/${restaurant._id}`}
               state={{ restaurant }}
               className="block p-4 rounded-lg hover:bg-[#212121] hover:text-white transition-all duration-300"
             >

@@ -44,18 +44,6 @@ const restaurantSchema = new mongoose.Schema(
       state: String,
       zipCode: String,
     },
-    cuisine: {
-      type: String,
-      required: true,
-    },
-    phone: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
     menu: [menuItemSchema],
     rating: {
       type: Number,

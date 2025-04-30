@@ -1,46 +1,69 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { menuAPI } from "../config/api";
 
-export const CartContext = createContext();
+const CartContext = createContext(null);
 
-export function useCart() {
+export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {
     throw new Error("useCart must be used within a CartProvider");
   }
   return context;
-}
+};
 
-export function CartProvider({ children }) {
+export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const addToCart = (item) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((i) => i.id === item.id);
-      if (existingItem) {
-        return prevItems.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
-        );
-      }
-      return [...prevItems, { ...item, quantity: 1 }];
-    });
+  const addToCart = async (menuItemId, quantity = 1) => {
+    try {
+      setLoading(true);
+      const response = await menuAPI.getById(menuItemId);
+      const menuItem = response.data;
+
+      setCartItems((prevItems) => {
+        const existingItem = prevItems.find((item) => item._id === menuItemId);
+        if (existingItem) {
+          return prevItems.map((item) =>
+            item._id === menuItemId
+              ? { ...item, quantity: item.quantity + quantity }
+              : item
+          );
+        }
+        return [...prevItems, { ...menuItem, quantity }];
+      });
+      setError(null);
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to add item to cart");
+      throw error;
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const removeFromCart = (itemId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+  const removeFromCart = (menuItemId) => {
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item._id !== menuItemId)
+    );
   };
 
-  const updateQuantity = (itemId, newQuantity) => {
-    if (newQuantity < 1) return;
+  const updateQuantity = (menuItemId, quantity) => {
+    if (quantity <= 0) {
+      removeFromCart(menuItemId);
+      return;
+    }
+
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === itemId ? { ...item, quantity: newQuantity } : item
+        item._id === menuItemId ? { ...item, quantity } : item
       )
     );
   };
@@ -56,18 +79,25 @@ export function CartProvider({ children }) {
     );
   };
 
+  const getCartItemCount = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
+  };
+
   return (
     <CartContext.Provider
       value={{
         cartItems,
+        loading,
+        error,
         addToCart,
         removeFromCart,
         updateQuantity,
         clearCart,
         getCartTotal,
+        getCartItemCount,
       }}
     >
       {children}
     </CartContext.Provider>
   );
-}
+};

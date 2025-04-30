@@ -1,42 +1,93 @@
 import React, { createContext, useState, useEffect } from "react";
-import { restaurants as initialRestaurants } from "../dataSet/RestaurantData";
+import { restaurantAPI } from "../config/api";
 
 export const RestaurantContext = createContext();
 
 export const RestaurantProvider = ({ children }) => {
-  const [restaurants, setRestaurants] = useState(() => {
-    const savedRestaurants = localStorage.getItem("restaurants");
-    return savedRestaurants ? JSON.parse(savedRestaurants) : initialRestaurants;
-  });
+  const [restaurants, setRestaurants] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem("restaurants", JSON.stringify(restaurants));
-  }, [restaurants]);
+    fetchRestaurants();
+  }, []);
 
-  const addRestaurant = (restaurant) => {
-    const highestId = restaurants.reduce(
-      (max, restaurant) => Math.max(max, restaurant.id),
-      0
-    );
-
-    const newId = highestId + 1 > 999 ? 1 : highestId + 1;
-
-    const newRestaurant = {
-      ...restaurant,
-      id: newId,
-      rating: 0,
-      menu: restaurant.menu || [],
-    };
-
-    setRestaurants((prevRestaurants) => [...prevRestaurants, newRestaurant]);
+  const fetchRestaurants = async () => {
+    try {
+      const response = await restaurantAPI.getAll();
+      setRestaurants(response.data);
+      setError(null);
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to fetch restaurants");
+      console.error("Error fetching restaurants:", error);
+    } finally {
+      setLoading(false);
+    }
   };
-  const removeRestaurant = (id) => {
-    setRestaurants((prev) => prev.filter((restaurant) => restaurant.id !== id));
+
+  const addRestaurant = async (restaurantData) => {
+    try {
+      const response = await restaurantAPI.create(restaurantData);
+      setRestaurants((prev) => [...prev, response.data]);
+      setError(null);
+      return response.data;
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to add restaurant");
+      throw error;
+    }
+  };
+
+  const updateRestaurant = async (id, restaurantData) => {
+    try {
+      const response = await restaurantAPI.update(id, restaurantData);
+      setRestaurants((prev) =>
+        prev.map((restaurant) =>
+          restaurant._id === id ? response.data : restaurant
+        )
+      );
+      setError(null);
+      return response.data;
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to update restaurant");
+      throw error;
+    }
+  };
+
+  const removeRestaurant = async (id) => {
+    try {
+      await restaurantAPI.delete(id);
+      setRestaurants((prev) =>
+        prev.filter((restaurant) => restaurant._id !== id)
+      );
+      setError(null);
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to remove restaurant");
+      throw error;
+    }
+  };
+
+  const getRestaurantById = async (id) => {
+    try {
+      const response = await restaurantAPI.getById(id);
+      return response.data;
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to fetch restaurant");
+      throw error;
+    }
   };
 
   return (
     <RestaurantContext.Provider
-      value={{ restaurants, addRestaurant, removeRestaurant }}
+      value={{
+        restaurants,
+        loading,
+        error,
+        addRestaurant,
+        updateRestaurant,
+        removeRestaurant,
+        getRestaurantById,
+        fetchRestaurants,
+      }}
     >
       {children}
     </RestaurantContext.Provider>

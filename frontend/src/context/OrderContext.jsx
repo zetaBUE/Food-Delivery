@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
+import { orderAPI } from "../config/api";
 
 const OrderContext = createContext(null);
 
@@ -11,28 +12,64 @@ export function useOrder() {
 }
 
 export function OrderProvider({ children }) {
-  const [orders, setOrders] = useState(() => {
-    const savedOrders = localStorage.getItem("orders");
-    return savedOrders ? JSON.parse(savedOrders) : [];
-  });
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem("orders", JSON.stringify(orders));
-  }, [orders]);
+    fetchOrders();
+  }, []);
 
-  const addOrder = (orderData) => {
-    const newOrder = {
-      id: orders.length + 1,
-      orderNumber: `#${Math.floor(Math.random() * 10000)}`,
-      date: new Date().toISOString().split("T")[0],
-      ...orderData,
-      status: "Pending",
-    };
-    setOrders((prevOrders) => [...prevOrders, newOrder]);
-    return newOrder;
+  const fetchOrders = async () => {
+    try {
+      const response = await orderAPI.getAll();
+      setOrders(response.data);
+      setError(null);
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to fetch orders");
+      console.error("Error fetching orders:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const getOrders = () => orders;
+  const addOrder = async (orderData) => {
+    try {
+      const response = await orderAPI.create(orderData);
+      setOrders((prevOrders) => [...prevOrders, response.data]);
+      setError(null);
+      return response.data;
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to create order");
+      throw error;
+    }
+  };
+
+  const getOrderById = async (id) => {
+    try {
+      const response = await orderAPI.getById(id);
+      return response.data;
+    } catch (error) {
+      setError(error.response?.data?.message || "Failed to fetch order");
+      throw error;
+    }
+  };
+
+  const updateOrderStatus = async (id, status) => {
+    try {
+      const response = await orderAPI.updateStatus(id, status);
+      setOrders((prevOrders) =>
+        prevOrders.map((order) => (order._id === id ? response.data : order))
+      );
+      setError(null);
+      return response.data;
+    } catch (error) {
+      setError(
+        error.response?.data?.message || "Failed to update order status"
+      );
+      throw error;
+    }
+  };
 
   const searchOrders = (orderNumber) => {
     return orders.filter((order) =>
@@ -44,9 +81,13 @@ export function OrderProvider({ children }) {
     <OrderContext.Provider
       value={{
         orders,
+        loading,
+        error,
         addOrder,
-        getOrders,
+        getOrderById,
+        updateOrderStatus,
         searchOrders,
+        fetchOrders,
       }}
     >
       {children}

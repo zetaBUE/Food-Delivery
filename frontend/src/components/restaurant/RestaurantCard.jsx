@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const RestaurantCard = ({ restaurant }) => {
   return (
     <Link
-      to={`/restaurant/${restaurant.id}`}
+      to={`/restaurant/${restaurant._id}`}
       state={{ restaurant }}
       className="w-80 h-100 group rounded-2xl text-black hover:bg-[#212121]
                           hover:text-[#E0E0E0] duration-300 shadow-xl"

@@ -7,15 +7,15 @@ const { validationResult } = require("express-validator");
 // @access  Public
 exports.getRestaurantMenu = async (req, res) => {
   try {
-    const menu = await Menu.findOne({
+    const menuItems = await Menu.find({
       restaurant: req.params.restaurantId,
     }).populate("restaurant", "name address");
 
-    if (!menu) {
-      return res.status(404).json({ msg: "Menu not found" });
+    if (!menuItems || menuItems.length === 0) {
+      return res.status(404).json({ msg: "No menu items found" });
     }
 
-    res.json(menu);
+    res.json(menuItems);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -166,9 +166,6 @@ exports.addMenuItem = async (req, res) => {
       image: req.body.image || "",
       isAvailable:
         req.body.isAvailable !== undefined ? req.body.isAvailable : true,
-      preparationTime: req.body.preparationTime || 0,
-      ingredients: req.body.ingredients || [],
-      dietaryInfo: req.body.dietaryInfo || {},
     };
 
     menu.items.push(newItem);
