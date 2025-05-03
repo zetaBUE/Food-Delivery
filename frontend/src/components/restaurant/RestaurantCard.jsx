@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const RestaurantCard = ({ restaurant }) => {
+  const imageUrl = restaurant.imageUrl
+    ? `http://localhost:5000${restaurant.imageUrl}`
+    : restaurant.image;
+
   return (
     <Link
       to={`/restaurant/${restaurant._id}`}
@@ -11,7 +15,7 @@ const RestaurantCard = ({ restaurant }) => {
     >
       <div className="h-48 overflow-hidden rounded-t-2xl">
         <img
-          src={restaurant.imageUrl}
+          src={imageUrl}
           alt={restaurant.name}
           className="w-full h-full object-cover transform
                               group-hover:scale-105 group-hover:rotate-6 duration-300"

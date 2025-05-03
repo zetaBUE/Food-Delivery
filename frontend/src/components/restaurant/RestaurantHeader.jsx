@@ -1,10 +1,14 @@
 import React from "react";
 
 const RestaurantHeader = ({ restaurant }) => {
+  const imageUrl = restaurant.imageUrl
+    ? `http://localhost:5000${restaurant.imageUrl}`
+    : restaurant.image;
+
   return (
     <div className="flex items-center gap-x-5 mb-8">
       <img
-        src={restaurant.image}
+        src={imageUrl}
         alt={restaurant.name}
         className="w-32 h-32 object-cover rounded-full"
       />
