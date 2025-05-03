@@ -65,11 +65,11 @@ export const restaurantAPI = {
 };
 
 export const menuAPI = {
-  getMenuItems: (restaurantId) => api.get(`/menu/restaurant/${restaurantId}`),
+  getMenuItems: (restaurantId) => api.get(`/menu/${restaurantId}`),
   addMenuItem: (restaurantId, menuItem) => {
     const config = {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
     };
     return api.post(`/menu/${restaurantId}`, menuItem, config);
@@ -77,7 +77,7 @@ export const menuAPI = {
   updateMenuItem: (restaurantId, itemId, updates) => {
     const config = {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
     };
     return api.put(`/menu/${restaurantId}/${itemId}`, updates, config);

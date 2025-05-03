@@ -10,7 +10,6 @@ const validationSchema = Yup.object().shape({
     .required("Price is required")
     .positive("Price must be positive"),
   category: Yup.string().required("Category is required"),
-  availability: Yup.boolean().required("Availability is required"),
 });
 
 const MenuManagement = ({ restaurant, onClose }) => {
@@ -59,18 +58,6 @@ const MenuManagement = ({ restaurant, onClose }) => {
     }
   };
 
-  const handleToggleAvailability = async (itemId, currentAvailability) => {
-    try {
-      await menuAPI.updateMenuItem(restaurant._id, itemId, {
-        availability: !currentAvailability,
-      });
-      await fetchMenuItems();
-    } catch (err) {
-      setError(err.response?.data?.message || "Failed to update menu item");
-      console.error(err);
-    }
-  };
-
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -105,7 +92,6 @@ const MenuManagement = ({ restaurant, onClose }) => {
           description: "",
           price: "",
           category: "",
-          availability: true,
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
@@ -166,11 +152,6 @@ const MenuManagement = ({ restaurant, onClose }) => {
               )}
             </div>
 
-            <div className="flex items-center">
-              <Field name="availability" type="checkbox" className="mr-2" />
-              <label className="text-[#FFE662]">Available</label>
-            </div>
-
             <button
               type="submit"
               className="w-full bg-[#FFE662] text-[#212121] px-4 py-2 rounded-full hover:bg-[#FFD700] transition"
@@ -199,23 +180,8 @@ const MenuManagement = ({ restaurant, onClose }) => {
                 <p className="text-sm text-gray-400">
                   ${item.price} - {item.category}
                 </p>
-                <p className="text-sm text-gray-400">
-                  {item.availability ? "Available" : "Unavailable"}
-                </p>
               </div>
               <div className="flex space-x-2">
-                <button
-                  onClick={() =>
-                    handleToggleAvailability(item._id, item.availability)
-                  }
-                  className={`px-3 py-1 rounded-full ${
-                    item.availability
-                      ? "bg-green-600 hover:bg-green-700"
-                      : "bg-red-600 hover:bg-red-700"
-                  } text-white`}
-                >
-                  {item.availability ? "Disable" : "Enable"}
-                </button>
                 <button
                   onClick={() => handleDelete(item._id)}
                   className="bg-[#800020] text-white px-3 py-1 rounded-full hover:bg-[#a0262c]"

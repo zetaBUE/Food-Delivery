@@ -164,8 +164,8 @@ exports.addMenuItem = async (req, res) => {
       price: req.body.price,
       category: req.body.category,
       image: req.body.image || "",
-      isAvailable:
-        req.body.isAvailable !== undefined ? req.body.isAvailable : true,
+      availability:
+        req.body.availability !== undefined ? req.body.availability : true,
     };
 
     menu.items.push(newItem);

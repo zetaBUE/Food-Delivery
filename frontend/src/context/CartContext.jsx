@@ -23,17 +23,16 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  const addToCart = async (menuItemId, quantity = 1) => {
+  const addToCart = async (menuItem, quantity = 1) => {
     try {
       setLoading(true);
-      const response = await menuAPI.getById(menuItemId);
-      const menuItem = response.data;
-
       setCartItems((prevItems) => {
-        const existingItem = prevItems.find((item) => item._id === menuItemId);
+        const existingItem = prevItems.find(
+          (item) => item._id === menuItem._id
+        );
         if (existingItem) {
           return prevItems.map((item) =>
-            item._id === menuItemId
+            item._id === menuItem._id
               ? { ...item, quantity: item.quantity + quantity }
               : item
           );

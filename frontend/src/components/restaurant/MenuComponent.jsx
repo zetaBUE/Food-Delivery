@@ -7,7 +7,7 @@ const MenuComponent = ({ menu }) => {
 
   const handleAddToCart = async (menuItem) => {
     try {
-      await addToCart(menuItem._id);
+      await addToCart(menuItem);
     } catch (error) {
       console.error("Failed to add item to cart:", error);
     }

@@ -5,9 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Invalid email address")
-    .required("Email is required"),
+  name: Yup.string().required("Username is required"),
   password: Yup.string()
     .min(6, "Password must be at least 6 characters")
     .required("Password is required"),
@@ -15,7 +13,7 @@ const validationSchema = Yup.object().shape({
 
 const AdminLogin = () => {
   const navigate = useNavigate();
-  const { login, error } = useAuth();
+  const { login } = useAuth();
   const [loginError, setLoginError] = useState(null);
 
   const handleSubmit = async (values, { setSubmitting }) => {
@@ -48,21 +46,21 @@ const AdminLogin = () => {
           </div>
         )}
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{ name: "", password: "" }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ errors, touched, isSubmitting }) => (
+          {({ isSubmitting }) => (
             <Form className="space-y-4">
               <div>
                 <Field
-                  name="email"
-                  type="email"
-                  placeholder="Admin Email"
+                  name="name"
+                  type="text"
+                  placeholder="Admin Username"
                   className="w-full p-3 rounded-xl bg-white text-black border border-gray-600 focus:border-[#FFE662] focus:outline-none"
                 />
                 <ErrorMessage
-                  name="email"
+                  name="name"
                   component="div"
                   className="text-red-500 text-sm mt-1"
                 />

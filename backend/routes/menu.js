@@ -135,8 +135,8 @@ router.post("/:restaurantId", [auth, admin], async (req, res) => {
 router.put("/:restaurantId/:itemId", [auth, admin], async (req, res) => {
   try {
     const { name, description, price, category, availability } = req.body;
-
     const menuItem = await Menu.findById(req.params.itemId);
+
     if (!menuItem) {
       return res.status(404).json({ msg: "Menu item not found" });
     }
@@ -172,7 +172,7 @@ router.delete("/:restaurantId/:itemId", [auth, admin], async (req, res) => {
       return res.status(401).json({ msg: "Not authorized" });
     }
 
-    await menuItem.remove();
+    await Menu.findByIdAndDelete(req.params.itemId);
     res.json({ msg: "Menu item removed" });
   } catch (err) {
     console.error(err.message);

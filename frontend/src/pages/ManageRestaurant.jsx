@@ -10,14 +10,8 @@ const ManageRestaurant = () => {
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [showMenuManagement, setShowMenuManagement] = useState(false);
 
-  const handleSubmit = async (values, { resetForm }) => {
+  const handleSubmit = async (formData, { resetForm }) => {
     try {
-      const formData = new FormData();
-      formData.append("name", values.name);
-      formData.append("description", values.description);
-      formData.append("image", values.image);
-      formData.append("isActive", true);
-
       await addRestaurant(formData);
       alert("Restaurant added successfully!");
       resetForm();

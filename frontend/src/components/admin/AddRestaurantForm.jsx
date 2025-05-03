@@ -20,6 +20,12 @@ const AddRestaurantForm = ({ onSubmit }) => {
     formData.append("name", values.name);
     formData.append("description", values.description);
     formData.append("image", values.image);
+    formData.append(
+      "owner",
+      localStorage.getItem("user")
+        ? JSON.parse(localStorage.getItem("user")).id
+        : null
+    );
 
     onSubmit(formData, { setSubmitting, resetForm });
   };
