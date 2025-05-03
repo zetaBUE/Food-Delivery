@@ -14,7 +14,7 @@ const CartItemList = ({ items, onIncrease, onDecrease, onRemove }) => {
 
       <div className="space-y-4">
         {items.map((item) => (
-          <div key={item.id} className="grid grid-cols-5 items-center">
+          <div key={item._id} className="grid grid-cols-5 items-center">
             <div className="flex items-center space-x-4">
               <span>{item.name}</span>
             </div>
@@ -23,14 +23,14 @@ const CartItemList = ({ items, onIncrease, onDecrease, onRemove }) => {
 
             <div className="text-center">
               <button
-                onClick={() => onDecrease(item.id)}
+                onClick={() => onDecrease(item._id)}
                 className="px-2 py-1 bg-gray-700 text-white rounded-full"
               >
                 -
               </button>
               <span className="mx-2">{item.quantity}</span>
               <button
-                onClick={() => onIncrease(item.id)}
+                onClick={() => onIncrease(item._id)}
                 className="px-2 py-1 bg-gray-700 text-white rounded-full"
               >
                 +
@@ -43,7 +43,7 @@ const CartItemList = ({ items, onIncrease, onDecrease, onRemove }) => {
 
             <div className="text-right">
               <button
-                onClick={() => onRemove(item.id)}
+                onClick={() => onRemove(item._id)}
                 className="text-red-500 hover:text-red-700"
               >
                 <FaTrashAlt className="inline-block" size={20} />

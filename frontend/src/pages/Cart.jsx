@@ -8,17 +8,17 @@ import EmptyCart from "../components/checkout/EmptyCart";
 function Cart() {
   const { cartItems, removeFromCart, updateQuantity, getCartTotal } = useCart();
 
-  const handleIncreaseQuantity = (id) => {
-    const item = cartItems.find((item) => item.id === id);
+  const handleIncreaseQuantity = (_id) => {
+    const item = cartItems.find((item) => item._id === _id);
     if (item) {
-      updateQuantity(id, item.quantity + 1);
+      updateQuantity(_id, item.quantity + 1);
     }
   };
 
-  const handleDecreaseQuantity = (id) => {
-    const item = cartItems.find((item) => item.id === id);
+  const handleDecreaseQuantity = (_id) => {
+    const item = cartItems.find((item) => item._id === _id);
     if (item && item.quantity > 1) {
-      updateQuantity(id, item.quantity - 1);
+      updateQuantity(_id, item.quantity - 1);
     }
   };
 

@@ -1,5 +1,4 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { menuAPI } from "../config/api";
 
 const CartContext = createContext(null);
 
