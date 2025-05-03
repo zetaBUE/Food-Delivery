@@ -22,7 +22,7 @@ router.post(
 router.post(
   "/login",
   [
-    check("email", "Please include a valid email").isEmail(),
+    check("name", "Name is required").not().isEmpty(),
     check("password", "Password is required").exists(),
   ],
   authController.login

@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { useAuth } from "../../context/AuthContext";
 
 const AccountInfoForm = () => {
-  const { user, login } = useAuth();
+  const { user, updateProfile } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -19,12 +19,15 @@ const AccountInfoForm = () => {
         "Phone number is not valid"
       ),
     }),
-    onSubmit: (values) => {
-      login({
-        ...user,
-        ...values,
-      });
-      alert("Account information updated!");
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        await updateProfile(values);
+        alert("Account information updated successfully!");
+      } catch (error) {
+        alert(error.message || "Failed to update account information");
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 
@@ -55,9 +58,10 @@ const AccountInfoForm = () => {
         ))}
         <button
           type="submit"
-          className="bg-[#800020] text-white px-6 py-2 rounded-xl hover:bg-[#a32638] transition"
+          disabled={formik.isSubmitting}
+          className="bg-[#800020] text-white px-6 py-2 rounded-xl hover:bg-[#a32638] transition disabled:opacity-50"
         >
-          Save Changes
+          {formik.isSubmitting ? "Saving..." : "Save Changes"}
         </button>
       </form>
     </div>

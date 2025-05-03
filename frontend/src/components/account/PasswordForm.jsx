@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { useAuth } from "../../context/AuthContext";
 
 const PasswordForm = () => {
-  const { user, login } = useAuth();
+  const { updateProfile } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -15,20 +15,28 @@ const PasswordForm = () => {
       currentPassword: Yup.string().required("Current password is required"),
       newPassword: Yup.string()
         .min(6, "Must be at least 6 characters")
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+          "Password must contain at least one uppercase letter, one lowercase letter, and one number"
+        )
         .required("New password is required"),
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("newPassword"), null], "Passwords must match")
         .required("Confirm your new password"),
     }),
-    onSubmit: (values) => {
-      // In a real app, we would verify the current password first
-      // For demo purposes, we'll just update the password
-      login({
-        ...user,
-        password: values.newPassword,
-      });
-      alert("Password updated successfully!");
-      formik.resetForm();
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+      try {
+        await updateProfile({
+          currentPassword: values.currentPassword,
+          password: values.newPassword,
+        });
+        alert("Password updated successfully!");
+        resetForm();
+      } catch (error) {
+        alert(error.message || "Failed to update password");
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 
@@ -38,30 +46,33 @@ const PasswordForm = () => {
         Change Password
       </h2>
       <form onSubmit={formik.handleSubmit} className="space-y-4">
-        {["currentPassword", "newPassword", "confirmPassword"].map((field) => (
-          <div key={field}>
-            <label className="block mb-1 text-[#800020] capitalize">
-              {field.replace(/([A-Z])/g, " $1")}
-            </label>
+        {[
+          { name: "currentPassword", label: "Current Password" },
+          { name: "newPassword", label: "New Password" },
+          { name: "confirmPassword", label: "Confirm New Password" },
+        ].map((field) => (
+          <div key={field.name}>
+            <label className="block mb-1 text-[#800020]">{field.label}</label>
             <input
               type="password"
-              name={field}
+              name={field.name}
               onChange={formik.handleChange}
-              value={formik.values[field]}
+              value={formik.values[field.name]}
               className="w-full border rounded-xl p-2 focus:outline-none focus:ring-2 focus:ring-[#FFE662]"
             />
-            {formik.touched[field] && formik.errors[field] && (
+            {formik.touched[field.name] && formik.errors[field.name] && (
               <p className="text-red-500 text-sm mt-1">
-                {formik.errors[field]}
+                {formik.errors[field.name]}
               </p>
             )}
           </div>
         ))}
         <button
           type="submit"
-          className="bg-[#800020] text-white px-6 py-2 rounded-xl hover:bg-[#a32638] transition"
+          disabled={formik.isSubmitting}
+          className="bg-[#800020] text-white px-6 py-2 rounded-xl hover:bg-[#a32638] transition disabled:opacity-50"
         >
-          Change Password
+          {formik.isSubmitting ? "Updating..." : "Change Password"}
         </button>
       </form>
     </div>
