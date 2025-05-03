@@ -28,29 +28,55 @@ const Checkout = () => {
   const { addOrder } = useOrder();
 
   const total = getCartTotal();
-  const shipping = "Free";
+  const shipping = 5;
+  const totalAmount = total + shipping;
 
-  const handleSubmit = (values) => {
-    const orderData = {
-      items: cartItems,
-      totalAmount: total,
-      customerName: `${values.firstName} ${values.lastName}`,
-      deliveryAddress: `${values.address}, ${
-        values.apartment ? values.apartment + ", " : ""
-      }${values.city}, ${values.governorate}${
-        values.zipCode ? " " + values.zipCode : ""
-      }`,
-      phone: values.phone,
-      email: values.email,
-      paymentMethod: values.paymentMethod,
-    };
+  const handleSubmit = async (values) => {
+    try {
+      // Get the restaurant ID from the first item in the cart
+      const restaurantId = cartItems[0].restaurant;
 
-    const newOrder = addOrder(orderData);
-    alert(
-      `Order placed successfully! Your order number is ${newOrder.orderNumber}`
-    );
-    clearCart();
-    navigate("/orders");
+      const orderData = {
+        restaurantId,
+        items: cartItems.map((item) => ({
+          menuItem: item._id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        })),
+        deliveryAddress: {
+          street: values.address,
+          city: values.city,
+          state: values.governorate,
+          zipCode: values.zipCode,
+        },
+        paymentMethod: values.paymentMethod,
+        deliveryInstructions: values.deliveryInstructions || "",
+        totalAmount,
+        status: "pending",
+        paymentStatus: "pending",
+      };
+
+      console.log("Submitting order data:", orderData); // Debug log
+
+      const response = await addOrder(orderData);
+      console.log("Order response:", response); // Debug log
+
+      if (response) {
+        clearCart();
+        navigate("/orders");
+      } else {
+        throw new Error("No response from server");
+      }
+    } catch (error) {
+      console.error("Failed to place order:", error);
+      console.error("Error details:", error.response?.data); // Debug log
+      alert(
+        `Failed to place order: ${
+          error.response?.data?.message || error.message
+        }`
+      );
+    }
   };
 
   if (cartItems.length === 0) {
@@ -73,6 +99,7 @@ const Checkout = () => {
             email: "",
             phone: "",
             paymentMethod: "cash",
+            deliveryInstructions: "",
           }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
@@ -91,7 +118,11 @@ const Checkout = () => {
       </div>
 
       <div className="w-full lg:w-1/3 mt-12 lg:ml-4">
-        <OrderSummary cartItems={cartItems} total={total} shipping={shipping} />
+        <OrderSummary
+          cartItems={cartItems}
+          total={totalAmount}
+          shipping={shipping}
+        />
       </div>
     </div>
   );

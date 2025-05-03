@@ -17,18 +17,20 @@ const OrdersTable = ({ orders, expandedOrder, onToggleDetails }) => {
         <tbody>
           {orders.length > 0 ? (
             orders.map((order) => (
-              <React.Fragment key={order.id}>
+              <React.Fragment key={order._id}>
                 <tr className="border-b">
-                  <td className="px-4 py-2">{order.orderNumber}</td>
-                  <td className="px-4 py-2">{order.date}</td>
+                  <td className="px-4 py-2">{order._id}</td>
+                  <td className="px-4 py-2">
+                    {new Date(order.createdAt).toLocaleDateString()}
+                  </td>
                   <td className="px-4 py-2">${order.totalAmount.toFixed(2)}</td>
                   <td className="px-4 py-2 text-gray-800">{order.status}</td>
                   <td className="px-4 py-2">
                     <button
                       className="px-4 py-2 rounded-md text-[#800020]"
-                      onClick={() => onToggleDetails(order.id)}
+                      onClick={() => onToggleDetails(order._id)}
                     >
-                      {expandedOrder === order.id ? (
+                      {expandedOrder === order._id ? (
                         <>- Hide Details</>
                       ) : (
                         <>+ View Details</>
@@ -36,7 +38,7 @@ const OrdersTable = ({ orders, expandedOrder, onToggleDetails }) => {
                     </button>
                   </td>
                 </tr>
-                {expandedOrder === order.id && (
+                {expandedOrder === order._id && (
                   <tr>
                     <OrderDetails order={order} />
                   </tr>

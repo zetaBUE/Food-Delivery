@@ -22,7 +22,7 @@ export function OrderProvider({ children }) {
 
   const fetchOrders = async () => {
     try {
-      const response = await orderAPI.getAll();
+      const response = await orderAPI.getUserOrders();
       setOrders(response.data);
       setError(null);
     } catch (error) {
@@ -73,7 +73,7 @@ export function OrderProvider({ children }) {
 
   const searchOrders = (orderNumber) => {
     return orders.filter((order) =>
-      order.orderNumber.toLowerCase().includes(orderNumber.toLowerCase())
+      order._id.toLowerCase().includes(orderNumber.toLowerCase())
     );
   };
 

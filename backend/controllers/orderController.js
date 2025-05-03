@@ -16,7 +16,12 @@ exports.createOrder = async (req, res) => {
       deliveryAddress,
       paymentMethod,
       deliveryInstructions,
+      totalAmount,
+      status,
+      paymentStatus,
     } = req.body;
+
+    console.log("Received order data:", req.body); // Debug log
 
     // Verify restaurant exists
     const restaurant = await Restaurant.findById(restaurantId);
@@ -29,9 +34,12 @@ exports.createOrder = async (req, res) => {
       user: req.user._id,
       restaurant: restaurantId,
       items,
+      totalAmount,
       deliveryAddress,
       paymentMethod,
       deliveryInstructions,
+      status: status || "pending",
+      paymentStatus: paymentStatus || "pending",
       estimatedDeliveryTime: new Date(Date.now() + 45 * 60000), // 45 minutes from now
     });
 
@@ -41,8 +49,11 @@ exports.createOrder = async (req, res) => {
     await order.populate("restaurant", "name");
     await order.populate("user", "name email");
 
+    console.log("Created order:", order); // Debug log
+
     res.status(201).json(order);
   } catch (error) {
+    console.error("Error creating order:", error); // Debug log
     res.status(500).json({ error: error.message });
   }
 };

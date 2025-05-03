@@ -87,10 +87,10 @@ export const menuAPI = {
 };
 
 export const orderAPI = {
-  getAll: () => api.get("/orders"),
+  getUserOrders: () => api.get("/orders/user"),
   getById: (id) => api.get(`/orders/${id}`),
   create: (orderData) => api.post("/orders", orderData),
-  updateStatus: (id, status) => api.put(`/orders/${id}/status`, { status }),
+  updateStatus: (id, status) => api.patch(`/orders/${id}/status`, { status }),
   getRestaurantOrders: (restaurantId) =>
     api.get(`/orders/restaurant/${restaurantId}`),
 };
