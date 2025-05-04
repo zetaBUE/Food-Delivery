@@ -111,7 +111,7 @@ exports.logout = async (req, res) => {
 // Update user profile
 exports.updateProfile = async (req, res) => {
   try {
-    const { name, email } = req.body;
+    const { name, email, addresses } = req.body;
 
     // Check if email is being changed and if it's already in use
     if (email && email !== req.user.email) {
@@ -121,11 +121,15 @@ exports.updateProfile = async (req, res) => {
       }
     }
 
-    const user = await User.findByIdAndUpdate(
-      req.user._id,
-      { name, email },
-      { new: true, runValidators: true }
-    ).select("-password");
+    const updateData = {};
+    if (name) updateData.name = name;
+    if (email) updateData.email = email;
+    if (addresses) updateData.addresses = addresses;
+
+    const user = await User.findByIdAndUpdate(req.user._id, updateData, {
+      new: true,
+      runValidators: true,
+    }).select("-password");
 
     res.json(user);
   } catch (error) {
