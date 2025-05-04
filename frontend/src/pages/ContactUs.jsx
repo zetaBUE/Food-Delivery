@@ -10,7 +10,7 @@ const ContactUs = () => {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
+    name: Yup.string().matches(/^[A-Za-z\s]+$/, "Name should contain only letters").required("Name is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
     message: Yup.string().required("Message is required"),
   });
@@ -36,7 +36,7 @@ const ContactUs = () => {
               <Field
                 type="text"
                 name="name"
-                className="w-full p-2 rounded text-black"
+                className="w-full p-2 rounded text-black bg-white"
               />
               <ErrorMessage name="name" component="div" className="text-red-300 text-sm mt-1" />
             </div>
@@ -46,7 +46,7 @@ const ContactUs = () => {
               <Field
                 type="email"
                 name="email"
-                className="w-full p-2 rounded text-black"
+                className="w-full p-2 rounded text-black bg-white"
               />
               <ErrorMessage name="email" component="div" className="text-red-300 text-sm mt-1" />
             </div>
@@ -57,7 +57,7 @@ const ContactUs = () => {
                 as="textarea"
                 name="message"
                 rows="4"
-                className="w-full p-2 rounded text-black"
+                className="w-full p-2 rounded text-black bg-white"
               />
               <ErrorMessage name="message" component="div" className="text-red-300 text-sm mt-1" />
             </div>
