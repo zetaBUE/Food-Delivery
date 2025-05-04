@@ -1,7 +1,6 @@
 const Restaurant = require("../models/Restaurant");
 const { validationResult } = require("express-validator");
 
-// Create restaurant
 exports.createRestaurant = async (req, res) => {
   try {
     const errors = validationResult(req);
@@ -14,7 +13,6 @@ exports.createRestaurant = async (req, res) => {
       owner: req.user._id,
     };
 
-    // If an image was uploaded, add its URL to the restaurant data
     if (req.file) {
       restaurantData.imageUrl = `/uploads/${req.file.filename}`;
     }
@@ -27,7 +25,6 @@ exports.createRestaurant = async (req, res) => {
   }
 };
 
-// Get all restaurants
 exports.getAllRestaurants = async (req, res) => {
   try {
     const restaurants = await Restaurant.find()
@@ -39,7 +36,7 @@ exports.getAllRestaurants = async (req, res) => {
   }
 };
 
-// Get restaurant by ID
+
 exports.getRestaurantById = async (req, res) => {
   try {
     const restaurant = await Restaurant.findById(req.params.id)
@@ -55,7 +52,7 @@ exports.getRestaurantById = async (req, res) => {
   }
 };
 
-// Update restaurant
+
 exports.updateRestaurant = async (req, res) => {
   try {
     const restaurant = await Restaurant.findById(req.params.id);
@@ -63,14 +60,14 @@ exports.updateRestaurant = async (req, res) => {
       return res.status(404).json({ error: "Restaurant not found" });
     }
 
-    // Check if user is the owner
+
     if (restaurant.owner.toString() !== req.user._id.toString()) {
       return res.status(403).json({ error: "Not authorized" });
     }
 
     const updateData = { ...req.body };
 
-    // If an image was uploaded, update the imageUrl
+   
     if (req.file) {
       updateData.imageUrl = `/uploads/${req.file.filename}`;
     }
@@ -87,7 +84,6 @@ exports.updateRestaurant = async (req, res) => {
   }
 };
 
-// Delete restaurant
 exports.deleteRestaurant = async (req, res) => {
   try {
     const restaurant = await Restaurant.findById(req.params.id);
@@ -95,7 +91,6 @@ exports.deleteRestaurant = async (req, res) => {
       return res.status(404).json({ error: "Restaurant not found" });
     }
 
-    // Check if user is the owner
     if (restaurant.owner.toString() !== req.user._id.toString()) {
       return res.status(403).json({ error: "Not authorized" });
     }
@@ -107,7 +102,6 @@ exports.deleteRestaurant = async (req, res) => {
   }
 };
 
-// Add menu item
 exports.addMenuItem = async (req, res) => {
   try {
     const restaurant = await Restaurant.findById(req.params.id);
@@ -115,7 +109,6 @@ exports.addMenuItem = async (req, res) => {
       return res.status(404).json({ error: "Restaurant not found" });
     }
 
-    // Check if user is the owner
     if (restaurant.owner.toString() !== req.user._id.toString()) {
       return res.status(403).json({ error: "Not authorized" });
     }
@@ -133,7 +126,6 @@ exports.addMenuItem = async (req, res) => {
   }
 };
 
-// Add review
 exports.addReview = async (req, res) => {
   try {
     const { rating, comment } = req.body;
@@ -151,7 +143,6 @@ exports.addReview = async (req, res) => {
 
     restaurant.reviews.push(review);
 
-    // Update overall rating
     const ratings = restaurant.reviews.map((r) => r.rating);
     restaurant.rating = ratings.reduce((a, b) => a + b) / ratings.length;
 

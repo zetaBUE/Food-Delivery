@@ -1,7 +1,6 @@
 const Feedback = require("../models/Feedback");
 const { validationResult } = require("express-validator");
 
-// Create new feedback
 exports.createFeedback = async (req, res) => {
   try {
     const errors = validationResult(req);
@@ -24,7 +23,6 @@ exports.createFeedback = async (req, res) => {
   }
 };
 
-// Get all feedback (admin only)
 exports.getAllFeedback = async (req, res) => {
   try {
     const feedbacks = await Feedback.find().sort({ createdAt: -1 });

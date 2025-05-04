@@ -2,9 +2,6 @@ const Menu = require("../models/Menu");
 const Restaurant = require("../models/Restaurant");
 const { validationResult } = require("express-validator");
 
-// @desc    Get menu for a restaurant
-// @route   GET /api/menu/restaurant/:restaurantId
-// @access  Public
 exports.getRestaurantMenu = async (req, res) => {
   try {
     const menuItems = await Menu.find({
@@ -22,9 +19,6 @@ exports.getRestaurantMenu = async (req, res) => {
   }
 };
 
-// @desc    Create a new menu
-// @route   POST /api/menu
-// @access  Private (Restaurant Owner/Admin)
 exports.createMenu = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -37,7 +31,6 @@ exports.createMenu = async (req, res) => {
       return res.status(404).json({ msg: "Restaurant not found" });
     }
 
-    // Check if user is restaurant owner or admin
     if (
       restaurant.owner.toString() !== req.user.id &&
       req.user.role !== "admin"
@@ -59,9 +52,7 @@ exports.createMenu = async (req, res) => {
   }
 };
 
-// @desc    Update a menu
-// @route   PUT /api/menu/:id
-// @access  Private (Restaurant Owner/Admin)
+
 exports.updateMenu = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -79,7 +70,6 @@ exports.updateMenu = async (req, res) => {
       return res.status(404).json({ msg: "Restaurant not found" });
     }
 
-    // Check if user is restaurant owner or admin
     if (
       restaurant.owner.toString() !== req.user.id &&
       req.user.role !== "admin"
@@ -99,9 +89,6 @@ exports.updateMenu = async (req, res) => {
   }
 };
 
-// @desc    Delete a menu
-// @route   DELETE /api/menu/:id
-// @access  Private (Restaurant Owner/Admin)
 exports.deleteMenu = async (req, res) => {
   try {
     const menu = await Menu.findById(req.params.id);
@@ -114,7 +101,6 @@ exports.deleteMenu = async (req, res) => {
       return res.status(404).json({ msg: "Restaurant not found" });
     }
 
-    // Check if user is restaurant owner or admin
     if (
       restaurant.owner.toString() !== req.user.id &&
       req.user.role !== "admin"
@@ -130,9 +116,6 @@ exports.deleteMenu = async (req, res) => {
   }
 };
 
-// @desc    Add a new item to menu
-// @route   PUT /api/menu/item/:menuId
-// @access  Private (Restaurant Owner/Admin)
 exports.addMenuItem = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -150,7 +133,6 @@ exports.addMenuItem = async (req, res) => {
       return res.status(404).json({ msg: "Restaurant not found" });
     }
 
-    // Check if user is restaurant owner or admin
     if (
       restaurant.owner.toString() !== req.user.id &&
       req.user.role !== "admin"
@@ -181,9 +163,6 @@ exports.addMenuItem = async (req, res) => {
   }
 };
 
-// @desc    Remove an item from menu
-// @route   DELETE /api/menu/item/:menuId/:itemId
-// @access  Private (Restaurant Owner/Admin)
 exports.removeMenuItem = async (req, res) => {
   try {
     const menu = await Menu.findById(req.params.menuId);
@@ -196,7 +175,6 @@ exports.removeMenuItem = async (req, res) => {
       return res.status(404).json({ msg: "Restaurant not found" });
     }
 
-    // Check if user is restaurant owner or admin
     if (
       restaurant.owner.toString() !== req.user.id &&
       req.user.role !== "admin"
@@ -204,12 +182,10 @@ exports.removeMenuItem = async (req, res) => {
       return res.status(401).json({ msg: "Not authorized" });
     }
 
-    // Remove the item
     menu.items = menu.items.filter(
       (item) => item._id.toString() !== req.params.itemId
     );
 
-    // Update categories if needed
     const remainingCategories = new Set(
       menu.items.map((item) => item.category)
     );
