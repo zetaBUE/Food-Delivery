@@ -17,7 +17,10 @@ const initialValues = {
 };
 
 const ReviewForm = ({ restaurantId, onReviewSubmitted }) => {
-  const handleSubmit = async (values, { setSubmitting, resetForm, setStatus }) => {
+  const handleSubmit = async (
+    values,
+    { setSubmitting, resetForm, setStatus }
+  ) => {
     try {
       await reviewAPI.create({
         restaurant: restaurantId,
@@ -28,7 +31,9 @@ const ReviewForm = ({ restaurantId, onReviewSubmitted }) => {
       if (onReviewSubmitted) onReviewSubmitted();
     } catch (err) {
       setStatus({
-        error: err.response?.data?.message || "Failed to submit review. Please try again.",
+        error:
+          err.response?.data?.message ||
+          "Failed to submit review. Please try again.",
       });
     } finally {
       setSubmitting(false);
@@ -50,7 +55,9 @@ const ReviewForm = ({ restaurantId, onReviewSubmitted }) => {
               <div className="text-red-400 text-sm">{status.error}</div>
             )}
             {status?.success && (
-              <div className="text-green-400 text-sm">Review submitted successfully!</div>
+              <div className="text-green-400 text-sm">
+                Review submitted successfully!
+              </div>
             )}
 
             <div>
@@ -106,4 +113,4 @@ const ReviewForm = ({ restaurantId, onReviewSubmitted }) => {
   );
 };
 
-export default ReviewForm; 
+export default ReviewForm;

@@ -56,14 +56,4 @@ router.put(
 // @access  Private
 router.delete("/:id", auth, reviewController.deleteReview);
 
-// @route   POST api/reviews/:id/images
-// @desc    Add images to a review
-// @access  Private
-router.post("/:id/images", auth, reviewController.addReviewImages);
-
-// @route   DELETE api/reviews/:id/images/:imageId
-// @desc    Remove an image from a review
-// @access  Private
-router.delete("/:id/images/:imageId", auth, reviewController.removeReviewImage);
-
 module.exports = router;

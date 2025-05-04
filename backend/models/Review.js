@@ -23,11 +23,6 @@ const reviewSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    images: [
-      {
-        type: String,
-      },
-    ],
     order: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Order",

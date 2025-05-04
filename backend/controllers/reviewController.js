@@ -66,7 +66,6 @@ exports.createReview = async (req, res) => {
       restaurant: req.body.restaurant,
       rating: req.body.rating,
       comment: req.body.comment,
-      images: req.body.images || [],
       order: req.body.order,
     });
 
@@ -132,58 +131,6 @@ exports.deleteReview = async (req, res) => {
 
     await review.remove();
     res.json({ msg: "Review removed" });
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-};
-
-// @desc    Add images to a review
-// @route   POST /api/reviews/:id/images
-// @access  Private
-exports.addReviewImages = async (req, res) => {
-  try {
-    const review = await Review.findById(req.params.id);
-    if (!review) {
-      return res.status(404).json({ msg: "Review not found" });
-    }
-
-    // Check if user owns the review
-    if (review.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: "Not authorized" });
-    }
-
-    review.images = [...review.images, ...req.body.images];
-    await review.save();
-
-    res.json(review);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-};
-
-// @desc    Remove an image from a review
-// @route   DELETE /api/reviews/:id/images/:imageId
-// @access  Private
-exports.removeReviewImage = async (req, res) => {
-  try {
-    const review = await Review.findById(req.params.id);
-    if (!review) {
-      return res.status(404).json({ msg: "Review not found" });
-    }
-
-    // Check if user owns the review
-    if (review.user.toString() !== req.user.id) {
-      return res.status(401).json({ msg: "Not authorized" });
-    }
-
-    review.images = review.images.filter(
-      (image) => image !== req.params.imageId
-    );
-    await review.save();
-
-    res.json(review);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
