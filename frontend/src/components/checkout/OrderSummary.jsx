@@ -19,7 +19,7 @@ const OrderSummary = ({ cartItems, total, shipping }) => {
       <div className="mt-4 border-t pt-2 text-sm">
         <div className="flex justify-between">
           <span>Shipping:</span>
-          <span>{shipping}</span>
+          <span>Free</span>
         </div>
         <div className="flex justify-between font-bold">
           <span>Total:</span>

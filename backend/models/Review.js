@@ -23,21 +23,6 @@ const reviewSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    foodRating: {
-      type: Number,
-      min: 1,
-      max: 5,
-    },
-    serviceRating: {
-      type: Number,
-      min: 1,
-      max: 5,
-    },
-    ambianceRating: {
-      type: Number,
-      min: 1,
-      max: 5,
-    },
     images: [
       {
         type: String,

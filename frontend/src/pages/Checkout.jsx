@@ -9,17 +9,51 @@ import DeliveryForm from "../components/checkout/DeliveryForm";
 import PaymentMethodForm from "../components/checkout/PaymentMethodForm";
 import OrderSummary from "../components/checkout/OrderSummary";
 
-const validationSchema = Yup.object().shape({
-  firstName: Yup.string().required("Required"),
-  lastName: Yup.string().required("Required"),
+const validationSchema = Yup.object({
+  firstName: Yup.string()
+    .matches(/^[A-Za-z]+$/, "First name must contain only letters")
+    .required("Required"),
+  lastName: Yup.string()
+    .matches(/^[A-Za-z]+$/, "Last name must contain only letters")
+    .required("Required"),
   address: Yup.string().required("Required"),
-  city: Yup.string().required("Required"),
-  governorate: Yup.string().required("Required"),
+  city: Yup.string()
+    .matches(/^[A-Za-z]+$/, "City must contain only letters")
+    .required("Required"),
+  governorate: Yup.string()
+    .matches(/^[A-Za-z]+$/, "Governorate must contain only letters")
+    .required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
   phone: Yup.string()
-    .matches(/^\d{11}$/, "Phone number must be exactly 11 digits and numbers")
+    .matches(/^\d{11}$/, "Phone number must be exactly 11 digits")
     .required("Required"),
   zipCode: Yup.string().matches(/^\d+$/, "Zip code must be a number"),
+
+  paymentMethod: Yup.string().required("Required"),
+
+  creditCardNumber: Yup.string().when("paymentMethod", {
+    is: "visa",
+    then: (schema) =>
+      schema
+        .matches(/^\d{16}$/, "Credit card number must be 16 numbers")
+        .required("Credit card number is required"),
+  }),
+
+  expiryDate: Yup.string().when("paymentMethod", {
+    is: "visa",
+    then: (schema) =>
+      schema
+        .required("Expiry date is required")
+        .matches(/^\d{4}-\d{2}$/, "Expiry date must be in YYYY-MM format"),
+  }),
+
+  cvv: Yup.string().when("paymentMethod", {
+    is: "visa",
+    then: (schema) =>
+      schema
+        .matches(/^\d{3}$/, "CVV must be 3 numbers")
+        .required("CVV is required"),
+  }),
 });
 
 const Checkout = () => {
@@ -28,12 +62,11 @@ const Checkout = () => {
   const { addOrder } = useOrder();
 
   const total = getCartTotal();
-  const shipping = 5;
+  const shipping = 0;
   const totalAmount = total + shipping;
 
   const handleSubmit = async (values) => {
     try {
-      // Get the restaurant ID from the first item in the cart
       const restaurantId = cartItems[0].restaurant;
 
       const orderData = {
@@ -57,10 +90,7 @@ const Checkout = () => {
         paymentStatus: "pending",
       };
 
-      console.log("Submitting order data:", orderData); // Debug log
-
       const response = await addOrder(orderData);
-      console.log("Order response:", response); // Debug log
 
       if (response) {
         clearCart();
@@ -70,7 +100,6 @@ const Checkout = () => {
       }
     } catch (error) {
       console.error("Failed to place order:", error);
-      console.error("Error details:", error.response?.data); // Debug log
       alert(
         `Failed to place order: ${
           error.response?.data?.message || error.message
@@ -100,6 +129,9 @@ const Checkout = () => {
             phone: "",
             paymentMethod: "cash",
             deliveryInstructions: "",
+            creditCardNumber: "",
+            expiryDate: "",
+            cvv: "",
           }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}

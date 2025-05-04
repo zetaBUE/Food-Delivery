@@ -10,7 +10,9 @@ const ContactUs = () => {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required("Name is required"),
+    name: Yup.string()
+      .matches(/^[A-Za-z\s]+$/, "Name should contain only letters")
+      .required("Name is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
     message: Yup.string().required("Message is required"),
   });
