@@ -28,15 +28,6 @@ router.post(
         max: 5,
       }),
       check("comment", "Comment is required").not().isEmpty(),
-      check("foodRating", "Food rating must be between 1 and 5")
-        .optional()
-        .isInt({ min: 1, max: 5 }),
-      check("serviceRating", "Service rating must be between 1 and 5")
-        .optional()
-        .isInt({ min: 1, max: 5 }),
-      check("ambianceRating", "Ambiance rating must be between 1 and 5")
-        .optional()
-        .isInt({ min: 1, max: 5 }),
     ],
   ],
   reviewController.createReview
@@ -55,15 +46,6 @@ router.put(
         max: 5,
       }),
       check("comment", "Comment is required").not().isEmpty(),
-      check("foodRating", "Food rating must be between 1 and 5")
-        .optional()
-        .isInt({ min: 1, max: 5 }),
-      check("serviceRating", "Service rating must be between 1 and 5")
-        .optional()
-        .isInt({ min: 1, max: 5 }),
-      check("ambianceRating", "Ambiance rating must be between 1 and 5")
-        .optional()
-        .isInt({ min: 1, max: 5 }),
     ],
   ],
   reviewController.updateReview

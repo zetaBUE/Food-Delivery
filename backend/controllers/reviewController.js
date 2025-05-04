@@ -66,9 +66,6 @@ exports.createReview = async (req, res) => {
       restaurant: req.body.restaurant,
       rating: req.body.rating,
       comment: req.body.comment,
-      foodRating: req.body.foodRating,
-      serviceRating: req.body.serviceRating,
-      ambianceRating: req.body.ambianceRating,
       images: req.body.images || [],
       order: req.body.order,
     });
@@ -106,9 +103,6 @@ exports.updateReview = async (req, res) => {
 
     review.rating = req.body.rating;
     review.comment = req.body.comment;
-    review.foodRating = req.body.foodRating;
-    review.serviceRating = req.body.serviceRating;
-    review.ambianceRating = req.body.ambianceRating;
 
     await review.save();
     await review.populate("user", "name avatar");
