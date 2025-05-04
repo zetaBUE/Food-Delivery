@@ -2,7 +2,6 @@ const Order = require("../models/Order");
 const Restaurant = require("../models/Restaurant");
 const { validationResult } = require("express-validator");
 
-// Create new order
 exports.createOrder = async (req, res) => {
   try {
     const errors = validationResult(req);
@@ -22,15 +21,13 @@ exports.createOrder = async (req, res) => {
       paymentStatus,
     } = req.body;
 
-    console.log("Received order data:", req.body); // Debug log
+    console.log("Received order data:", req.body); 
 
-    // Verify restaurant exists
     const restaurant = await Restaurant.findById(restaurantId);
     if (!restaurant) {
       return res.status(404).json({ error: "Restaurant not found" });
     }
 
-    // Create new order
     const order = new Order({
       user: req.user._id,
       restaurant: restaurantId,
@@ -43,25 +40,22 @@ exports.createOrder = async (req, res) => {
       deliveryInstructions,
       status: status || "pending",
       paymentStatus: paymentStatus || "pending",
-      estimatedDeliveryTime: new Date(Date.now() + 45 * 60000), // 45 minutes from now
+      estimatedDeliveryTime: new Date(Date.now() + 45 * 60000), 
     });
 
     await order.save();
-
-    // Populate necessary fields
     await order.populate("restaurant", "name");
     await order.populate("user", "name email");
 
-    console.log("Created order:", order); // Debug log
+    console.log("Created order:", order); 
 
     res.status(201).json(order);
   } catch (error) {
-    console.error("Error creating order:", error); // Debug log
+    console.error("Error creating order:", error); 
     res.status(500).json({ error: error.message });
   }
 };
 
-// Get all orders for a user
 exports.getUserOrders = async (req, res) => {
   try {
     const orders = await Order.find({ user: req.user._id })
@@ -73,7 +67,6 @@ exports.getUserOrders = async (req, res) => {
   }
 };
 
-// Get order by ID
 exports.getOrderById = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id)
@@ -84,7 +77,6 @@ exports.getOrderById = async (req, res) => {
       return res.status(404).json({ error: "Order not found" });
     }
 
-    // Check if user is authorized to view this order
     if (
       order.user._id.toString() !== req.user._id.toString() &&
       req.user.role !== "admin"
@@ -98,7 +90,6 @@ exports.getOrderById = async (req, res) => {
   }
 };
 
-// Update order status
 exports.updateOrderStatus = async (req, res) => {
   try {
     const { status } = req.body;
@@ -108,7 +99,6 @@ exports.updateOrderStatus = async (req, res) => {
       return res.status(404).json({ error: "Order not found" });
     }
 
-    // Only admin or restaurant owner can update order status
     if (req.user.role !== "admin") {
       return res.status(403).json({ error: "Not authorized" });
     }
@@ -125,7 +115,6 @@ exports.updateOrderStatus = async (req, res) => {
   }
 };
 
-// Cancel order
 exports.cancelOrder = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
@@ -134,14 +123,13 @@ exports.cancelOrder = async (req, res) => {
       return res.status(404).json({ error: "Order not found" });
     }
 
-    // Only allow cancellation if order is pending or confirmed
+
     if (!["pending", "confirmed"].includes(order.status)) {
       return res
         .status(400)
         .json({ error: "Order cannot be cancelled at this stage" });
     }
 
-    // Check if user is authorized to cancel this order
     if (
       order.user.toString() !== req.user._id.toString() &&
       req.user.role !== "admin"
@@ -157,12 +145,10 @@ exports.cancelOrder = async (req, res) => {
   }
 };
 
-// Get restaurant orders (for restaurant owners/admin)
 exports.getRestaurantOrders = async (req, res) => {
   try {
     const { restaurantId } = req.params;
 
-    // Verify restaurant exists and user has access
     const restaurant = await Restaurant.findById(restaurantId);
     if (!restaurant) {
       return res.status(404).json({ error: "Restaurant not found" });
