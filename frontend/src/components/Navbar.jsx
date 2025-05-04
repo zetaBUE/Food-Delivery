@@ -4,6 +4,7 @@ import { RiShoppingBasketLine } from "react-icons/ri";
 import { AiFillHome } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 import { MdRestaurantMenu } from "react-icons/md";
+import { FaUserShield } from "react-icons/fa";
 import { useCart } from "../context/CartContext";
 import CraveCartLogo from "../assets/CraveCartLogo.svg";
 import OrderButton from "../components/OrderButton";
@@ -43,6 +44,14 @@ export default function Navbar() {
       >
         <MdRestaurantMenu className="text-2xl" />
         <span>Restaurants</span>
+      </Link>
+
+      <Link
+        to="/admin"
+        className="flex items-center hover:text-white transition-all duration-200 space-x-1 text-lg"
+      >
+        <FaUserShield className="text-2xl" />
+        <span>Admin</span>
       </Link>
 
       <Link

@@ -10,7 +10,7 @@ exports.register = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
     // Check if user already exists
     let user = await User.findOne({ email });
@@ -23,6 +23,7 @@ exports.register = async (req, res) => {
       name,
       email,
       password,
+      role: role || "user", // Use provided role or default to "user"
     });
 
     await user.save();
