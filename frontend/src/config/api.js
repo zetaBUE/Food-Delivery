@@ -95,10 +95,36 @@ export const orderAPI = {
     api.get(`/orders/restaurant/${restaurantId}`),
 };
 
+export const creditCardAPI = {
+  getAll: () => api.get("/credit-cards"),
+  add: (cardData) => api.post("/credit-cards", cardData),
+  delete: (cardId) => api.delete(`/credit-cards/${cardId}`),
+  setDefault: (cardId) => api.patch(`/credit-cards/${cardId}/set-default`),
+};
+
 export const reviewAPI = {
   create: (reviewData) => api.post("/reviews", reviewData),
   getByRestaurant: (restaurantId) =>
     api.get(`/reviews/restaurant/${restaurantId}`),
+};
+
+export const feedbackAPI = {
+  create: async (data) => {
+    const response = await fetch(`${API_URL}/feedback`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || "Failed to submit feedback");
+    }
+
+    return response.json();
+  },
 };
 
 export default api;

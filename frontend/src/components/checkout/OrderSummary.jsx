@@ -1,12 +1,15 @@
 import React from "react";
 
-const OrderSummary = ({ cartItems, total, shipping }) => {
+const OrderSummary = ({ cartItems, total }) => {
   return (
     <div className="bg-[#212121] p-4 rounded-lg shadow-sm text-white">
       <h3 className="text-lg font-semibold mb-4">Order Summary</h3>
       <ul>
         {cartItems.map((item) => (
-          <li key={item.id} className="flex justify-between py-1">
+          <li
+            key={`${item._id}-${item.quantity}`}
+            className="flex justify-between py-1"
+          >
             <div className="flex items-center">
               <span>
                 {item.name} x {item.quantity}

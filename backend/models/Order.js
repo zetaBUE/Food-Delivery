@@ -60,6 +60,11 @@ const orderSchema = new mongoose.Schema(
       required: true,
       enum: ["credit_card", "debit_card", "cash"],
     },
+    paymentDetails: {
+      cardNumber: String,
+      expiryDate: String,
+      cvv: String,
+    },
     deliveryInstructions: String,
     estimatedDeliveryTime: Date,
     actualDeliveryTime: Date,

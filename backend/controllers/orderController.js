@@ -15,6 +15,7 @@ exports.createOrder = async (req, res) => {
       items,
       deliveryAddress,
       paymentMethod,
+      paymentDetails,
       deliveryInstructions,
       totalAmount,
       status,
@@ -37,6 +38,8 @@ exports.createOrder = async (req, res) => {
       totalAmount,
       deliveryAddress,
       paymentMethod,
+      paymentDetails:
+        paymentMethod === "credit_card" ? paymentDetails : undefined,
       deliveryInstructions,
       status: status || "pending",
       paymentStatus: paymentStatus || "pending",

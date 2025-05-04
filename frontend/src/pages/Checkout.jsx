@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useOrder } from "../context/OrderContext";
+import { useCreditCard } from "../context/CreditCardContext";
 import EmptyCart from "../components/checkout/EmptyCart";
 import DeliveryForm from "../components/checkout/DeliveryForm";
 import PaymentMethodForm from "../components/checkout/PaymentMethodForm";
@@ -60,6 +61,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { cartItems, getCartTotal, clearCart } = useCart();
   const { addOrder } = useOrder();
+  const { addCreditCard } = useCreditCard();
 
   const total = getCartTotal();
   const shipping = 0;
@@ -83,12 +85,34 @@ const Checkout = () => {
           state: values.governorate,
           zipCode: values.zipCode,
         },
-        paymentMethod: values.paymentMethod,
+        paymentMethod:
+          values.paymentMethod === "visa"
+            ? "credit_card"
+            : values.paymentMethod,
         deliveryInstructions: values.deliveryInstructions || "",
         totalAmount,
         status: "pending",
         paymentStatus: "pending",
       };
+
+      // Add credit card information if using credit card payment
+      if (values.paymentMethod === "visa") {
+        orderData.paymentDetails = {
+          cardNumber: values.creditCardNumber,
+          expiryDate: values.expiryDate,
+          cvv: values.cvv,
+        };
+
+        // If save card is checked, save the card
+        if (values.saveCard) {
+          await addCreditCard({
+            cardNumber: values.creditCardNumber,
+            expiryDate: values.expiryDate,
+            cardHolderName: `${values.firstName} ${values.lastName}`,
+            isDefault: false,
+          });
+        }
+      }
 
       const response = await addOrder(orderData);
 
@@ -132,6 +156,7 @@ const Checkout = () => {
             creditCardNumber: "",
             expiryDate: "",
             cvv: "",
+            saveCard: false,
           }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}

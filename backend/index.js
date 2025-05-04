@@ -22,10 +22,10 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/restaurants", require("./routes/restaurant"));
-app.use("/api/orders", require("./routes/order"));
 app.use("/api/menu", require("./routes/menu"));
+app.use("/api/orders", require("./routes/order"));
 app.use("/api/reviews", require("./routes/review"));
-app.use("/api/categories", require("./routes/category"));
+app.use("/api/feedback", require("./routes/feedback"));
 
 // Error handling middleware
 app.use((err, req, res, next) => {

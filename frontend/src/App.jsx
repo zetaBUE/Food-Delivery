@@ -1,3 +1,4 @@
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./index.css";
 import Navbar from "./components/Navbar";
@@ -20,7 +21,7 @@ import { CartProvider } from "./context/CartContext";
 import { OrderProvider } from "./context/OrderContext";
 import { RestaurantProvider } from "./context/RestaurantContext";
 import { AuthProvider } from "./context/AuthContext";
-
+import { CreditCardProvider } from "./context/CreditCardContext";
 
 export default function App() {
   return (
@@ -28,32 +29,34 @@ export default function App() {
       <CartProvider>
         <OrderProvider>
           <RestaurantProvider>
-            <main className="overflow-hidden">
-              <Navbar />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/account" element={<Account />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/orders" element={<Orders />} />
-                <Route path="/restaurants" element={<Restaurants />} />
-                <Route path="/restaurant/:id" element={<RestaurantMenu />} />
-                <Route path="/admin" element={<AdminLogin />} />
-                <Route
-                  path="/admin/manageRestaurant"
-                  element={
-                    <ProtectedRoute>
-                      <ManageRestaurant />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/contact-us" element={<ContactUs />} />
-              </Routes>
-              <Footer />
-            </main>
+            <CreditCardProvider>
+              <main className="overflow-hidden">
+                <Navbar />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/account" element={<Account />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/orders" element={<Orders />} />
+                  <Route path="/restaurants" element={<Restaurants />} />
+                  <Route path="/restaurant/:id" element={<RestaurantMenu />} />
+                  <Route path="/admin" element={<AdminLogin />} />
+                  <Route
+                    path="/admin/manageRestaurant"
+                    element={
+                      <ProtectedRoute>
+                        <ManageRestaurant />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="/faq" element={<FAQ />} />
+                  <Route path="/contact-us" element={<ContactUs />} />
+                </Routes>
+                <Footer />
+              </main>
+            </CreditCardProvider>
           </RestaurantProvider>
         </OrderProvider>
       </CartProvider>
