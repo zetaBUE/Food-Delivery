@@ -8,7 +8,7 @@ export default function OrderButton() {
 
   const handleClick = () => {
     if (user) {
-      navigate("/restaurants");
+      navigate("/checkout");
     } else {
       navigate("/login");
     }
