@@ -9,17 +9,46 @@ import DeliveryForm from "../components/checkout/DeliveryForm";
 import PaymentMethodForm from "../components/checkout/PaymentMethodForm";
 import OrderSummary from "../components/checkout/OrderSummary";
 
-const validationSchema = Yup.object().shape({
-  firstName: Yup.string().required("Required"),
-  lastName: Yup.string().required("Required"),
+const validationSchema = Yup.object({
+  firstName: Yup.string()
+    .matches(/^[A-Za-z]+$/, "First name must contain only letters")
+    .required("Required"),
+  lastName: Yup.string()
+    .matches(/^[A-Za-z]+$/, "Last name must contain only letters")
+    .required("Required"),
   address: Yup.string().required("Required"),
-  city: Yup.string().required("Required"),
-  governorate: Yup.string().required("Required"),
+  city: Yup.string()
+    .matches(/^[A-Za-z]+$/, "City must contain only letters")
+    .required("Required"),
+  governorate: Yup.string()
+    .matches(/^[A-Za-z]+$/, "Governorate must contain only letters")
+    .required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
   phone: Yup.string()
     .matches(/^\d{11}$/, "Phone number must be exactly 11 digits and numbers")
     .required("Required"),
   zipCode: Yup.string().matches(/^\d+$/, "Zip code must be a number"),
+  paymentMethod: Yup.string().required("Required"),
+  creditCardNumber: Yup.string()
+    .when("paymentMethod", {
+      is: "visa",
+      then: Yup.string()
+        .matches(/^\d{16}$/, "Credit card number must be 16 digits")
+        .required("Credit card number is required"),
+    }),
+  expiryDate: Yup.string()
+    .when("paymentMethod", {
+      is: "visa",
+      then: Yup.string().matches(
+        /^(0[1-9]|1[0-2])\/\d{2}$/,
+        "Expiry date must be in MM/YY format"
+      ),
+    }),
+  cvv: Yup.string()
+    .when("paymentMethod", {
+      is: "visa",
+      then: Yup.string().matches(/^\d{3}$/, "CVV must be 3 digits"),
+    }),
 });
 
 const Checkout = () => {
@@ -33,7 +62,7 @@ const Checkout = () => {
 
   const handleSubmit = async (values) => {
     try {
-      // Get the restaurant ID from the first item in the cart
+      
       const restaurantId = cartItems[0].restaurant;
 
       const orderData = {
@@ -57,10 +86,10 @@ const Checkout = () => {
         paymentStatus: "pending",
       };
 
-      console.log("Submitting order data:", orderData); // Debug log
+      console.log("Submitting order data:", orderData); 
 
       const response = await addOrder(orderData);
-      console.log("Order response:", response); // Debug log
+      console.log("Order response:", response); 
 
       if (response) {
         clearCart();
@@ -70,7 +99,7 @@ const Checkout = () => {
       }
     } catch (error) {
       console.error("Failed to place order:", error);
-      console.error("Error details:", error.response?.data); // Debug log
+      console.error("Error details:", error.response?.data); 
       alert(
         `Failed to place order: ${
           error.response?.data?.message || error.message

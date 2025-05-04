@@ -3,6 +3,7 @@ import { useLocation, useParams } from "react-router-dom";
 import RestaurantHeader from "../components/restaurant/RestaurantHeader.jsx";
 import MenuComponent from "../components/restaurant/MenuComponent.jsx";
 import { menuAPI } from "../config/api";
+import ReviewForm from "../components/restaurant/ReviewForm.jsx";
 
 const RestaurantMenu = () => {
   const { id } = useParams();
@@ -61,6 +62,7 @@ const RestaurantMenu = () => {
       <div className="max-w-4xl mx-auto px-5 py-10">
         <RestaurantHeader restaurant={restaurant} />
         <MenuComponent menu={menu} />
+        <ReviewForm restaurantId={id} />
       </div>
     </div>
   );
