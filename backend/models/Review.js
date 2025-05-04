@@ -41,7 +41,6 @@ const reviewSchema = new mongoose.Schema(
   }
 );
 
-// Create compound index to ensure one review per user per restaurant
 reviewSchema.index({ user: 1, restaurant: 1 }, { unique: true });
 
 module.exports = mongoose.model("Review", reviewSchema);

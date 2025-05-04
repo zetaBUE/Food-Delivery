@@ -78,7 +78,6 @@ const orderSchema = new mongoose.Schema(
   }
 );
 
-// Calculate total amount before saving
 orderSchema.pre("save", async function (next) {
   if (this.isModified("items")) {
     this.totalAmount = this.items.reduce((total, item) => {

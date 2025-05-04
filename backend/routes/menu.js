@@ -64,14 +64,8 @@ router.put(
   menuController.updateMenu
 );
 
-// @route   DELETE api/menu/:id
-// @desc    Delete a menu
-// @access  Private (Restaurant Owner/Admin)
 router.delete("/:id", auth, menuController.deleteMenu);
 
-// @route   PUT api/menu/item/:menuId
-// @desc    Add a new item to menu
-// @access  Private (Restaurant Owner/Admin)
 router.put(
   "/item/:menuId",
   [
@@ -93,12 +87,8 @@ router.put(
   menuController.addMenuItem
 );
 
-// @route   DELETE api/menu/item/:menuId/:itemId
-// @desc    Remove an item from menu
-// @access  Private (Restaurant Owner/Admin)
 router.delete("/item/:menuId/:itemId", auth, menuController.removeMenuItem);
 
-// Get all menu items for a restaurant
 router.get("/:restaurantId", auth, async (req, res) => {
   try {
     const menuItems = await Menu.find({ restaurant: req.params.restaurantId });
@@ -109,7 +99,7 @@ router.get("/:restaurantId", auth, async (req, res) => {
   }
 });
 
-// Add a new menu item
+
 router.post("/:restaurantId", [auth, admin], async (req, res) => {
   try {
     const { name, description, price, category, availability } = req.body;
@@ -131,7 +121,6 @@ router.post("/:restaurantId", [auth, admin], async (req, res) => {
   }
 });
 
-// Update a menu item
 router.put("/:restaurantId/:itemId", [auth, admin], async (req, res) => {
   try {
     const { name, description, price, category, availability } = req.body;
@@ -160,7 +149,6 @@ router.put("/:restaurantId/:itemId", [auth, admin], async (req, res) => {
   }
 });
 
-// Delete a menu item
 router.delete("/:restaurantId/:itemId", [auth, admin], async (req, res) => {
   try {
     const menuItem = await Menu.findById(req.params.itemId);

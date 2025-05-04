@@ -4,7 +4,6 @@ const router = express.Router();
 const orderController = require("../controllers/orderController");
 const auth = require("../middleware/auth");
 
-// Create new order - Private
 router.post(
   "/",
   [
@@ -26,13 +25,10 @@ router.post(
   orderController.createOrder
 );
 
-// Get user orders - Private
 router.get("/user", auth, orderController.getUserOrders);
 
-// Get specific order - Private
 router.get("/:id", auth, orderController.getOrderById);
 
-// Update order status - Private/Admin only
 router.patch(
   "/:id/status",
   [
@@ -49,10 +45,8 @@ router.patch(
   orderController.updateOrderStatus
 );
 
-// Cancel order - Private
 router.post("/:id/cancel", auth, orderController.cancelOrder);
 
-// Get restaurant orders - Private/Admin or Restaurant Owner
 router.get(
   "/restaurant/:restaurantId",
   auth,

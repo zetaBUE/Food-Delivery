@@ -4,7 +4,6 @@ const router = express.Router();
 const feedbackController = require("../controllers/feedbackController");
 const auth = require("../middleware/auth");
 
-// Create new feedback - Public
 router.post(
   "/",
   [
@@ -15,7 +14,6 @@ router.post(
   feedbackController.createFeedback
 );
 
-// Get all feedback - Private (Admin only)
 router.get("/", auth, feedbackController.getAllFeedback);
 
 module.exports = router;

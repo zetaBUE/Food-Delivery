@@ -4,19 +4,12 @@ const { check } = require("express-validator");
 const auth = require("../middleware/auth");
 const reviewController = require("../controllers/reviewController");
 
-// @route   GET api/reviews/restaurant/:restaurantId
-// @desc    Get all reviews for a restaurant
-// @access  Public
 router.get("/restaurant/:restaurantId", reviewController.getRestaurantReviews);
 
-// @route   GET api/reviews/user/:userId
-// @desc    Get all reviews by a user
-// @access  Private
+
 router.get("/user/:userId", auth, reviewController.getUserReviews);
 
-// @route   POST api/reviews
-// @desc    Create a new review
-// @access  Private
+
 router.post(
   "/",
   [
@@ -33,9 +26,7 @@ router.post(
   reviewController.createReview
 );
 
-// @route   PUT api/reviews/:id
-// @desc    Update a review
-// @access  Private
+
 router.put(
   "/:id",
   [
@@ -51,9 +42,6 @@ router.put(
   reviewController.updateReview
 );
 
-// @route   DELETE api/reviews/:id
-// @desc    Delete a review
-// @access  Private
 router.delete("/:id", auth, reviewController.deleteReview);
 
 module.exports = router;

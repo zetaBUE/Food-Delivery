@@ -4,7 +4,6 @@ const router = express.Router();
 const authController = require("../controllers/authController");
 const auth = require("../middleware/auth");
 
-// Register route
 router.post(
   "/register",
   [
@@ -18,7 +17,6 @@ router.post(
   authController.register
 );
 
-// Login route
 router.post(
   "/login",
   [
@@ -28,10 +26,10 @@ router.post(
   authController.login
 );
 
-// Get current user - Private
+
 router.get("/me", auth, authController.getCurrentUser);
 
-// Update profile - Private
+
 router.put(
   "/profile",
   [
@@ -44,7 +42,7 @@ router.put(
   authController.updateProfile
 );
 
-// Logout route - Private
+
 router.post("/logout", auth, authController.logout);
 
 module.exports = router;

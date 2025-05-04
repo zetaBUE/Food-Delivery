@@ -5,7 +5,6 @@ const restaurantController = require("../controllers/restaurantController");
 const auth = require("../middleware/auth");
 const upload = require("../middleware/upload");
 
-// Create restaurant - Private/Admin
 router.post(
   "/",
   [
@@ -19,23 +18,18 @@ router.post(
   restaurantController.createRestaurant
 );
 
-// Get all restaurants - Public
 router.get("/", restaurantController.getAllRestaurants);
 
-// Get restaurant by ID - Public
 router.get("/:id", restaurantController.getRestaurantById);
 
-// Update restaurant - Private/Owner
 router.put(
   "/:id",
   [auth, upload.single("image")],
   restaurantController.updateRestaurant
 );
 
-// Delete restaurant - Private/Owner
 router.delete("/:id", auth, restaurantController.deleteRestaurant);
 
-// Add menu item - Private/Owner
 router.post(
   "/:id/menu",
   [
@@ -51,7 +45,6 @@ router.post(
   restaurantController.addMenuItem
 );
 
-// Add review - Private
 router.post(
   "/:id/reviews",
   [
