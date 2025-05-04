@@ -6,14 +6,8 @@ const menuController = require("../controllers/menuController");
 const admin = require("../middleware/admin");
 const Menu = require("../models/Menu");
 
-// @route   GET api/menu/restaurant/:restaurantId
-// @desc    Get menu for a restaurant
-// @access  Public
 router.get("/restaurant/:restaurantId", menuController.getRestaurantMenu);
 
-// @route   POST api/menu
-// @desc    Create a new menu
-// @access  Private (Restaurant Owner/Admin)
 router.post(
   "/",
   [
@@ -38,9 +32,6 @@ router.post(
   menuController.createMenu
 );
 
-// @route   PUT api/menu/:id
-// @desc    Update a menu
-// @access  Private (Restaurant Owner/Admin)
 router.put(
   "/:id",
   [

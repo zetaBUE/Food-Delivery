@@ -95,7 +95,7 @@ const Checkout = () => {
         paymentStatus: "pending",
       };
 
-      // Add credit card information if using credit card payment
+      
       if (values.paymentMethod === "visa") {
         orderData.paymentDetails = {
           cardNumber: values.creditCardNumber,
@@ -103,7 +103,7 @@ const Checkout = () => {
           cvv: values.cvv,
         };
 
-        // If save card is checked, save the card
+        
         if (values.saveCard) {
           await addCreditCard({
             cardNumber: values.creditCardNumber,

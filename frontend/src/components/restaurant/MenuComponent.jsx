@@ -1,4 +1,3 @@
-// MenuComponent.js
 import React from "react";
 import { useCart } from "../../context/CartContext";
 
@@ -13,7 +12,6 @@ const MenuComponent = ({ menu }) => {
     }
   };
 
-  // Group menu items by category
   const menuByCategory = menu.reduce((acc, item) => {
     if (!acc[item.category]) {
       acc[item.category] = [];
