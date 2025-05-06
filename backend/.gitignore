@@ -23,10 +23,6 @@ pids
 *.seed
 *.pid.lock
 
-# Directory for uploaded files
-uploads/*
-!uploads/.gitkeep
-
 # IDE specific files
 .idea/
 .vscode/
