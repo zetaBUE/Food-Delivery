@@ -166,7 +166,7 @@ const MenuManagement = ({ restaurant, onClose }) => {
         <h4 className="text-xl font-semibold text-[#FFE662] mb-4">
           Current Menu Items
         </h4>
-        <div className="space-y-4">
+        <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
           {menuItems.map((item) => (
             <div
               key={item._id}

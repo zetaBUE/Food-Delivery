@@ -54,8 +54,8 @@ const ManageRestaurant = () => {
           onManageMenu={handleManageMenu}
         />
         {showMenuManagement && selectedRestaurant && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="w-full max-w-4xl">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center p-4 z-50 overflow-y-auto">
+            <div className="w-full max-w-4xl my-8">
               <MenuManagement
                 restaurant={selectedRestaurant}
                 onClose={() => {
